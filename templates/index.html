@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Crypto Robot - Accueil</title>
+  <style>
+    body { font-family: Arial; background-color: #f0f2f5; text-align: center; margin-left: 320px; }
+    .form-container { background: white; padding: 30px; margin: 50px auto; border-radius: 10px; width: 420px; box-shadow: 0 4px 10px #ccc; }
+    input, select, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+    button { background-color: #28a745; color: white; border: none; font-weight: bold; cursor: pointer; }
+    .section-title { margin-top: 25px; margin-bottom: 10px; font-weight: bold; color: #333; font-size: 16px; text-align: left; }
+    .link-button { background-color: #007bff; color: white; padding: 10px; border-radius: 6px; text-decoration: none; display: inline-block; margin-top: 20px; }
+    .stop-btn { background-color: #dc3545; width: 100%; margin-top: 15px; }
+    .compose-only { display: none; }
+
+    #ia-chat {
+      display: block;
+      width: 300px;
+      padding: 15px;
+      border-right: 1px solid #ddd;
+      height: 100vh;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+      position: fixed;
+      left: 0;
+      top: 0;
+      text-align: left;
+    }
+    #ia-chat h3 { margin-top: 0; }
+    #ia-output { font-family: monospace; font-size: 14px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div id="ia-chat">
+    <h3>🧠 Analyse IA</h3>
+    <div id="ia-output">Clique sur "Analyser IA & Sentiment" pour lancer l'analyse du marché...</div>
+  </div>
+
+  <div class="form-container">
+    <div id="analyse-form" style="margin-bottom: 20px;">
+      <button id="analyse-btn" style="background-color: orange; color: white; padding: 10px; border-radius: 6px; border: none; font-weight: bold; width: 100%;">
+        🔍 Analyser IA & Sentiment avant de trader
+      </button>
+    </div>
+
+    <h2>🤖 Lancer le Crypto Bot</h2>
+
+    <form method="post">
+      <div class="section-title">Paramètres de base</div>
+      <input type="number" step="0.01" name="montant" placeholder="Montant initial (USDT)" required>
+      <input type="number" step="0.01" name="variation_entree" placeholder="Variation d'entrée (%)" required>
+      <input type="number" step="0.01" name="objectif_gain" placeholder="Objectif de gain (%)" required>
+      <input type="number" step="0.01" name="stop_loss" placeholder="Stop-loss global (%)" required>
+
+      <div class="section-title">Mode d'exécution</div>
+      <select name="mode_execution" required>
+        <option value="reel">💰 Mode réel</option>
+        <option value="fictif">🧪 Mode fictif</option>
+      </select>
+
+      <div class="section-title">Type de stratégie</div>
+      <select id="mode_auto" name="mode_auto" required onchange="toggleComposeOptions(this.value)">
+        <option value="unique">🎯 Unique</option>
+        <option value="auto">🔁 Auto</option>
+        <option value="compose">♻️ Auto avec intérêts composés</option>
+      </select>
+
+      <div class="section-title">Profil de stratégie</div>
+      <select name="profil" required>
+        <option value="safe">🟢 Sécurisé</option>
+        <option value="standard" selected>🟠 Standard</option>
+        <option value="risky">🔴 Risqué</option>
+      </select>
+
+      <div class="compose-only" id="compose-options">
+        <div class="section-title">Options (composés uniquement)</div>
+        <input type="number" step="0.01" name="seuil_entree" placeholder="Seuil entrée sécurisée (%)">
+        <input type="number" step="0.01" name="seuil_sortie" placeholder="Seuil sortie sécurisée (%)">
+        <input type="number" step="0.01" name="reserve" placeholder="Réserve automatique (USDT)">
+      </div>
+
+      <button type="submit">🚀 Lancer le robot</button>
+    </form>
+
+    <a class="link-button" href="/historique">📊 Voir l'historique</a>
+
+    <form method="post" action="/stop">
+      <button class="stop-btn" type="submit">🛑 Arrêter le robot</button>
+    </form>
+  </div>
+
+  <script>
+    function toggleComposeOptions(value) {
+      const section = document.getElementById("compose-options");
+      section.style.display = (value === "compose") ? "block" : "none";
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+      const selectedMode = document.getElementById("mode_auto").value;
+      toggleComposeOptions(selectedMode);
+    });
+
+    document.getElementById("analyse-btn").addEventListener("click", function () {
+      document.getElementById("ia-chat").style.display = "block";
+      document.getElementById("ia-output").innerText = "Le bot est en train d’analyser les 100 cryptos via Binance, Twitter et Google News...\n\n⏳ Chargement des données en cours...";
+
+      fetch("/analyser_sentiment")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("ia-output").innerText = data;
+        })
+        .catch(error => {
+          document.getElementById("ia-output").innerText = "❌ Une erreur est survenue : " + error;
+        });
+    });
+  </script>
+</body>
+</html>

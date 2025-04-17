@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: bot-ia-crypto
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: PORT
+        value: 5002
+      - key: BINANCE_API_KEY
+        value: your_binance_key
+      - key: BINANCE_SECRET_KEY
+        value: your_binance_secret_key
+      - key: USE_SANDBOX
+        value: True
+    plan: free
+    autoDeploy: true
+    region: frankfurt

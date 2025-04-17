@@ -1,0 +1,12 @@
+node_modules
+# === FICHIERS À IGNORER ===
+*.log
+*.csv
+.DS_Store
+logs_robot.txt
+app.log
+sentiment_scores.json
+audit_*.csv
+historique_trades.csv
+frontend/dist
+git rm --cached logs_robot.txt historique_trades.csv sentiment_scores.json

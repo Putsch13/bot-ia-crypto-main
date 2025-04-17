@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Résumé de l'opération</title>
+  <style>
+    body { font-family: Arial; background-color: #f0f2f5; text-align: center; padding: 30px; }
+    .card {
+      background: white;
+      display: inline-block;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: left;
+      max-width: 500px;
+      margin: auto;
+    }
+    h2 { margin-bottom: 10px; }
+    .item { margin: 10px 0; font-size: 16px; }
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .vert { background-color: #28a745; }
+    .orange { background-color: #ffc107; color: black; }
+    .rouge { background-color: #dc3545; }
+    a { display: inline-block; margin-top: 20px; color: #007bff; text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>📈 Opération lancée</h2>
+
+    <div class="item"><strong>Crypto sélectionnée :</strong> {{ crypto }}</div>
+    {% if score %}
+    <div class="item"><strong>Score d'analyse :</strong> {{ score }}/100</div>
+    {% endif %}
+    <div class="item"><strong>Profil :</strong> {{ profil|capitalize }}</div>
+    <div class="item"><strong>Montant investi :</strong> {{ montant }} USDT</div>
+    <div class="item"><strong>Objectif de gain :</strong> +{{ objectif_gain }} %</div>
+    <div class="item"><strong>Mode :</strong> {{ mode_execution|capitalize }}</div>
+    <div class="item"><strong>Tendance :</strong>
+      <span class="badge {{ tendance }}">{{ tendance|capitalize }}</span>
+    </div>
+
+    <a href="/">← Retour</a>
+  </div>
+</body>
+</html>

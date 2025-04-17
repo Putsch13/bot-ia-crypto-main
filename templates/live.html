@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>📺 Suivi en Direct du Robot</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f2f5; text-align: center; }
+        h2 { margin-top: 30px; }
+        .table-container, .log-container { margin: 20px auto; width: 90%; max-width: 1000px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+        th, td { padding: 12px 15px; border-bottom: 1px solid #eee; }
+        th { background-color: #007bff; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+
+        .log-box {
+            text-align: left;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            height: 300px;
+            overflow-y: scroll;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .actions {
+            margin: 30px 0;
+        }
+
+        .back-button, .stop-button, .refresh-button {
+            display: inline-block;
+            margin: 10px 20px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .back-button {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .stop-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        .refresh-button {
+            background-color: #ffc107;
+            color: black;
+            border: none;
+        }
+
+        .stop-form {
+            display: inline;
+        }
+
+        .refresh-form {
+            display: inline;
+        }
+    </style>
+    <meta http-equiv="refresh" content="10">
+</head>
+<body>
+    <h2>📈 Suivi en Direct du Robot</h2>
+
+    <div class="table-container">
+        <h3>📊 Derniers trades</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Mode</th>
+                    <th>Crypto</th>
+                    <th>Prix Achat</th>
+                    <th>Prix Vente</th>
+                    <th>Gain (%)</th>
+                    <th>Résultat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ligne in lignes %}
+                    <tr>
+                        <td>{{ ligne[0] }}</td>
+                        <td>{{ ligne[1] }}</td>
+                        <td>{{ ligne[2] }}</td>
+                        <td>{{ ligne[3] }}</td>
+                        <td>{{ ligne[4] }}</td>
+                        <td>{{ ligne[5] }}</td>
+                        <td>{{ ligne[6] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="log-container">
+        <h3>💬 Tchat du Robot</h3>
+        <div class="log-box">
+            {% for ligne in logs %}
+                <div>{{ ligne }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="/" class="back-button">⬅️ Retour à l'accueil</a>
+
+        <form method="post" action="/stop" class="stop-form">
+            <button type="submit" class="stop-button">🛑 Stopper le Robot</button>
+        </form>
+
+        <form action

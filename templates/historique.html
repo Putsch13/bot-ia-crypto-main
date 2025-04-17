@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Historique des Trades</title>
+    <style>
+        body { font-family: Arial; background: #f0f2f5; text-align: center; }
+        h2 { margin-top: 40px; }
+        table { margin: auto; border-collapse: collapse; background: white; box-shadow: 0 4px 8px #ccc; }
+        th, td { padding: 10px 15px; border: 1px solid #ddd; }
+        th { background: #28a745; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        a { display: inline-block; margin-top: 20px; color: #28a745; text-decoration: none; }
+
+        .summary { background: white; margin: 40px auto; padding: 20px; width: 90%; max-width: 900px; border-radius: 10px; box-shadow: 0 0 10px #ccc; text-align: center; }
+        .cards { display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 20px; }
+        .card { background: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 8px; width: 200px; margin: 10px; box-shadow: 0 2px 6px #eee; }
+        select { padding: 8px; border-radius: 6px; border: 1px solid #ccc; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>📊 Historique des Trades</h2>
+
+    <div class="summary">
+        <form method="get" action="/historique">
+            <label for="periode">Période :</label>
+            <select name="periode" onchange="this.form.submit()">
+                <option value="tout" {% if periode=='tout' %}selected{% endif %}>Tout</option>
+                <option value="1h" {% if periode=='1h' %}selected{% endif %}>1 heure</option>
+                <option value="24h" {% if periode=='24h' %}selected{% endif %}>24 heures</option>
+                <option value="7j" {% if periode=='7j' %}selected{% endif %}>7 jours</option>
+                <option value="30j" {% if periode=='30j' %}selected{% endif %}>30 jours</option>
+            </select>
+        </form>
+
+        <div class="cards">
+            <div class="card">
+                <strong>Nombre de trades :</strong><br>{{ stats.nb_trades }}
+            </div>
+            <div class="card">
+                <strong>Gain total :</strong><br>{{ stats.total_gain }} %
+            </div>
+            <div class="card">
+                <strong>Moyenne :</strong><br>{{ stats.gain_moyen }} %
+            </div>
+            <div class="card">
+                <strong>Meilleur trade :</strong><br>{{ stats.gain_max }} %
+            </div>
+        </div>
+    </div>
+
+    {% if lignes %}
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Mode</th>
+            <th>Crypto</th>
+            <th>Achat</th>
+            <th>Vente</th>
+            <th>Gain</th>
+            <th>Résultat</th>
+        </tr>
+        {% for ligne in lignes %}
+        <tr>
+            {% for col in ligne %}
+            <td>{{ col }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Aucune donnée disponible.</p>
+    {% endif %}
+
+    <a href="/">← Retour à l'accueil</a>
+</body>
+</html>
