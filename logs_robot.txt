@@ -1,0 +1,494 @@
+16:13:09 - 🔎 Analyse intelligente du marché...
+16:13:13 - 🏆 Meilleure crypto sélectionnée : XRP/USDT avec score 100
+16:13:14 - 🧪 Achat fictif : XRP à 2.1375
+16:34:41 - [TEST] Trade injecté : BTC/USDT | 4.20%
+16:34:41 - [TEST] Trade injecté : BTC/USDT | 3.67%
+16:34:41 - [TEST] Trade injecté : SOL/USDT | -2.40%
+16:34:41 - [TEST] Trade injecté : SOL/USDT | 9.66%
+16:34:41 - [TEST] Trade injecté : BTC/USDT | -4.22%
+16:35:41 - 🔎 Analyse intelligente du marché...
+16:35:47 - 🏆 Meilleure crypto sélectionnée : FUN/USDT avec score 100
+16:35:47 - 🧪 Achat fictif : FUN à 0.009129
+16:42:22 - 🔎 Analyse intelligente du marché...
+16:42:24 - 🏆 Meilleure crypto sélectionnée : FUN/USDT avec score 100
+16:42:24 - 🧪 Achat fictif : FUN à 0.009047
+16:42:57 - 🛑 Robot stoppé manuellement.
+16:43:07 - 🔎 Analyse intelligente du marché...
+16:43:09 - 🏆 Meilleure crypto sélectionnée : FUN/USDT avec score 100
+16:47:10 - 🔎 Analyse intelligente du marché...
+16:47:15 - 🏆 Meilleure crypto sélectionnée : FUN/USDT avec score 100
+16:47:16 - 🎯 Achat en mode unique : FUN à 0.009
+16:49:45 - 🔎 Analyse intelligente du marché...
+16:49:47 - 🏆 Meilleure crypto sélectionnée : FUN/USDT avec score 100
+16:49:48 - 🎯 Achat en mode unique : FUN à 0.009
+16:49:51 - ⚙️ Mode d'exécution : fictif
+16:49:51 - 🔎 Analyse intelligente du marché...
+16:49:53 - 🏆 Meilleure crypto sélectionnée : FUN/USDT avec score 100
+16:49:54 - 🧪 Achat fictif : FUN à 0.009011
+16:51:18 - 🔎 Analyse intelligente du marché...
+16:51:23 - 🏆 Meilleure crypto sélectionnée : FUN/USDT avec score 100
+16:52:50 - 🔎 Analyse intelligente du marché...
+16:52:51 - 🏆 Meilleure crypto sélectionnée : FUN/USDT avec score 100
+16:53:02 - 🔎 Analyse intelligente du marché...
+16:53:03 - 🏆 Meilleure crypto sélectionnée : FUN/USDT avec score 100
+13:05:06 - 🔎 Analyse intelligente du marché...
+13:05:48 - 🏆 Meilleure crypto sélectionnée : STPT/USDT avec score 100
+13:05:48 - 🧪 Achat fictif : STPT à 0.04061
+13:22:36 - 🧠 Analyse manuelle du sentiment en cours avant lancement du robot...
+13:23:17 - 🔎 Analyse intelligente du marché...
+13:23:28 - ✅ IA prête : sentiment actualisé. Tu peux lancer le robot.
+13:23:38 - 🧠 Analyse manuelle du sentiment en cours avant lancement du robot...
+13:24:01 - 🏆 Meilleure crypto sélectionnée : IOTX/USDT avec score 100
+13:24:01 - 📌 Détails : variation 1h = 4.245%, variation 24h = 0.00077%, volume = 15097849.12329
+13:24:01 - 🧠 IA : Cette crypto a surpassé les autres sur les critères techniques et émotionnels.
+13:24:01 - 🧪 Achat fictif : IOTX à 0.01895
+13:24:23 - ✅ IA prête : sentiment actualisé. Tu peux lancer le robot.
+13:35:49 - 📡 Analyse sentimentielle en cours...
+13:36:41 - ✅ Analyse émotionnelle mise à jour.
+13:37:28 - 🔎 Analyse intelligente du marché...
+13:38:13 - 🏆 Meilleure crypto : IOTX/USDT avec score 100
+13:38:13 - 🧪 Achat fictif : IOTX à 0.01894
+13:38:35 - 🛑 Robot stoppé manuellement.
+18:30:16 - 📡 Analyse sentimentielle en cours...
+18:31:09 - ✅ Analyse émotionnelle mise à jour.
+18:38:17 - 📡 Analyse sentimentielle en cours...
+18:39:15 - ✅ Analyse émotionnelle mise à jour.
+10:39:37 - 🔎 Analyse intelligente du marché...
+10:35:47 - 🔎 Analyse intelligente du marché...
+10:40:24 - 🏆 Meilleure crypto : TRX/USDT avec score 100
+10:40:25 - 🧪 Achat fictif : TRX à 0.2342
+10:41:44 - 🛑 Robot stoppé manuellement.
+10:15:35 - 🧪 Achat fictif de NEO/USDT à 5.42
+10:15:35 - 💹 Nouveau capital : 100.16 USDT
+10:18:32 - 🧪 Achat fictif de NEO/USDT à 5.44
+10:18:32 - 💹 Nouveau capital : 100.33 USDT
+10:21:33 - 🧪 Achat fictif de NEO/USDT à 5.42
+10:21:33 - 💹 Nouveau capital : 100.49 USDT
+10:24:36 - 🧪 Achat fictif de NEO/USDT à 5.42
+10:24:36 - 💹 Nouveau capital : 100.65 USDT
+10:27:23 - 🧪 Achat fictif de NEO/USDT à 5.44
+10:27:23 - 💹 Nouveau capital : 100.81 USDT
+10:30:17 - 🧪 Achat fictif de NEO/USDT à 5.43
+10:30:17 - 💹 Nouveau capital : 100.98 USDT
+10:33:01 - 🧪 Achat fictif de NEO/USDT à 5.46
+10:33:01 - 💹 Nouveau capital : 101.14 USDT
+10:35:51 - 🧪 Achat fictif de NEO/USDT à 5.47
+10:35:51 - 💹 Nouveau capital : 101.31 USDT
+10:38:58 - 🧪 Achat fictif de NEO/USDT à 5.47
+10:38:58 - 💹 Nouveau capital : 101.47 USDT
+10:41:55 - 🧪 Achat fictif de NEO/USDT à 5.44
+10:41:55 - 💹 Nouveau capital : 101.63 USDT
+11:25:35 - 🧪 Achat fictif de NEO/USDT à 5.39
+11:25:35 - 💹 Nouveau capital : 100.16 USDT
+11:27:01 - 🧪 Achat fictif de NEO/USDT à 5.39
+11:27:01 - 💹 Nouveau capital : 100.32 USDT
+11:27:07 - 🧪 Achat fictif de NEO/USDT à 5.39
+11:27:07 - 💹 Nouveau capital : 100.16 USDT
+11:28:29 - 🧪 Achat fictif de NEO/USDT à 5.41
+11:28:29 - 💹 Nouveau capital : 100.49 USDT
+11:28:36 - 🧪 Achat fictif de NEO/USDT à 5.41
+11:28:36 - 💹 Nouveau capital : 100.32 USDT
+11:29:52 - 🧪 Achat fictif de NEO/USDT à 5.41
+11:29:52 - 💹 Nouveau capital : 100.65 USDT
+11:30:03 - 🧪 Achat fictif de NEO/USDT à 5.41
+11:30:03 - 💹 Nouveau capital : 100.49 USDT
+11:31:11 - 🧪 Achat fictif de NEO/USDT à 5.41
+11:31:11 - 💹 Nouveau capital : 100.81 USDT
+11:31:24 - 🧪 Achat fictif de NEO/USDT à 5.41
+11:31:24 - 💹 Nouveau capital : 100.65 USDT
+11:32:38 - 🧪 Achat fictif de NEO/USDT à 5.41
+11:32:38 - 💹 Nouveau capital : 100.97 USDT
+11:32:51 - 🧪 Achat fictif de NEO/USDT à 5.41
+11:32:51 - 💹 Nouveau capital : 100.81 USDT
+11:34:06 - 🧪 Achat fictif de NEO/USDT à 5.39
+11:34:06 - 💹 Nouveau capital : 101.13 USDT
+11:34:18 - 🧪 Achat fictif de NEO/USDT à 5.39
+11:34:18 - 💹 Nouveau capital : 100.97 USDT
+11:38:53 - 🧪 Achat fictif de NEO/USDT à 5.39
+11:38:53 - 💹 Nouveau capital : 100.16 USDT
+11:40:35 - 🧪 Achat fictif de NEO/USDT à 5.40
+11:40:35 - 💹 Nouveau capital : 100.32 USDT
+11:42:16 - 🧪 Achat fictif de NEO/USDT à 5.42
+11:42:16 - 💹 Nouveau capital : 100.49 USDT
+11:43:54 - 🧪 Achat fictif de NEO/USDT à 5.42
+11:43:54 - 💹 Nouveau capital : 100.65 USDT
+11:45:32 - 🧪 Achat fictif de NEO/USDT à 5.43
+11:45:32 - 💹 Nouveau capital : 100.81 USDT
+11:46:58 - 🧪 Achat fictif de NEO/USDT à 5.43
+11:46:58 - 💹 Nouveau capital : 100.97 USDT
+11:48:45 - 🧪 Achat fictif de NEO/USDT à 5.44
+11:48:45 - 💹 Nouveau capital : 101.14 USDT
+11:50:22 - 🧪 Achat fictif de NEO/USDT à 5.45
+11:50:22 - 💹 Nouveau capital : 101.30 USDT
+11:51:48 - 🧪 Achat fictif de NEO/USDT à 5.45
+11:51:48 - 💹 Nouveau capital : 101.46 USDT
+11:53:21 - 🧪 Achat fictif de NEO/USDT à 5.45
+11:53:21 - 💹 Nouveau capital : 101.63 USDT
+11:54:53 - 🧪 Achat fictif de NEO/USDT à 5.45
+11:54:53 - 💹 Nouveau capital : 101.79 USDT
+11:56:27 - 🧪 Achat fictif de NEO/USDT à 5.45
+11:56:27 - 💹 Nouveau capital : 101.96 USDT
+11:57:58 - 🧪 Achat fictif de NEO/USDT à 5.45
+11:57:58 - 💹 Nouveau capital : 102.12 USDT
+11:59:44 - 🧪 Achat fictif de NEO/USDT à 5.45
+11:59:44 - 💹 Nouveau capital : 102.28 USDT
+12:01:22 - 🧪 Achat fictif de NEO/USDT à 5.45
+12:01:22 - 💹 Nouveau capital : 102.45 USDT
+12:03:03 - 🧪 Achat fictif de NEO/USDT à 5.45
+12:03:03 - 💹 Nouveau capital : 102.61 USDT
+13:42:29 - [ERROR] Echec de récupération des tickers : binance GET https://testnet.binancefuture.com/fapi/v1/exchangeInfo 502 Bad Gateway <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+ Sorry for the inconvenience.<br/>
+Please report this message and include the following information to us.<br/>
+Thank you very much!</p>
+<table>
+<tr>
+<td>URL:</td>
+<td>http://testnet.binancefuture.com/fapi/v1/exchangeInfo</td>
+</tr>
+<tr>
+<td>Server:</td>
+<td>tk_prod_dispatcher_pg</td>
+</tr>
+<tr>
+<td>Date:</td>
+<td>2025/04/09 11:42:29</td>
+</tr>
+</table>
+<hr/>Powered by Bengine<hr><center>tengine</center>
+</body>
+</html>
+18:41:38 - 🧪 Achat fictif de BNB/USDT à 565.85
+18:41:38 - 💹 Nouveau capital : 116.98 USDT
+18:43:10 - 🧪 Achat fictif de BNB/USDT à 566.14
+18:43:10 - 💹 Nouveau capital : 133.96 USDT
+18:44:42 - 🧪 Achat fictif de BNB/USDT à 565.70
+18:44:42 - 💹 Nouveau capital : 150.93 USDT
+18:46:21 - 🧪 Achat fictif de BNB/USDT à 565.22
+18:46:21 - 💹 Nouveau capital : 167.89 USDT
+18:47:59 - 🧪 Achat fictif de BNB/USDT à 565.50
+18:47:59 - 💹 Nouveau capital : 184.85 USDT
+21:11:13 - 🧪 Achat fictif de BTC/USDT à 81831.09
+21:11:13 - 💹 Nouveau capital : 2554.93 USDT
+22:03:26 - [ERROR] Impossible de récupérer le prix pour BTC/USDT : binance GET https://testnet.binance.vision/api/v3/ticker/24hr?symbol=BTCUSDT
+14:34:46 - 🧪 Achat fictif de BTC/USDT à 82134.29
+14:34:46 - 💹 Nouveau capital : 5018.96 USDT
+15:20:14 - 🧪 Achat fictif de BTC/USDT à 81818.85
+15:20:14 - 💹 Nouveau capital : 2554.57 USDT
+15:20:46 - 🧪 Achat fictif de BTC/USDT à 81820.00
+15:20:46 - 💹 Nouveau capital : 2554.60 USDT
+15:22:03 - 🧪 Achat fictif de BTC/USDT à 81870.27
+15:22:03 - 💹 Nouveau capital : 5010.67 USDT
+15:22:36 - 🧪 Achat fictif de BTC/USDT à 81895.40
+15:22:36 - 💹 Nouveau capital : 5011.46 USDT
+15:23:53 - 🧪 Achat fictif de BTC/USDT à 81902.07
+15:23:53 - 💹 Nouveau capital : 7467.74 USDT
+15:24:27 - 🧪 Achat fictif de BTC/USDT à 81838.48
+15:24:27 - 💹 Nouveau capital : 7466.62 USDT
+15:25:44 - 🧪 Achat fictif de BTC/USDT à 81902.82
+15:25:44 - 💹 Nouveau capital : 9924.82 USDT
+15:26:17 - 🧪 Achat fictif de BTC/USDT à 81919.20
+15:26:17 - 💹 Nouveau capital : 9924.19 USDT
+15:27:34 - 🧪 Achat fictif de BTC/USDT à 81829.21
+15:27:34 - 💹 Nouveau capital : 12379.70 USDT
+15:28:12 - 🧪 Achat fictif de BTC/USDT à 81818.67
+15:28:12 - 💹 Nouveau capital : 12378.75 USDT
+15:29:29 - 🧪 Achat fictif de BTC/USDT à 81707.07
+15:29:29 - 💹 Nouveau capital : 14830.91 USDT
+15:30:06 - 🧪 Achat fictif de BTC/USDT à 81729.99
+15:30:06 - 💹 Nouveau capital : 14830.65 USDT
+15:31:23 - 🧪 Achat fictif de BTC/USDT à 81806.60
+15:31:23 - 💹 Nouveau capital : 17285.11 USDT
+15:32:00 - 🧪 Achat fictif de BTC/USDT à 81580.01
+15:32:00 - 💹 Nouveau capital : 17278.05 USDT
+15:33:19 - 🧪 Achat fictif de BTC/USDT à 81450.63
+15:33:19 - 💹 Nouveau capital : 19728.63 USDT
+15:33:54 - 🧪 Achat fictif de BTC/USDT à 81518.00
+15:33:54 - 💹 Nouveau capital : 19723.59 USDT
+15:35:07 - 🧪 Achat fictif de BTC/USDT à 81567.04
+15:35:07 - 💹 Nouveau capital : 22175.64 USDT
+15:35:42 - 🧪 Achat fictif de BTC/USDT à 81569.07
+15:35:42 - 💹 Nouveau capital : 22170.66 USDT
+15:36:55 - 🧪 Achat fictif de BTC/USDT à 81393.65
+15:36:55 - 💹 Nouveau capital : 24617.45 USDT
+15:37:31 - 🧪 Achat fictif de BTC/USDT à 81387.69
+15:37:31 - 💹 Nouveau capital : 24612.30 USDT
+15:38:10 - 🧪 Achat fictif de BTC/USDT à 81400.02
+15:38:10 - 💹 Nouveau capital : 2542.00 USDT
+15:38:43 - 🧪 Achat fictif de BTC/USDT à 81175.99
+15:38:43 - 💹 Nouveau capital : 27052.73 USDT
+15:39:19 - 🧪 Achat fictif de BTC/USDT à 81198.12
+15:39:19 - 💹 Nouveau capital : 27048.24 USDT
+15:39:59 - 🧪 Achat fictif de BTC/USDT à 81213.67
+15:39:59 - 💹 Nouveau capital : 4978.41 USDT
+15:40:33 - 🧪 Achat fictif de BTC/USDT à 81215.18
+15:40:33 - 💹 Nouveau capital : 29489.18 USDT
+15:41:10 - 🧪 Achat fictif de BTC/USDT à 80982.00
+15:41:10 - 💹 Nouveau capital : 29477.70 USDT
+15:41:47 - 🧪 Achat fictif de BTC/USDT à 81006.09
+15:41:47 - 💹 Nouveau capital : 7408.59 USDT
+15:42:22 - 🧪 Achat fictif de BTC/USDT à 80934.00
+15:42:22 - 💹 Nouveau capital : 31917.20 USDT
+15:42:56 - 🧪 Achat fictif de BTC/USDT à 81002.13
+15:42:56 - 💹 Nouveau capital : 31907.76 USDT
+15:43:33 - 🧪 Achat fictif de BTC/USDT à 81002.15
+15:43:33 - 💹 Nouveau capital : 9838.66 USDT
+15:44:05 - 🧪 Achat fictif de BTC/USDT à 80804.53
+15:44:05 - 💹 Nouveau capital : 34341.34 USDT
+15:44:41 - 🧪 Achat fictif de BTC/USDT à 80833.99
+15:44:41 - 💹 Nouveau capital : 34332.78 USDT
+15:45:16 - 🧪 Achat fictif de BTC/USDT à 80876.01
+15:45:16 - 💹 Nouveau capital : 12264.94 USDT
+15:45:50 - 🧪 Achat fictif de BTC/USDT à 80870.16
+15:45:50 - 💹 Nouveau capital : 36767.44 USDT
+15:46:25 - 🧪 Achat fictif de BTC/USDT à 80864.01
+15:46:25 - 💹 Nouveau capital : 36758.70 USDT
+09:30:50 - 🧪 Achat fictif de ICX/USDT à 0.09
+09:30:50 - 💹 Nouveau capital : 100.00 USDT
+09:32:15 - 🧪 Achat fictif de ICX/USDT à 0.09
+09:32:15 - 💹 Nouveau capital : 100.01 USDT
+09:33:45 - 🧪 Achat fictif de ICX/USDT à 0.09
+09:33:45 - 💹 Nouveau capital : 100.01 USDT
+09:35:26 - 🧪 Achat fictif de LTC/USDT à 75.56
+09:35:26 - 💹 Nouveau capital : 102.27 USDT
+09:37:05 - 🧪 Achat fictif de LTC/USDT à 75.60
+09:37:05 - 💹 Nouveau capital : 104.54 USDT
+09:38:49 - 🧪 Achat fictif de LTC/USDT à 75.74
+09:38:49 - 💹 Nouveau capital : 106.82 USDT
+09:40:32 - 🧪 Achat fictif de LTC/USDT à 75.60
+09:40:32 - 💹 Nouveau capital : 109.08 USDT
+09:42:10 - 🧪 Achat fictif de LTC/USDT à 75.60
+09:42:10 - 💹 Nouveau capital : 111.35 USDT
+09:43:53 - 🧪 Achat fictif de LTC/USDT à 75.59
+09:43:53 - 💹 Nouveau capital : 113.62 USDT
+09:45:40 - 🧪 Achat fictif de LTC/USDT à 75.54
+09:45:40 - 💹 Nouveau capital : 115.88 USDT
+09:47:19 - 🧪 Achat fictif de LTC/USDT à 75.59
+09:47:19 - 💹 Nouveau capital : 118.15 USDT
+09:49:10 - 🧪 Achat fictif de LTC/USDT à 75.69
+09:49:10 - 💹 Nouveau capital : 120.42 USDT
+09:50:56 - 🧪 Achat fictif de LTC/USDT à 75.62
+09:50:56 - 💹 Nouveau capital : 122.69 USDT
+09:52:35 - 🧪 Achat fictif de LTC/USDT à 75.62
+09:52:35 - 💹 Nouveau capital : 124.96 USDT
+09:54:17 - 🧪 Achat fictif de LTC/USDT à 75.64
+09:54:17 - 💹 Nouveau capital : 127.23 USDT
+09:55:55 - 🧪 Achat fictif de LTC/USDT à 75.67
+09:55:55 - 💹 Nouveau capital : 129.50 USDT
+09:57:27 - 🧪 Achat fictif de LTC/USDT à 75.68
+09:57:27 - 💹 Nouveau capital : 131.77 USDT
+09:59:13 - 🧪 Achat fictif de LTC/USDT à 75.68
+09:59:13 - 💹 Nouveau capital : 134.04 USDT
+10:00:59 - 🧪 Achat fictif de LTC/USDT à 75.73
+10:00:59 - 💹 Nouveau capital : 136.31 USDT
+10:35:13 - 🧪 Achat fictif de BNB/USDT à 579.78
+10:35:13 - 💹 Nouveau capital : 128.99 USDT
+10:37:50 - 🧪 Achat fictif de BNB/USDT à 580.12
+10:37:50 - 💹 Nouveau capital : 158.00 USDT
+10:40:34 - 🧪 Achat fictif de BNB/USDT à 580.88
+10:40:34 - 💹 Nouveau capital : 187.04 USDT
+10:43:13 - 🧪 Achat fictif de BNB/USDT à 580.32
+10:43:13 - 💹 Nouveau capital : 216.06 USDT
+10:45:54 - 🧪 Achat fictif de BNB/USDT à 579.95
+10:45:54 - 💹 Nouveau capital : 245.05 USDT
+10:52:57 - [ERROR] Prix indisponible pour BNB/USDT : binance GET https://testnet.binance.vision/api/v3/ticker/24hr?symbol=BNBUSDT
+11:05:31 - 🧪 Achat fictif de BTC/USDT à 81512.23
+11:05:31 - 💹 Nouveau capital : 4320.66 USDT
+11:08:07 - 🧪 Achat fictif de BNB/USDT à 579.73
+11:08:07 - 💹 Nouveau capital : 4349.65 USDT
+11:10:58 - 🧪 Achat fictif de BNB/USDT à 579.57
+11:10:58 - 💹 Nouveau capital : 4378.63 USDT
+11:13:37 - 🧪 Achat fictif de BNB/USDT à 579.67
+11:13:37 - 💹 Nouveau capital : 4407.61 USDT
+11:16:22 - 🧪 Achat fictif de BNB/USDT à 580.38
+11:16:22 - 💹 Nouveau capital : 4436.63 USDT
+11:18:59 - 🧪 Achat fictif de BNB/USDT à 580.44
+11:18:59 - 💹 Nouveau capital : 4465.65 USDT
+11:21:38 - 🧪 Achat fictif de BNB/USDT à 580.16
+11:21:38 - 💹 Nouveau capital : 4494.66 USDT
+11:24:08 - 🧪 Achat fictif de BNB/USDT à 580.33
+11:24:08 - 💹 Nouveau capital : 4523.68 USDT
+11:26:50 - 🧪 Achat fictif de BNB/USDT à 580.85
+11:26:50 - 💹 Nouveau capital : 4552.72 USDT
+11:29:36 - 🧪 Achat fictif de BNB/USDT à 581.44
+11:29:36 - 💹 Nouveau capital : 4581.79 USDT
+11:32:09 - 🧪 Achat fictif de BTC/USDT à 82110.01
+11:32:09 - 💹 Nouveau capital : 8687.29 USDT
+11:34:51 - 🧪 Achat fictif de BTC/USDT à 82224.35
+11:34:51 - 💹 Nouveau capital : 12798.51 USDT
+11:37:24 - 🧪 Achat fictif de BTC/USDT à 82259.23
+11:37:24 - 💹 Nouveau capital : 16911.47 USDT
+11:40:17 - 🧪 Achat fictif de BTC/USDT à 82261.21
+11:40:17 - 💹 Nouveau capital : 21024.53 USDT
+11:42:50 - 🧪 Achat fictif de BTC/USDT à 82279.95
+11:42:50 - 💹 Nouveau capital : 25138.53 USDT
+11:45:37 - 🧪 Achat fictif de BTC/USDT à 82145.70
+11:45:37 - 💹 Nouveau capital : 29245.82 USDT
+11:48:15 - 🧪 Achat fictif de BTC/USDT à 82200.01
+11:48:15 - 💹 Nouveau capital : 33355.82 USDT
+11:50:59 - 🧪 Achat fictif de BTC/USDT à 82183.48
+11:50:59 - 💹 Nouveau capital : 37464.99 USDT
+11:53:34 - 🧪 Achat fictif de BTC/USDT à 82320.20
+11:53:34 - 💹 Nouveau capital : 41581.00 USDT
+11:56:16 - 🧪 Achat fictif de BTC/USDT à 82406.90
+11:56:16 - 💹 Nouveau capital : 45701.34 USDT
+11:59:07 - 🧪 Achat fictif de BTC/USDT à 82333.10
+11:59:07 - 💹 Nouveau capital : 49818.00 USDT
+12:01:44 - 🧪 Achat fictif de BTC/USDT à 82337.70
+12:01:44 - 💹 Nouveau capital : 53934.88 USDT
+12:04:29 - 🧪 Achat fictif de BTC/USDT à 82309.52
+12:04:29 - 💹 Nouveau capital : 58050.36 USDT
+12:07:04 - 🧪 Achat fictif de BTC/USDT à 82343.99
+12:07:04 - 💹 Nouveau capital : 62167.56 USDT
+12:09:51 - 🧪 Achat fictif de BTC/USDT à 82488.41
+12:09:51 - 💹 Nouveau capital : 66291.98 USDT
+12:12:29 - 🧪 Achat fictif de BTC/USDT à 82407.50
+12:12:29 - 💹 Nouveau capital : 70412.36 USDT
+12:15:14 - 🧪 Achat fictif de BTC/USDT à 82434.73
+12:15:14 - 💹 Nouveau capital : 74534.09 USDT
+12:17:44 - 🧪 Achat fictif de BTC/USDT à 82473.98
+12:17:44 - 💹 Nouveau capital : 78657.79 USDT
+12:20:26 - 🧪 Achat fictif de BTC/USDT à 82708.89
+12:20:26 - 💹 Nouveau capital : 82793.24 USDT
+12:23:00 - 🧪 Achat fictif de BTC/USDT à 82673.40
+12:23:00 - 💹 Nouveau capital : 86926.91 USDT
+12:25:50 - 🧪 Achat fictif de BTC/USDT à 82681.28
+12:25:50 - 💹 Nouveau capital : 91060.97 USDT
+12:28:41 - 🧪 Achat fictif de BTC/USDT à 82784.38
+12:28:41 - 💹 Nouveau capital : 95200.19 USDT
+12:31:31 - 🧪 Achat fictif de BTC/USDT à 82773.42
+12:31:31 - 💹 Nouveau capital : 99338.86 USDT
+12:34:10 - 🧪 Achat fictif de BTC/USDT à 82860.01
+12:34:10 - 💹 Nouveau capital : 103481.86 USDT
+12:36:46 - 🧪 Achat fictif de BTC/USDT à 82960.03
+12:36:46 - 💹 Nouveau capital : 107629.86 USDT
+12:39:37 - 🧪 Achat fictif de BTC/USDT à 82822.57
+12:39:37 - 💹 Nouveau capital : 111770.99 USDT
+12:42:18 - 🧪 Achat fictif de BTC/USDT à 82708.26
+12:42:18 - 💹 Nouveau capital : 115906.40 USDT
+12:45:14 - 🧪 Achat fictif de BTC/USDT à 82628.17
+12:45:14 - 💹 Nouveau capital : 120037.81 USDT
+12:47:45 - 🧪 Achat fictif de BTC/USDT à 82615.36
+12:47:45 - 💹 Nouveau capital : 124168.58 USDT
+12:50:37 - 🧪 Achat fictif de BTC/USDT à 82593.93
+12:50:37 - 💹 Nouveau capital : 128298.28 USDT
+12:53:21 - 🧪 Achat fictif de BTC/USDT à 82588.21
+12:53:21 - 💹 Nouveau capital : 132427.69 USDT
+12:56:12 - 🧪 Achat fictif de BTC/USDT à 82587.25
+12:56:12 - 💹 Nouveau capital : 136557.05 USDT
+12:59:01 - 🧪 Achat fictif de BTC/USDT à 82617.67
+12:59:01 - 💹 Nouveau capital : 140687.93 USDT
+13:01:35 - 🧪 Achat fictif de BTC/USDT à 82692.74
+13:01:35 - 💹 Nouveau capital : 144822.57 USDT
+13:04:20 - 🧪 Achat fictif de BTC/USDT à 82650.38
+13:04:20 - 💹 Nouveau capital : 148955.09 USDT
+13:07:02 - 🧪 Achat fictif de BTC/USDT à 82697.03
+13:07:02 - 💹 Nouveau capital : 153089.94 USDT
+13:10:01 - 🧪 Achat fictif de BTC/USDT à 82821.79
+13:10:01 - 💹 Nouveau capital : 157231.03 USDT
+13:12:40 - 🧪 Achat fictif de BTC/USDT à 82845.61
+13:12:40 - 💹 Nouveau capital : 161373.31 USDT
+13:15:24 - 🧪 Achat fictif de BTC/USDT à 82639.45
+13:15:24 - 💹 Nouveau capital : 165505.28 USDT
+13:17:52 - 🧪 Achat fictif de BTC/USDT à 82602.21
+13:17:52 - 💹 Nouveau capital : 169635.39 USDT
+13:20:43 - 🧪 Achat fictif de BTC/USDT à 82564.21
+13:20:43 - 💹 Nouveau capital : 173763.60 USDT
+13:23:31 - 🧪 Achat fictif de BTC/USDT à 82520.28
+13:23:31 - 💹 Nouveau capital : 177889.62 USDT
+13:26:21 - 🧪 Achat fictif de BTC/USDT à 82446.02
+13:26:21 - 💹 Nouveau capital : 182011.92 USDT
+13:29:09 - 🧪 Achat fictif de BTC/USDT à 82388.85
+13:29:09 - 💹 Nouveau capital : 186131.36 USDT
+13:31:46 - 🧪 Achat fictif de BTC/USDT à 82388.58
+13:31:46 - 💹 Nouveau capital : 190250.79 USDT
+14:45:42 - 🧪 Achat fictif de LTC/USDT à 76.45
+11:13:58 - 🧪 Achat fictif de NEO/USDT à 5.42
+11:13:58 - 💹 Nouveau capital : 100.16 USDT
+11:16:19 - 🧪 Achat fictif de NEO/USDT à 5.42
+11:16:19 - 💹 Nouveau capital : 100.33 USDT
+11:18:55 - 🧪 Achat fictif de NEO/USDT à 5.42
+11:18:55 - 💹 Nouveau capital : 100.49 USDT
+11:21:30 - 🧪 Achat fictif de NEO/USDT à 5.40
+11:21:30 - 💹 Nouveau capital : 100.65 USDT
+11:24:04 - 🧪 Achat fictif de NEO/USDT à 5.40
+11:24:04 - 💹 Nouveau capital : 100.81 USDT
+14:29:24 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:29:24 - 💹 Nouveau capital : 100.01 USDT
+14:31:24 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:31:24 - 💹 Nouveau capital : 100.02 USDT
+14:33:37 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:33:37 - 💹 Nouveau capital : 100.02 USDT
+14:34:29 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:34:29 - 💹 Nouveau capital : 100.01 USDT
+14:35:46 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:35:46 - 💹 Nouveau capital : 100.03 USDT
+14:36:30 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:36:30 - 💹 Nouveau capital : 100.02 USDT
+14:37:52 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:37:52 - 💹 Nouveau capital : 100.04 USDT
+14:38:37 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:38:37 - 💹 Nouveau capital : 100.02 USDT
+14:40:07 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:40:07 - 💹 Nouveau capital : 100.05 USDT
+14:40:50 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:40:50 - 💹 Nouveau capital : 100.03 USDT
+14:42:18 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:42:18 - 💹 Nouveau capital : 100.05 USDT
+14:43:09 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:43:09 - 💹 Nouveau capital : 100.04 USDT
+14:44:35 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:44:35 - 💹 Nouveau capital : 100.06 USDT
+14:45:28 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:45:28 - 💹 Nouveau capital : 100.05 USDT
+14:46:37 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:46:37 - 💹 Nouveau capital : 100.07 USDT
+14:47:38 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:47:38 - 💹 Nouveau capital : 100.05 USDT
+14:48:58 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:48:58 - 💹 Nouveau capital : 100.08 USDT
+14:49:54 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:49:54 - 💹 Nouveau capital : 100.06 USDT
+14:51:12 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:51:12 - 💹 Nouveau capital : 100.08 USDT
+14:52:12 - 🧪 Achat fictif de TRX/USDT à 0.25
+14:52:12 - 💹 Nouveau capital : 100.07 USDT
+10:57:05 - 🧪 Achat fictif de ONT/USDT à 0.14
+10:57:05 - 💹 Nouveau capital : 1000.01 USDT
+10:58:42 - 🧪 Achat fictif de ONT/USDT à 0.14
+10:58:42 - 💹 Nouveau capital : 1000.01 USDT
+11:00:18 - 🧪 Achat fictif de QTUM/USDT à 1.97
+11:00:18 - 💹 Nouveau capital : 1000.11 USDT
+11:01:29 - 🧪 Achat fictif de QTUM/USDT à 1.96
+11:01:29 - 💹 Nouveau capital : 1000.21 USDT
+11:03:00 - 🧪 Achat fictif de QTUM/USDT à 1.96
+11:03:00 - 💹 Nouveau capital : 1000.31 USDT
+11:04:32 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:04:32 - 💹 Nouveau capital : 1000.32 USDT
+11:06:00 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:06:00 - 💹 Nouveau capital : 1000.32 USDT
+11:07:31 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:07:31 - 💹 Nouveau capital : 1000.33 USDT
+11:09:09 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:09:09 - 💹 Nouveau capital : 1000.34 USDT
+11:10:43 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:10:43 - 💹 Nouveau capital : 1000.34 USDT
+11:12:11 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:12:11 - 💹 Nouveau capital : 1000.35 USDT
+11:13:49 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:13:49 - 💹 Nouveau capital : 1000.36 USDT
+11:15:19 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:15:19 - 💹 Nouveau capital : 1000.36 USDT
+11:16:34 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:16:34 - 💹 Nouveau capital : 1000.37 USDT
+11:18:08 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:18:08 - 💹 Nouveau capital : 1000.38 USDT
+11:19:45 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:19:45 - 💹 Nouveau capital : 1000.38 USDT
+11:21:14 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:21:14 - 💹 Nouveau capital : 1000.39 USDT
+11:22:45 - 🧪 Achat fictif de ONT/USDT à 0.14
+11:22:45 - 💹 Nouveau capital : 1000.40 USDT

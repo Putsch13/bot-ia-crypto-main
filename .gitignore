@@ -1,12 +1,30 @@
-node_modules
-# === FICHIERS À IGNORER ===
+# Node modules
+node_modules/
+frontend/node_modules/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs et données temporaires
 *.log
 *.csv
+*.json
+logs/
+portfolio.json
+positions.json
+config/portefeuille.json
+
+# Dossiers système
 .DS_Store
-logs_robot.txt
-app.log
-sentiment_scores.json
-audit_*.csv
-historique_trades.csv
-frontend/dist
-git rm --cached logs_robot.txt historique_trades.csv sentiment_scores.json
+.env
+.vscode/
+.idea/
+
+# Models & data
+models/
+data/
+*.model
+*.h5
+*.pkl
