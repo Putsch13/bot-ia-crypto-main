@@ -7,6 +7,7 @@ const backendUrl = process.env.BACKEND_URL || "http://localhost:5002"
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: true, // Permet l'accès via le réseau local
     proxy: {
       '/historique': backendUrl,
       '/performance': backendUrl,

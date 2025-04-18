@@ -92,7 +92,7 @@ const ActiveTradesPanel = () => {
             return (
               <tr key={symbol} className="border-b border-zinc-800">
                 <td>{symbol}</td>
-                <td>{buyPrice.toFixed(4)}</td>
+                <td>{(buyPrice ?? 0).toFixed(4)}</td>
                 <td>{usdtInvested}</td>
                 <td className={isProfit ? "text-green-400" : "text-red-400"}>{profit} $</td>
                 <td>{new Date(info.timestamp * 1000).toLocaleString()}</td>

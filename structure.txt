@@ -1,0 +1,1657 @@
+.
+├── Dockerfile
+├── __pycache__
+│   ├── ai_engine.cpython-311.pyc
+│   ├── app.cpython-311.pyc
+│   ├── app.cpython-313.pyc
+│   ├── audit_cryptos.cpython-311.pyc
+│   ├── backend_ia_bot.cpython-311.pyc
+│   ├── bot_config.cpython-311.pyc
+│   ├── bot_runner.cpython-311.pyc
+│   ├── buzz_tracker.cpython-311.pyc
+│   ├── config.cpython-311.pyc
+│   ├── data_fetcher.cpython-311.pyc
+│   ├── data_fetcher.cpython-313.pyc
+│   ├── ml_brain.cpython-311.pyc
+│   ├── ml_brain.cpython-313.pyc
+│   ├── model.cpython-311.pyc
+│   ├── predict_live.cpython-311.pyc
+│   └── twitter_tracker.cpython-311.pyc
+├── ai_engine.py
+├── app.log
+├── app.py
+├── audit_100cryptos.csv
+├── audit_100cryptos_20250407_125958.csv
+├── audit_100cryptos_20250407_135205.csv
+├── audit_100cryptos_20250407_150905.csv
+├── audit_100cryptos_20250407_151840.csv
+├── audit_100cryptos_20250407_151913.csv
+├── audit_100cryptos_20250407_153021.csv
+├── audit_100cryptos_20250407_154256.csv
+├── audit_100cryptos_20250408_093617.csv
+├── audit_100cryptos_20250408_115330.csv
+├── audit_100cryptos_20250408_115339.csv
+├── audit_100cryptos_20250408_120654.csv
+├── audit_100cryptos_20250408_120700.csv
+├── audit_100cryptos_20250408_122021.csv
+├── audit_100cryptos_20250408_122024.csv
+├── audit_100cryptos_20250408_124722.csv
+├── audit_100cryptos_20250408_124724.csv
+├── audit_100cryptos_20250408_131852.csv
+├── audit_100cryptos_20250408_133430.csv
+├── audit_100cryptos_20250409_094057.csv
+├── audit_100cryptos_20250409_094100.csv
+├── audit_100cryptos_20250409_095147.csv
+├── audit_100cryptos_20250409_095153.csv
+├── audit_100cryptos_20250409_095959.csv
+├── audit_100cryptos_20250409_100001.csv
+├── audit_100cryptos_20250409_100641.csv
+├── audit_100cryptos_20250409_100643.csv
+├── audit_100cryptos_20250409_102031.csv
+├── audit_100cryptos_20250409_103404.csv
+├── audit_100cryptos_20250409_103406.csv
+├── audit_100cryptos_20250409_112805.csv
+├── audit_100cryptos_20250409_114052.csv
+├── audit_100cryptos_20250409_114059.csv
+├── audit_100cryptos_20250409_114717.csv
+├── audit_100cryptos_20250409_115325.csv
+├── audit_100cryptos_20250409_115343.csv
+├── audit_100cryptos_20250409_115546.csv
+├── audit_100cryptos_20250409_115733.csv
+├── audit_100cryptos_20250409_115744.csv
+├── audit_100cryptos_20250409_180606.csv
+├── audit_100cryptos_20250409_181747.csv
+├── audit_100cryptos_20250409_181933.csv
+├── audit_100cryptos_20250409_182445.csv
+├── audit_100cryptos_20250409_183752.csv
+├── audit_100cryptos_20250409_184345.csv
+├── audit_100cryptos_20250409_184514.csv
+├── audit_100cryptos_20250409_205321.csv
+├── audit_100cryptos_20250409_211004.csv
+├── audit_100cryptos_20250409_214550.csv
+├── audit_100cryptos_20250410_143459.csv
+├── audit_100cryptos_20250410_144013.csv
+├── audit_100cryptos_20250410_145417.csv
+├── audit_100cryptos_20250410_150815.csv
+├── audit_100cryptos_20250410_151539.csv
+├── audit_100cryptos_20250410_151759.csv
+├── audit_100cryptos_20250410_152224.csv
+├── audit_100cryptos_20250410_152726.csv
+├── audit_100cryptos_20250410_152926.csv
+├── audit_100cryptos_20250410_153635.csv
+├── audit_100cryptos_20250410_153723.csv
+├── audit_100cryptos_20250410_154032.csv
+├── audit_100cryptos_20250410_154323.csv
+├── audit_100cryptos_20250411_092708.csv
+├── audit_100cryptos_20250411_092716.csv
+├── audit_100cryptos_20250411_093453.csv
+├── audit_100cryptos_20250411_094159.csv
+├── audit_100cryptos_20250411_094200.csv
+├── audit_100cryptos_20250411_095652.csv
+├── audit_100cryptos_20250411_095655.csv
+├── audit_100cryptos_20250411_102733.csv
+├── audit_100cryptos_20250411_102736.csv
+├── audit_100cryptos_20250411_104227.csv
+├── audit_100cryptos_20250411_104235.csv
+├── audit_100cryptos_20250415_160642.csv
+├── audit_100cryptos_20250415_160646.csv
+├── audit_100cryptos_20250415_162130.csv
+├── audit_100cryptos_20250415_162131.csv
+├── audit_100cryptos_20250415_164432.csv
+├── audit_100cryptos_20250416_091855.csv
+├── audit_100cryptos_20250416_091856.csv
+├── audit_100cryptos_20250416_093333.csv
+├── audit_100cryptos_20250416_093338.csv
+├── audit_100cryptos_20250416_094818.csv
+├── audit_100cryptos_20250416_094819.csv
+├── audit_100cryptos_20250416_100309.csv
+├── audit_100cryptos_20250416_100312.csv
+├── audit_100cryptos_20250416_101759.csv
+├── audit_100cryptos_20250416_101800.csv
+├── audit_100cryptos_20250416_110337.csv
+├── audit_100cryptos_20250416_110412.csv
+├── audit_100cryptos_20250416_111816.csv
+├── audit_100cryptos_20250416_113006.csv
+├── audit_100cryptos_20250416_113045.csv
+├── audit_100cryptos_20250416_120829.csv
+├── audit_100cryptos_20250416_131847.csv
+├── audit_100cryptos_20250416_133331.csv
+├── audit_100cryptos_20250416_134818.csv
+├── audit_100cryptos_20250416_140249.csv
+├── audit_100cryptos_20250416_141725.csv
+├── audit_100cryptos_20250416_143155.csv
+├── audit_100cryptos_20250416_144633.csv
+├── audit_100cryptos_20250416_200708.csv
+├── audit_100cryptos_20250416_200711.csv
+├── audit_100cryptos_20250416_202225.csv
+├── audit_100cryptos_20250416_202231.csv
+├── audit_100cryptos_20250416_203747.csv
+├── audit_100cryptos_20250416_203751.csv
+├── audit_100cryptos_20250417_082259.csv
+├── audit_100cryptos_20250417_082302.csv
+├── audit_100cryptos_20250417_083210.csv
+├── audit_100cryptos_20250417_083211.csv
+├── audit_100cryptos_20250417_084644.csv
+├── audit_100cryptos_20250417_090119.csv
+├── audit_100cryptos_20250417_090120.csv
+├── audit_100cryptos_20250417_091556.csv
+├── audit_100cryptos_20250417_091557.csv
+├── audit_100cryptos_20250417_093042.csv
+├── audit_100cryptos_20250417_093045.csv
+├── audit_100cryptos_20250417_094545.csv
+├── audit_100cryptos_20250417_094546.csv
+├── audit_100cryptos_20250417_104356.csv
+├── audit_100cryptos_20250417_104359.csv
+├── audit_100cryptos_20250417_104912.csv
+├── audit_100cryptos_20250417_104914.csv
+├── audit_100cryptos_20250417_110350.csv
+├── audit_100cryptos_20250417_110353.csv
+├── audit_100cryptos_20250417_111835.csv
+├── audit_100cryptos_20250417_111839.csv
+├── audit_100cryptos_20250417_113308.csv
+├── audit_100cryptos_20250417_113314.csv
+├── audit_100cryptos_20250417_114744.csv
+├── audit_100cryptos_20250417_114747.csv
+├── audit_100cryptos_20250417_120234.csv
+├── audit_100cryptos_20250417_120235.csv
+├── audit_100cryptos_20250417_121711.csv
+├── audit_100cryptos_20250417_121713.csv
+├── audit_100cryptos_20250417_123428.csv
+├── audit_100cryptos_20250417_123429.csv
+├── audit_cryptos.py
+├── backend_ia_bot.py
+├── bot_config.py
+├── bot_runner.py
+├── buzz_tracker.py
+├── config
+│   ├── config.json
+│   └── portefeuille.json
+├── config.py
+├── data_collector.py
+├── data_collector_multi_tf.py
+├── data_fetcher.py
+├── data_multi_tf
+│   ├── AAVEUSDT_15m.csv
+│   ├── AAVEUSDT_1d.csv
+│   ├── AAVEUSDT_1h.csv
+│   ├── AAVEUSDT_1m.csv
+│   ├── AAVEUSDT_30m.csv
+│   ├── AAVEUSDT_3m.csv
+│   ├── AAVEUSDT_5m.csv
+│   ├── ACTUSDT_15m.csv
+│   ├── ACTUSDT_1d.csv
+│   ├── ACTUSDT_1h.csv
+│   ├── ACTUSDT_1m.csv
+│   ├── ACTUSDT_1w.csv
+│   ├── ACTUSDT_30m.csv
+│   ├── ACTUSDT_3m.csv
+│   ├── ACTUSDT_5m.csv
+│   ├── ADAUSDT_15m.csv
+│   ├── ADAUSDT_1d.csv
+│   ├── ADAUSDT_1h.csv
+│   ├── ADAUSDT_1m.csv
+│   ├── ADAUSDT_30m.csv
+│   ├── ADAUSDT_3m.csv
+│   ├── ADAUSDT_5m.csv
+│   ├── ALGOUSDT_15m.csv
+│   ├── ALGOUSDT_1d.csv
+│   ├── ALGOUSDT_1h.csv
+│   ├── ALGOUSDT_1m.csv
+│   ├── ALGOUSDT_30m.csv
+│   ├── ALGOUSDT_3m.csv
+│   ├── ALGOUSDT_5m.csv
+│   ├── APTUSDT_15m.csv
+│   ├── APTUSDT_1d.csv
+│   ├── APTUSDT_1h.csv
+│   ├── APTUSDT_1m.csv
+│   ├── APTUSDT_30m.csv
+│   ├── APTUSDT_3m.csv
+│   ├── APTUSDT_5m.csv
+│   ├── ARBUSDT_15m.csv
+│   ├── ARBUSDT_1d.csv
+│   ├── ARBUSDT_1h.csv
+│   ├── ARBUSDT_1m.csv
+│   ├── ARBUSDT_30m.csv
+│   ├── ARBUSDT_3m.csv
+│   ├── ARBUSDT_5m.csv
+│   ├── ARDRUSDT_15m.csv
+│   ├── ARDRUSDT_1d.csv
+│   ├── ARDRUSDT_1h.csv
+│   ├── ARDRUSDT_1m.csv
+│   ├── ARDRUSDT_30m.csv
+│   ├── ARDRUSDT_3m.csv
+│   ├── ARDRUSDT_5m.csv
+│   ├── ARKMUSDT_15m.csv
+│   ├── ARKMUSDT_1d.csv
+│   ├── ARKMUSDT_1h.csv
+│   ├── ARKMUSDT_1m.csv
+│   ├── ARKMUSDT_30m.csv
+│   ├── ARKMUSDT_3m.csv
+│   ├── ARKMUSDT_5m.csv
+│   ├── ARKUSDT_15m.csv
+│   ├── ARKUSDT_1d.csv
+│   ├── ARKUSDT_1h.csv
+│   ├── ARKUSDT_1m.csv
+│   ├── ARKUSDT_30m.csv
+│   ├── ARKUSDT_3m.csv
+│   ├── ARKUSDT_5m.csv
+│   ├── ARUSDT_15m.csv
+│   ├── ARUSDT_1d.csv
+│   ├── ARUSDT_1h.csv
+│   ├── ARUSDT_1m.csv
+│   ├── ARUSDT_30m.csv
+│   ├── ARUSDT_3m.csv
+│   ├── ARUSDT_5m.csv
+│   ├── ATOMUSDT_15m.csv
+│   ├── ATOMUSDT_1d.csv
+│   ├── ATOMUSDT_1h.csv
+│   ├── ATOMUSDT_1m.csv
+│   ├── ATOMUSDT_30m.csv
+│   ├── ATOMUSDT_3m.csv
+│   ├── ATOMUSDT_5m.csv
+│   ├── AUCTIONUSDT_15m.csv
+│   ├── AUCTIONUSDT_1d.csv
+│   ├── AUCTIONUSDT_1h.csv
+│   ├── AUCTIONUSDT_1m.csv
+│   ├── AUCTIONUSDT_30m.csv
+│   ├── AUCTIONUSDT_3m.csv
+│   ├── AUCTIONUSDT_5m.csv
+│   ├── AVAXUSDT_15m.csv
+│   ├── AVAXUSDT_1d.csv
+│   ├── AVAXUSDT_1h.csv
+│   ├── AVAXUSDT_1m.csv
+│   ├── AVAXUSDT_30m.csv
+│   ├── AVAXUSDT_3m.csv
+│   ├── AVAXUSDT_5m.csv
+│   ├── BCHUSDT_15m.csv
+│   ├── BCHUSDT_1d.csv
+│   ├── BCHUSDT_1h.csv
+│   ├── BCHUSDT_1m.csv
+│   ├── BCHUSDT_30m.csv
+│   ├── BCHUSDT_3m.csv
+│   ├── BCHUSDT_5m.csv
+│   ├── BERAUSDT_15m.csv
+│   ├── BERAUSDT_1d.csv
+│   ├── BERAUSDT_1h.csv
+│   ├── BERAUSDT_1m.csv
+│   ├── BERAUSDT_1w.csv
+│   ├── BERAUSDT_30m.csv
+│   ├── BERAUSDT_3m.csv
+│   ├── BERAUSDT_5m.csv
+│   ├── BNBUSDT_15m.csv
+│   ├── BNBUSDT_1d.csv
+│   ├── BNBUSDT_1h.csv
+│   ├── BNBUSDT_1m.csv
+│   ├── BNBUSDT_30m.csv
+│   ├── BNBUSDT_3m.csv
+│   ├── BNBUSDT_5m.csv
+│   ├── BNXUSDT_15m.csv
+│   ├── BNXUSDT_1d.csv
+│   ├── BNXUSDT_1h.csv
+│   ├── BNXUSDT_1m.csv
+│   ├── BNXUSDT_30m.csv
+│   ├── BNXUSDT_3m.csv
+│   ├── BNXUSDT_5m.csv
+│   ├── BONKUSDT_15m.csv
+│   ├── BONKUSDT_1d.csv
+│   ├── BONKUSDT_1h.csv
+│   ├── BONKUSDT_1m.csv
+│   ├── BONKUSDT_30m.csv
+│   ├── BONKUSDT_3m.csv
+│   ├── BONKUSDT_5m.csv
+│   ├── BTCUSDT_15m.csv
+│   ├── BTCUSDT_1d.csv
+│   ├── BTCUSDT_1h.csv
+│   ├── BTCUSDT_1m.csv
+│   ├── BTCUSDT_30m.csv
+│   ├── BTCUSDT_3m.csv
+│   ├── BTCUSDT_5m.csv
+│   ├── CAKEUSDT_15m.csv
+│   ├── CAKEUSDT_1d.csv
+│   ├── CAKEUSDT_1h.csv
+│   ├── CAKEUSDT_1m.csv
+│   ├── CAKEUSDT_30m.csv
+│   ├── CAKEUSDT_3m.csv
+│   ├── CAKEUSDT_5m.csv
+│   ├── CFXUSDT_15m.csv
+│   ├── CFXUSDT_1d.csv
+│   ├── CFXUSDT_1h.csv
+│   ├── CFXUSDT_1m.csv
+│   ├── CFXUSDT_30m.csv
+│   ├── CFXUSDT_3m.csv
+│   ├── CFXUSDT_5m.csv
+│   ├── CRVUSDT_15m.csv
+│   ├── CRVUSDT_1d.csv
+│   ├── CRVUSDT_1h.csv
+│   ├── CRVUSDT_1m.csv
+│   ├── CRVUSDT_30m.csv
+│   ├── CRVUSDT_3m.csv
+│   ├── CRVUSDT_5m.csv
+│   ├── DOGEUSDT_15m.csv
+│   ├── DOGEUSDT_1d.csv
+│   ├── DOGEUSDT_1h.csv
+│   ├── DOGEUSDT_1m.csv
+│   ├── DOGEUSDT_30m.csv
+│   ├── DOGEUSDT_3m.csv
+│   ├── DOGEUSDT_5m.csv
+│   ├── DOTUSDT_15m.csv
+│   ├── DOTUSDT_1d.csv
+│   ├── DOTUSDT_1h.csv
+│   ├── DOTUSDT_1m.csv
+│   ├── DOTUSDT_30m.csv
+│   ├── DOTUSDT_3m.csv
+│   ├── DOTUSDT_5m.csv
+│   ├── DYDXUSDT_15m.csv
+│   ├── DYDXUSDT_1d.csv
+│   ├── DYDXUSDT_1h.csv
+│   ├── DYDXUSDT_1m.csv
+│   ├── DYDXUSDT_30m.csv
+│   ├── DYDXUSDT_3m.csv
+│   ├── DYDXUSDT_5m.csv
+│   ├── ENAUSDT_15m.csv
+│   ├── ENAUSDT_1d.csv
+│   ├── ENAUSDT_1h.csv
+│   ├── ENAUSDT_1m.csv
+│   ├── ENAUSDT_30m.csv
+│   ├── ENAUSDT_3m.csv
+│   ├── ENAUSDT_5m.csv
+│   ├── EOSUSDT_15m.csv
+│   ├── EOSUSDT_1d.csv
+│   ├── EOSUSDT_1h.csv
+│   ├── EOSUSDT_1m.csv
+│   ├── EOSUSDT_30m.csv
+│   ├── EOSUSDT_3m.csv
+│   ├── EOSUSDT_5m.csv
+│   ├── ETCUSDT_15m.csv
+│   ├── ETCUSDT_1d.csv
+│   ├── ETCUSDT_1h.csv
+│   ├── ETCUSDT_1m.csv
+│   ├── ETCUSDT_30m.csv
+│   ├── ETCUSDT_3m.csv
+│   ├── ETCUSDT_5m.csv
+│   ├── ETHUSDT_15m.csv
+│   ├── ETHUSDT_1d.csv
+│   ├── ETHUSDT_1h.csv
+│   ├── ETHUSDT_1m.csv
+│   ├── ETHUSDT_30m.csv
+│   ├── ETHUSDT_3m.csv
+│   ├── ETHUSDT_5m.csv
+│   ├── EURUSDT_15m.csv
+│   ├── EURUSDT_1d.csv
+│   ├── EURUSDT_1h.csv
+│   ├── EURUSDT_1m.csv
+│   ├── EURUSDT_30m.csv
+│   ├── EURUSDT_3m.csv
+│   ├── EURUSDT_5m.csv
+│   ├── FDUSDUSDT_15m.csv
+│   ├── FDUSDUSDT_1d.csv
+│   ├── FDUSDUSDT_1h.csv
+│   ├── FDUSDUSDT_1m.csv
+│   ├── FDUSDUSDT_30m.csv
+│   ├── FDUSDUSDT_3m.csv
+│   ├── FDUSDUSDT_5m.csv
+│   ├── FETUSDT_15m.csv
+│   ├── FETUSDT_1d.csv
+│   ├── FETUSDT_1h.csv
+│   ├── FETUSDT_1m.csv
+│   ├── FETUSDT_30m.csv
+│   ├── FETUSDT_3m.csv
+│   ├── FETUSDT_5m.csv
+│   ├── FILUSDT_15m.csv
+│   ├── FILUSDT_1d.csv
+│   ├── FILUSDT_1h.csv
+│   ├── FILUSDT_1m.csv
+│   ├── FILUSDT_30m.csv
+│   ├── FILUSDT_3m.csv
+│   ├── FILUSDT_5m.csv
+│   ├── FLOKIUSDT_15m.csv
+│   ├── FLOKIUSDT_1d.csv
+│   ├── FLOKIUSDT_1h.csv
+│   ├── FLOKIUSDT_1m.csv
+│   ├── FLOKIUSDT_30m.csv
+│   ├── FLOKIUSDT_3m.csv
+│   ├── FLOKIUSDT_5m.csv
+│   ├── FORMUSDT_15m.csv
+│   ├── FORMUSDT_1d.csv
+│   ├── FORMUSDT_1h.csv
+│   ├── FORMUSDT_1m.csv
+│   ├── FORMUSDT_1w.csv
+│   ├── FORMUSDT_30m.csv
+│   ├── FORMUSDT_3m.csv
+│   ├── FORMUSDT_5m.csv
+│   ├── FORTHUSDT_15m.csv
+│   ├── FORTHUSDT_1d.csv
+│   ├── FORTHUSDT_1h.csv
+│   ├── FORTHUSDT_1m.csv
+│   ├── FORTHUSDT_30m.csv
+│   ├── FORTHUSDT_3m.csv
+│   ├── FORTHUSDT_5m.csv
+│   ├── FUNUSDT_15m.csv
+│   ├── FUNUSDT_1d.csv
+│   ├── FUNUSDT_1h.csv
+│   ├── FUNUSDT_1m.csv
+│   ├── FUNUSDT_30m.csv
+│   ├── FUNUSDT_3m.csv
+│   ├── FUNUSDT_5m.csv
+│   ├── GALAUSDT_15m.csv
+│   ├── GALAUSDT_1d.csv
+│   ├── GALAUSDT_1h.csv
+│   ├── GALAUSDT_1m.csv
+│   ├── GALAUSDT_30m.csv
+│   ├── GALAUSDT_3m.csv
+│   ├── GALAUSDT_5m.csv
+│   ├── GASUSDT_15m.csv
+│   ├── GASUSDT_1d.csv
+│   ├── GASUSDT_1h.csv
+│   ├── GASUSDT_1m.csv
+│   ├── GASUSDT_30m.csv
+│   ├── GASUSDT_3m.csv
+│   ├── GASUSDT_5m.csv
+│   ├── GMXUSDT_15m.csv
+│   ├── GMXUSDT_1d.csv
+│   ├── GMXUSDT_1h.csv
+│   ├── GMXUSDT_1m.csv
+│   ├── GMXUSDT_30m.csv
+│   ├── GMXUSDT_3m.csv
+│   ├── GMXUSDT_5m.csv
+│   ├── GUNUSDT_15m.csv
+│   ├── GUNUSDT_1d.csv
+│   ├── GUNUSDT_1h.csv
+│   ├── GUNUSDT_1m.csv
+│   ├── GUNUSDT_1w.csv
+│   ├── GUNUSDT_30m.csv
+│   ├── GUNUSDT_3m.csv
+│   ├── GUNUSDT_5m.csv
+│   ├── HBARUSDT_15m.csv
+│   ├── HBARUSDT_1d.csv
+│   ├── HBARUSDT_1h.csv
+│   ├── HBARUSDT_1m.csv
+│   ├── HBARUSDT_30m.csv
+│   ├── HBARUSDT_3m.csv
+│   ├── HBARUSDT_5m.csv
+│   ├── ICPUSDT_15m.csv
+│   ├── ICPUSDT_1d.csv
+│   ├── ICPUSDT_1h.csv
+│   ├── ICPUSDT_1m.csv
+│   ├── ICPUSDT_30m.csv
+│   ├── ICPUSDT_3m.csv
+│   ├── ICPUSDT_5m.csv
+│   ├── INJUSDT_15m.csv
+│   ├── INJUSDT_1d.csv
+│   ├── INJUSDT_1h.csv
+│   ├── INJUSDT_1m.csv
+│   ├── INJUSDT_30m.csv
+│   ├── INJUSDT_3m.csv
+│   ├── INJUSDT_5m.csv
+│   ├── JASMYUSDT_15m.csv
+│   ├── JASMYUSDT_1d.csv
+│   ├── JASMYUSDT_1h.csv
+│   ├── JASMYUSDT_1m.csv
+│   ├── JASMYUSDT_30m.csv
+│   ├── JASMYUSDT_3m.csv
+│   ├── JASMYUSDT_5m.csv
+│   ├── JUPUSDT_15m.csv
+│   ├── JUPUSDT_1d.csv
+│   ├── JUPUSDT_1h.csv
+│   ├── JUPUSDT_1m.csv
+│   ├── JUPUSDT_30m.csv
+│   ├── JUPUSDT_3m.csv
+│   ├── JUPUSDT_5m.csv
+│   ├── KAITOUSDT_15m.csv
+│   ├── KAITOUSDT_1d.csv
+│   ├── KAITOUSDT_1h.csv
+│   ├── KAITOUSDT_1m.csv
+│   ├── KAITOUSDT_1w.csv
+│   ├── KAITOUSDT_30m.csv
+│   ├── KAITOUSDT_3m.csv
+│   ├── KAITOUSDT_5m.csv
+│   ├── LAYERUSDT_15m.csv
+│   ├── LAYERUSDT_1d.csv
+│   ├── LAYERUSDT_1h.csv
+│   ├── LAYERUSDT_1m.csv
+│   ├── LAYERUSDT_1w.csv
+│   ├── LAYERUSDT_30m.csv
+│   ├── LAYERUSDT_3m.csv
+│   ├── LAYERUSDT_5m.csv
+│   ├── LDOUSDT_15m.csv
+│   ├── LDOUSDT_1d.csv
+│   ├── LDOUSDT_1h.csv
+│   ├── LDOUSDT_1m.csv
+│   ├── LDOUSDT_30m.csv
+│   ├── LDOUSDT_3m.csv
+│   ├── LDOUSDT_5m.csv
+│   ├── LINAUSDT_15m.csv
+│   ├── LINAUSDT_1d.csv
+│   ├── LINAUSDT_1h.csv
+│   ├── LINAUSDT_1m.csv
+│   ├── LINAUSDT_30m.csv
+│   ├── LINAUSDT_3m.csv
+│   ├── LINAUSDT_5m.csv
+│   ├── LINKUSDT_15m.csv
+│   ├── LINKUSDT_1d.csv
+│   ├── LINKUSDT_1h.csv
+│   ├── LINKUSDT_1m.csv
+│   ├── LINKUSDT_30m.csv
+│   ├── LINKUSDT_3m.csv
+│   ├── LINKUSDT_5m.csv
+│   ├── LPTUSDT_15m.csv
+│   ├── LPTUSDT_1d.csv
+│   ├── LPTUSDT_1h.csv
+│   ├── LPTUSDT_1m.csv
+│   ├── LPTUSDT_30m.csv
+│   ├── LPTUSDT_3m.csv
+│   ├── LPTUSDT_5m.csv
+│   ├── LTCUSDT_15m.csv
+│   ├── LTCUSDT_1d.csv
+│   ├── LTCUSDT_1h.csv
+│   ├── LTCUSDT_1m.csv
+│   ├── LTCUSDT_30m.csv
+│   ├── LTCUSDT_3m.csv
+│   ├── LTCUSDT_5m.csv
+│   ├── MASKUSDT_15m.csv
+│   ├── MASKUSDT_1d.csv
+│   ├── MASKUSDT_1h.csv
+│   ├── MASKUSDT_1m.csv
+│   ├── MASKUSDT_30m.csv
+│   ├── MASKUSDT_3m.csv
+│   ├── MASKUSDT_5m.csv
+│   ├── MKRUSDT_15m.csv
+│   ├── MKRUSDT_1d.csv
+│   ├── MKRUSDT_1h.csv
+│   ├── MKRUSDT_1m.csv
+│   ├── MKRUSDT_30m.csv
+│   ├── MKRUSDT_3m.csv
+│   ├── MKRUSDT_5m.csv
+│   ├── MUBARAKUSDT_15m.csv
+│   ├── MUBARAKUSDT_1d.csv
+│   ├── MUBARAKUSDT_1h.csv
+│   ├── MUBARAKUSDT_1m.csv
+│   ├── MUBARAKUSDT_1w.csv
+│   ├── MUBARAKUSDT_30m.csv
+│   ├── MUBARAKUSDT_3m.csv
+│   ├── MUBARAKUSDT_5m.csv
+│   ├── NEARUSDT_15m.csv
+│   ├── NEARUSDT_1d.csv
+│   ├── NEARUSDT_1h.csv
+│   ├── NEARUSDT_1m.csv
+│   ├── NEARUSDT_30m.csv
+│   ├── NEARUSDT_3m.csv
+│   ├── NEARUSDT_5m.csv
+│   ├── NEIROUSDT_15m.csv
+│   ├── NEIROUSDT_1d.csv
+│   ├── NEIROUSDT_1h.csv
+│   ├── NEIROUSDT_1m.csv
+│   ├── NEIROUSDT_30m.csv
+│   ├── NEIROUSDT_3m.csv
+│   ├── NEIROUSDT_5m.csv
+│   ├── NEOUSDT_15m.csv
+│   ├── NEOUSDT_1d.csv
+│   ├── NEOUSDT_1h.csv
+│   ├── NEOUSDT_1m.csv
+│   ├── NEOUSDT_30m.csv
+│   ├── NEOUSDT_3m.csv
+│   ├── NEOUSDT_5m.csv
+│   ├── NILUSDT_15m.csv
+│   ├── NILUSDT_1d.csv
+│   ├── NILUSDT_1h.csv
+│   ├── NILUSDT_1m.csv
+│   ├── NILUSDT_1w.csv
+│   ├── NILUSDT_30m.csv
+│   ├── NILUSDT_3m.csv
+│   ├── NILUSDT_5m.csv
+│   ├── OMUSDT_15m.csv
+│   ├── OMUSDT_1d.csv
+│   ├── OMUSDT_1h.csv
+│   ├── OMUSDT_1m.csv
+│   ├── OMUSDT_30m.csv
+│   ├── OMUSDT_3m.csv
+│   ├── OMUSDT_5m.csv
+│   ├── OPUSDT_15m.csv
+│   ├── OPUSDT_1d.csv
+│   ├── OPUSDT_1h.csv
+│   ├── OPUSDT_1m.csv
+│   ├── OPUSDT_30m.csv
+│   ├── OPUSDT_3m.csv
+│   ├── OPUSDT_5m.csv
+│   ├── ORDIUSDT_15m.csv
+│   ├── ORDIUSDT_1d.csv
+│   ├── ORDIUSDT_1h.csv
+│   ├── ORDIUSDT_1m.csv
+│   ├── ORDIUSDT_30m.csv
+│   ├── ORDIUSDT_3m.csv
+│   ├── ORDIUSDT_5m.csv
+│   ├── PARTIUSDT_15m.csv
+│   ├── PARTIUSDT_1d.csv
+│   ├── PARTIUSDT_1h.csv
+│   ├── PARTIUSDT_1m.csv
+│   ├── PARTIUSDT_1w.csv
+│   ├── PARTIUSDT_30m.csv
+│   ├── PARTIUSDT_3m.csv
+│   ├── PARTIUSDT_5m.csv
+│   ├── PAXGUSDT_15m.csv
+│   ├── PAXGUSDT_1d.csv
+│   ├── PAXGUSDT_1h.csv
+│   ├── PAXGUSDT_1m.csv
+│   ├── PAXGUSDT_30m.csv
+│   ├── PAXGUSDT_3m.csv
+│   ├── PAXGUSDT_5m.csv
+│   ├── PENDLEUSDT_15m.csv
+│   ├── PENDLEUSDT_1d.csv
+│   ├── PENDLEUSDT_1h.csv
+│   ├── PENDLEUSDT_1m.csv
+│   ├── PENDLEUSDT_30m.csv
+│   ├── PENDLEUSDT_3m.csv
+│   ├── PENDLEUSDT_5m.csv
+│   ├── PEPEUSDT_15m.csv
+│   ├── PEPEUSDT_1d.csv
+│   ├── PEPEUSDT_1h.csv
+│   ├── PEPEUSDT_1m.csv
+│   ├── PEPEUSDT_30m.csv
+│   ├── PEPEUSDT_3m.csv
+│   ├── PEPEUSDT_5m.csv
+│   ├── PNUTUSDT_15m.csv
+│   ├── PNUTUSDT_1d.csv
+│   ├── PNUTUSDT_1h.csv
+│   ├── PNUTUSDT_1m.csv
+│   ├── PNUTUSDT_1w.csv
+│   ├── PNUTUSDT_30m.csv
+│   ├── PNUTUSDT_3m.csv
+│   ├── PNUTUSDT_5m.csv
+│   ├── POLUSDT_15m.csv
+│   ├── POLUSDT_1d.csv
+│   ├── POLUSDT_1h.csv
+│   ├── POLUSDT_1m.csv
+│   ├── POLUSDT_30m.csv
+│   ├── POLUSDT_3m.csv
+│   ├── POLUSDT_5m.csv
+│   ├── RAREUSDT_15m.csv
+│   ├── RAREUSDT_1d.csv
+│   ├── RAREUSDT_1h.csv
+│   ├── RAREUSDT_1m.csv
+│   ├── RAREUSDT_30m.csv
+│   ├── RAREUSDT_3m.csv
+│   ├── RAREUSDT_5m.csv
+│   ├── RAYUSDT_15m.csv
+│   ├── RAYUSDT_1d.csv
+│   ├── RAYUSDT_1h.csv
+│   ├── RAYUSDT_1m.csv
+│   ├── RAYUSDT_30m.csv
+│   ├── RAYUSDT_3m.csv
+│   ├── RAYUSDT_5m.csv
+│   ├── RENDERUSDT_15m.csv
+│   ├── RENDERUSDT_1d.csv
+│   ├── RENDERUSDT_1h.csv
+│   ├── RENDERUSDT_1m.csv
+│   ├── RENDERUSDT_30m.csv
+│   ├── RENDERUSDT_3m.csv
+│   ├── RENDERUSDT_5m.csv
+│   ├── RUNEUSDT_15m.csv
+│   ├── RUNEUSDT_1d.csv
+│   ├── RUNEUSDT_1h.csv
+│   ├── RUNEUSDT_1m.csv
+│   ├── RUNEUSDT_30m.csv
+│   ├── RUNEUSDT_3m.csv
+│   ├── RUNEUSDT_5m.csv
+│   ├── SEIUSDT_15m.csv
+│   ├── SEIUSDT_1d.csv
+│   ├── SEIUSDT_1h.csv
+│   ├── SEIUSDT_1m.csv
+│   ├── SEIUSDT_30m.csv
+│   ├── SEIUSDT_3m.csv
+│   ├── SEIUSDT_5m.csv
+│   ├── SHIBUSDT_15m.csv
+│   ├── SHIBUSDT_1d.csv
+│   ├── SHIBUSDT_1h.csv
+│   ├── SHIBUSDT_1m.csv
+│   ├── SHIBUSDT_30m.csv
+│   ├── SHIBUSDT_3m.csv
+│   ├── SHIBUSDT_5m.csv
+│   ├── SOLUSDT_15m.csv
+│   ├── SOLUSDT_1d.csv
+│   ├── SOLUSDT_1h.csv
+│   ├── SOLUSDT_1m.csv
+│   ├── SOLUSDT_30m.csv
+│   ├── SOLUSDT_3m.csv
+│   ├── SOLUSDT_5m.csv
+│   ├── STPTUSDT_15m.csv
+│   ├── STPTUSDT_1d.csv
+│   ├── STPTUSDT_1h.csv
+│   ├── STPTUSDT_1m.csv
+│   ├── STPTUSDT_30m.csv
+│   ├── STPTUSDT_3m.csv
+│   ├── STPTUSDT_5m.csv
+│   ├── SUIUSDT_15m.csv
+│   ├── SUIUSDT_1d.csv
+│   ├── SUIUSDT_1h.csv
+│   ├── SUIUSDT_1m.csv
+│   ├── SUIUSDT_30m.csv
+│   ├── SUIUSDT_3m.csv
+│   ├── SUIUSDT_5m.csv
+│   ├── SUSDT_15m.csv
+│   ├── SUSDT_1d.csv
+│   ├── SUSDT_1h.csv
+│   ├── SUSDT_1m.csv
+│   ├── SUSDT_1w.csv
+│   ├── SUSDT_30m.csv
+│   ├── SUSDT_3m.csv
+│   ├── SUSDT_5m.csv
+│   ├── TAOUSDT_15m.csv
+│   ├── TAOUSDT_1d.csv
+│   ├── TAOUSDT_1h.csv
+│   ├── TAOUSDT_1m.csv
+│   ├── TAOUSDT_30m.csv
+│   ├── TAOUSDT_3m.csv
+│   ├── TAOUSDT_5m.csv
+│   ├── TIAUSDT_15m.csv
+│   ├── TIAUSDT_1d.csv
+│   ├── TIAUSDT_1h.csv
+│   ├── TIAUSDT_1m.csv
+│   ├── TIAUSDT_30m.csv
+│   ├── TIAUSDT_3m.csv
+│   ├── TIAUSDT_5m.csv
+│   ├── TONUSDT_15m.csv
+│   ├── TONUSDT_1d.csv
+│   ├── TONUSDT_1h.csv
+│   ├── TONUSDT_1m.csv
+│   ├── TONUSDT_30m.csv
+│   ├── TONUSDT_3m.csv
+│   ├── TONUSDT_5m.csv
+│   ├── TROYUSDT_15m.csv
+│   ├── TROYUSDT_1d.csv
+│   ├── TROYUSDT_1h.csv
+│   ├── TROYUSDT_1m.csv
+│   ├── TROYUSDT_30m.csv
+│   ├── TROYUSDT_3m.csv
+│   ├── TROYUSDT_5m.csv
+│   ├── TRUMPUSDT_15m.csv
+│   ├── TRUMPUSDT_1d.csv
+│   ├── TRUMPUSDT_1h.csv
+│   ├── TRUMPUSDT_1m.csv
+│   ├── TRUMPUSDT_1w.csv
+│   ├── TRUMPUSDT_30m.csv
+│   ├── TRUMPUSDT_3m.csv
+│   ├── TRUMPUSDT_5m.csv
+│   ├── TRXUSDT_15m.csv
+│   ├── TRXUSDT_1d.csv
+│   ├── TRXUSDT_1h.csv
+│   ├── TRXUSDT_1m.csv
+│   ├── TRXUSDT_30m.csv
+│   ├── TRXUSDT_3m.csv
+│   ├── TRXUSDT_5m.csv
+│   ├── TSTUSDT_15m.csv
+│   ├── TSTUSDT_1d.csv
+│   ├── TSTUSDT_1h.csv
+│   ├── TSTUSDT_1m.csv
+│   ├── TSTUSDT_1w.csv
+│   ├── TSTUSDT_30m.csv
+│   ├── TSTUSDT_3m.csv
+│   ├── TSTUSDT_5m.csv
+│   ├── TUTUSDT_15m.csv
+│   ├── TUTUSDT_1d.csv
+│   ├── TUTUSDT_1h.csv
+│   ├── TUTUSDT_1m.csv
+│   ├── TUTUSDT_1w.csv
+│   ├── TUTUSDT_30m.csv
+│   ├── TUTUSDT_3m.csv
+│   ├── TUTUSDT_5m.csv
+│   ├── UNIUSDT_15m.csv
+│   ├── UNIUSDT_1d.csv
+│   ├── UNIUSDT_1h.csv
+│   ├── UNIUSDT_1m.csv
+│   ├── UNIUSDT_30m.csv
+│   ├── UNIUSDT_3m.csv
+│   ├── UNIUSDT_5m.csv
+│   ├── USDCUSDT_15m.csv
+│   ├── USDCUSDT_1d.csv
+│   ├── USDCUSDT_1h.csv
+│   ├── USDCUSDT_1m.csv
+│   ├── USDCUSDT_30m.csv
+│   ├── USDCUSDT_3m.csv
+│   ├── USDCUSDT_5m.csv
+│   ├── USUALUSDT_15m.csv
+│   ├── USUALUSDT_1d.csv
+│   ├── USUALUSDT_1h.csv
+│   ├── USUALUSDT_1m.csv
+│   ├── USUALUSDT_1w.csv
+│   ├── USUALUSDT_30m.csv
+│   ├── USUALUSDT_3m.csv
+│   ├── USUALUSDT_5m.csv
+│   ├── VANRYUSDT_15m.csv
+│   ├── VANRYUSDT_1d.csv
+│   ├── VANRYUSDT_1h.csv
+│   ├── VANRYUSDT_1m.csv
+│   ├── VANRYUSDT_30m.csv
+│   ├── VANRYUSDT_3m.csv
+│   ├── VANRYUSDT_5m.csv
+│   ├── VETUSDT_15m.csv
+│   ├── VETUSDT_1d.csv
+│   ├── VETUSDT_1h.csv
+│   ├── VETUSDT_1m.csv
+│   ├── VETUSDT_30m.csv
+│   ├── VETUSDT_3m.csv
+│   ├── VETUSDT_5m.csv
+│   ├── VIDTUSDT_15m.csv
+│   ├── VIDTUSDT_1d.csv
+│   ├── VIDTUSDT_1h.csv
+│   ├── VIDTUSDT_1m.csv
+│   ├── VIDTUSDT_30m.csv
+│   ├── VIDTUSDT_3m.csv
+│   ├── VIDTUSDT_5m.csv
+│   ├── WBTCUSDT_15m.csv
+│   ├── WBTCUSDT_1d.csv
+│   ├── WBTCUSDT_1h.csv
+│   ├── WBTCUSDT_1m.csv
+│   ├── WBTCUSDT_30m.csv
+│   ├── WBTCUSDT_3m.csv
+│   ├── WBTCUSDT_5m.csv
+│   ├── WIFUSDT_15m.csv
+│   ├── WIFUSDT_1d.csv
+│   ├── WIFUSDT_1h.csv
+│   ├── WIFUSDT_1m.csv
+│   ├── WIFUSDT_30m.csv
+│   ├── WIFUSDT_3m.csv
+│   ├── WIFUSDT_5m.csv
+│   ├── WLDUSDT_15m.csv
+│   ├── WLDUSDT_1d.csv
+│   ├── WLDUSDT_1h.csv
+│   ├── WLDUSDT_1m.csv
+│   ├── WLDUSDT_30m.csv
+│   ├── WLDUSDT_3m.csv
+│   ├── WLDUSDT_5m.csv
+│   ├── XLMUSDT_15m.csv
+│   ├── XLMUSDT_1d.csv
+│   ├── XLMUSDT_1h.csv
+│   ├── XLMUSDT_1m.csv
+│   ├── XLMUSDT_30m.csv
+│   ├── XLMUSDT_3m.csv
+│   ├── XLMUSDT_5m.csv
+│   ├── XRPUSDT_15m.csv
+│   ├── XRPUSDT_1d.csv
+│   ├── XRPUSDT_1h.csv
+│   ├── XRPUSDT_1m.csv
+│   ├── XRPUSDT_30m.csv
+│   ├── XRPUSDT_3m.csv
+│   ├── XRPUSDT_5m.csv
+│   ├── ZECUSDT_15m.csv
+│   ├── ZECUSDT_1d.csv
+│   ├── ZECUSDT_1h.csv
+│   ├── ZECUSDT_1m.csv
+│   ├── ZECUSDT_30m.csv
+│   ├── ZECUSDT_3m.csv
+│   ├── ZECUSDT_5m.csv
+│   ├── ZROUSDT_15m.csv
+│   ├── ZROUSDT_1d.csv
+│   ├── ZROUSDT_1h.csv
+│   ├── ZROUSDT_1m.csv
+│   ├── ZROUSDT_30m.csv
+│   ├── ZROUSDT_3m.csv
+│   └── ZROUSDT_5m.csv
+├── dataset_trades.csv
+├── fetch_binance_data.py
+├── frontend
+│   ├── README.md
+│   ├── eslint.config.js
+│   ├── fix_toFixed_patch.py
+│   ├── index.html
+│   ├── node_modules
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.cjs
+│   ├── public
+│   ├── src
+│   ├── tailwind.config.js
+│   └── vite.config.js
+├── frontend_dist 2
+│   ├── assets
+│   ├── index.html
+│   └── vite.svg
+├── frontend_dist 3
+│   ├── assets
+│   ├── index.html
+│   └── vite.svg
+├── generate_dataset.py
+├── hello.py
+├── historique_fake.csv
+├── historique_trades.csv
+├── import pandas as pd  df = pd.read_csv("dataset_trades.csv") print(df.describe(include='all'))
+├── inspect_dataset.py
+├── logs
+│   └── trades.csv
+├── logs_robot.txt
+├── main.py
+├── ml_brain.py
+├── ml_dataset_builder.py
+├── ml_live_trainer.py
+├── ml_train.py
+├── ml_train_multi_crypto.py
+├── ml_train_top100.py
+├── model.py
+├── models
+│   ├── label_encoder.pkl
+│   ├── model.pkl
+│   ├── scaler.pkl
+│   ├── xgb_AAVEUSDT_15m.model
+│   ├── xgb_AAVEUSDT_1d.model
+│   ├── xgb_AAVEUSDT_1h.model
+│   ├── xgb_AAVEUSDT_1m.model
+│   ├── xgb_AAVEUSDT_30m.model
+│   ├── xgb_AAVEUSDT_3m.model
+│   ├── xgb_AAVEUSDT_5m.model
+│   ├── xgb_ACTUSDT_15m.model
+│   ├── xgb_ACTUSDT_1d.model
+│   ├── xgb_ACTUSDT_1h.model
+│   ├── xgb_ACTUSDT_1m.model
+│   ├── xgb_ACTUSDT_30m.model
+│   ├── xgb_ACTUSDT_3m.model
+│   ├── xgb_ACTUSDT_5m.model
+│   ├── xgb_ADAUSDT_15m.model
+│   ├── xgb_ADAUSDT_1d.model
+│   ├── xgb_ADAUSDT_1h.model
+│   ├── xgb_ADAUSDT_1m.model
+│   ├── xgb_ADAUSDT_30m.model
+│   ├── xgb_ADAUSDT_3m.model
+│   ├── xgb_ADAUSDT_5m.model
+│   ├── xgb_ALGOUSDT_15m.model
+│   ├── xgb_ALGOUSDT_1d.model
+│   ├── xgb_ALGOUSDT_1h.model
+│   ├── xgb_ALGOUSDT_1m.model
+│   ├── xgb_ALGOUSDT_30m.model
+│   ├── xgb_ALGOUSDT_3m.model
+│   ├── xgb_ALGOUSDT_5m.model
+│   ├── xgb_APTUSDT_15m.model
+│   ├── xgb_APTUSDT_1d.model
+│   ├── xgb_APTUSDT_1h.model
+│   ├── xgb_APTUSDT_1m.model
+│   ├── xgb_APTUSDT_30m.model
+│   ├── xgb_APTUSDT_3m.model
+│   ├── xgb_APTUSDT_5m.model
+│   ├── xgb_ARBUSDT_15m.model
+│   ├── xgb_ARBUSDT_1d.model
+│   ├── xgb_ARBUSDT_1h.model
+│   ├── xgb_ARBUSDT_1m.model
+│   ├── xgb_ARBUSDT_30m.model
+│   ├── xgb_ARBUSDT_3m.model
+│   ├── xgb_ARBUSDT_5m.model
+│   ├── xgb_ARDRUSDT_15m.model
+│   ├── xgb_ARDRUSDT_1h.model
+│   ├── xgb_ARDRUSDT_1m.model
+│   ├── xgb_ARDRUSDT_30m.model
+│   ├── xgb_ARDRUSDT_3m.model
+│   ├── xgb_ARDRUSDT_5m.model
+│   ├── xgb_ARKMUSDT_15m.model
+│   ├── xgb_ARKMUSDT_1d.model
+│   ├── xgb_ARKMUSDT_1h.model
+│   ├── xgb_ARKMUSDT_1m.model
+│   ├── xgb_ARKMUSDT_30m.model
+│   ├── xgb_ARKMUSDT_3m.model
+│   ├── xgb_ARKMUSDT_5m.model
+│   ├── xgb_ARKUSDT_15m.model
+│   ├── xgb_ARKUSDT_1d.model
+│   ├── xgb_ARKUSDT_1h.model
+│   ├── xgb_ARKUSDT_1m.model
+│   ├── xgb_ARKUSDT_30m.model
+│   ├── xgb_ARKUSDT_3m.model
+│   ├── xgb_ARKUSDT_5m.model
+│   ├── xgb_ARUSDT_15m.model
+│   ├── xgb_ARUSDT_1d.model
+│   ├── xgb_ARUSDT_1h.model
+│   ├── xgb_ARUSDT_1m.model
+│   ├── xgb_ARUSDT_30m.model
+│   ├── xgb_ARUSDT_3m.model
+│   ├── xgb_ARUSDT_5m.model
+│   ├── xgb_ATOMUSDT_15m.model
+│   ├── xgb_ATOMUSDT_1d.model
+│   ├── xgb_ATOMUSDT_1h.model
+│   ├── xgb_ATOMUSDT_1m.model
+│   ├── xgb_ATOMUSDT_30m.model
+│   ├── xgb_ATOMUSDT_3m.model
+│   ├── xgb_ATOMUSDT_5m.model
+│   ├── xgb_AUCTIONUSDT_15m.model
+│   ├── xgb_AUCTIONUSDT_1d.model
+│   ├── xgb_AUCTIONUSDT_1h.model
+│   ├── xgb_AUCTIONUSDT_1m.model
+│   ├── xgb_AUCTIONUSDT_30m.model
+│   ├── xgb_AUCTIONUSDT_3m.model
+│   ├── xgb_AUCTIONUSDT_5m.model
+│   ├── xgb_AVAXUSDT_15m.model
+│   ├── xgb_AVAXUSDT_1d.model
+│   ├── xgb_AVAXUSDT_1h.model
+│   ├── xgb_AVAXUSDT_1m.model
+│   ├── xgb_AVAXUSDT_30m.model
+│   ├── xgb_AVAXUSDT_3m.model
+│   ├── xgb_AVAXUSDT_5m.model
+│   ├── xgb_BCHUSDT_15m.model
+│   ├── xgb_BCHUSDT_1d.model
+│   ├── xgb_BCHUSDT_1h.model
+│   ├── xgb_BCHUSDT_1m.model
+│   ├── xgb_BCHUSDT_30m.model
+│   ├── xgb_BCHUSDT_3m.model
+│   ├── xgb_BCHUSDT_5m.model
+│   ├── xgb_BERAUSDT_15m.model
+│   ├── xgb_BERAUSDT_1d.model
+│   ├── xgb_BERAUSDT_1h.model
+│   ├── xgb_BERAUSDT_1m.model
+│   ├── xgb_BERAUSDT_30m.model
+│   ├── xgb_BERAUSDT_3m.model
+│   ├── xgb_BERAUSDT_5m.model
+│   ├── xgb_BNBUSDT_15m.model
+│   ├── xgb_BNBUSDT_1d.model
+│   ├── xgb_BNBUSDT_1h.model
+│   ├── xgb_BNBUSDT_1m.model
+│   ├── xgb_BNBUSDT_30m.model
+│   ├── xgb_BNBUSDT_3m.model
+│   ├── xgb_BNBUSDT_5m.model
+│   ├── xgb_BNXUSDT_15m.model
+│   ├── xgb_BNXUSDT_1d.model
+│   ├── xgb_BNXUSDT_1h.model
+│   ├── xgb_BNXUSDT_1m.model
+│   ├── xgb_BNXUSDT_30m.model
+│   ├── xgb_BNXUSDT_3m.model
+│   ├── xgb_BNXUSDT_5m.model
+│   ├── xgb_BONKUSDT_15m.model
+│   ├── xgb_BONKUSDT_1d.model
+│   ├── xgb_BONKUSDT_1h.model
+│   ├── xgb_BONKUSDT_1m.model
+│   ├── xgb_BONKUSDT_30m.model
+│   ├── xgb_BONKUSDT_3m.model
+│   ├── xgb_BONKUSDT_5m.model
+│   ├── xgb_BTCUSDT_15m.model
+│   ├── xgb_BTCUSDT_1d.model
+│   ├── xgb_BTCUSDT_1h.model
+│   ├── xgb_BTCUSDT_1m.model
+│   ├── xgb_BTCUSDT_30m.model
+│   ├── xgb_BTCUSDT_3m.model
+│   ├── xgb_BTCUSDT_5m.model
+│   ├── xgb_CAKEUSDT_15m.model
+│   ├── xgb_CAKEUSDT_1d.model
+│   ├── xgb_CAKEUSDT_1h.model
+│   ├── xgb_CAKEUSDT_1m.model
+│   ├── xgb_CAKEUSDT_30m.model
+│   ├── xgb_CAKEUSDT_3m.model
+│   ├── xgb_CAKEUSDT_5m.model
+│   ├── xgb_CFXUSDT_15m.model
+│   ├── xgb_CFXUSDT_1d.model
+│   ├── xgb_CFXUSDT_1h.model
+│   ├── xgb_CFXUSDT_1m.model
+│   ├── xgb_CFXUSDT_30m.model
+│   ├── xgb_CFXUSDT_3m.model
+│   ├── xgb_CFXUSDT_5m.model
+│   ├── xgb_CRVUSDT_15m.model
+│   ├── xgb_CRVUSDT_1d.model
+│   ├── xgb_CRVUSDT_1h.model
+│   ├── xgb_CRVUSDT_1m.model
+│   ├── xgb_CRVUSDT_30m.model
+│   ├── xgb_CRVUSDT_3m.model
+│   ├── xgb_CRVUSDT_5m.model
+│   ├── xgb_DOGEUSDT_15m.model
+│   ├── xgb_DOGEUSDT_1d.model
+│   ├── xgb_DOGEUSDT_1h.model
+│   ├── xgb_DOGEUSDT_1m.model
+│   ├── xgb_DOGEUSDT_30m.model
+│   ├── xgb_DOGEUSDT_3m.model
+│   ├── xgb_DOGEUSDT_5m.model
+│   ├── xgb_DOTUSDT_15m.model
+│   ├── xgb_DOTUSDT_1d.model
+│   ├── xgb_DOTUSDT_1h.model
+│   ├── xgb_DOTUSDT_1m.model
+│   ├── xgb_DOTUSDT_30m.model
+│   ├── xgb_DOTUSDT_3m.model
+│   ├── xgb_DOTUSDT_5m.model
+│   ├── xgb_DYDXUSDT_15m.model
+│   ├── xgb_DYDXUSDT_1d.model
+│   ├── xgb_DYDXUSDT_1h.model
+│   ├── xgb_DYDXUSDT_1m.model
+│   ├── xgb_DYDXUSDT_30m.model
+│   ├── xgb_DYDXUSDT_3m.model
+│   ├── xgb_DYDXUSDT_5m.model
+│   ├── xgb_ENAUSDT_15m.model
+│   ├── xgb_ENAUSDT_1d.model
+│   ├── xgb_ENAUSDT_1h.model
+│   ├── xgb_ENAUSDT_1m.model
+│   ├── xgb_ENAUSDT_30m.model
+│   ├── xgb_ENAUSDT_3m.model
+│   ├── xgb_ENAUSDT_5m.model
+│   ├── xgb_EOSUSDT_15m.model
+│   ├── xgb_EOSUSDT_1d.model
+│   ├── xgb_EOSUSDT_1h.model
+│   ├── xgb_EOSUSDT_1m.model
+│   ├── xgb_EOSUSDT_30m.model
+│   ├── xgb_EOSUSDT_3m.model
+│   ├── xgb_EOSUSDT_5m.model
+│   ├── xgb_ETCUSDT_15m.model
+│   ├── xgb_ETCUSDT_1d.model
+│   ├── xgb_ETCUSDT_1h.model
+│   ├── xgb_ETCUSDT_1m.model
+│   ├── xgb_ETCUSDT_30m.model
+│   ├── xgb_ETCUSDT_3m.model
+│   ├── xgb_ETCUSDT_5m.model
+│   ├── xgb_ETHUSDT_15m.model
+│   ├── xgb_ETHUSDT_1d.model
+│   ├── xgb_ETHUSDT_1h.model
+│   ├── xgb_ETHUSDT_1m.model
+│   ├── xgb_ETHUSDT_30m.model
+│   ├── xgb_ETHUSDT_3m.model
+│   ├── xgb_ETHUSDT_5m.model
+│   ├── xgb_EURUSDT_15m.model
+│   ├── xgb_EURUSDT_1d.model
+│   ├── xgb_EURUSDT_1h.model
+│   ├── xgb_EURUSDT_1m.model
+│   ├── xgb_EURUSDT_30m.model
+│   ├── xgb_EURUSDT_3m.model
+│   ├── xgb_EURUSDT_5m.model
+│   ├── xgb_FDUSDUSDT_15m.model
+│   ├── xgb_FDUSDUSDT_1d.model
+│   ├── xgb_FDUSDUSDT_1h.model
+│   ├── xgb_FDUSDUSDT_1m.model
+│   ├── xgb_FDUSDUSDT_30m.model
+│   ├── xgb_FDUSDUSDT_3m.model
+│   ├── xgb_FDUSDUSDT_5m.model
+│   ├── xgb_FETUSDT_15m.model
+│   ├── xgb_FETUSDT_1d.model
+│   ├── xgb_FETUSDT_1h.model
+│   ├── xgb_FETUSDT_1m.model
+│   ├── xgb_FETUSDT_30m.model
+│   ├── xgb_FETUSDT_3m.model
+│   ├── xgb_FETUSDT_5m.model
+│   ├── xgb_FILUSDT_15m.model
+│   ├── xgb_FILUSDT_1d.model
+│   ├── xgb_FILUSDT_1h.model
+│   ├── xgb_FILUSDT_1m.model
+│   ├── xgb_FILUSDT_30m.model
+│   ├── xgb_FILUSDT_3m.model
+│   ├── xgb_FILUSDT_5m.model
+│   ├── xgb_FLOKIUSDT_15m.model
+│   ├── xgb_FLOKIUSDT_1d.model
+│   ├── xgb_FLOKIUSDT_1h.model
+│   ├── xgb_FLOKIUSDT_1m.model
+│   ├── xgb_FLOKIUSDT_30m.model
+│   ├── xgb_FLOKIUSDT_3m.model
+│   ├── xgb_FLOKIUSDT_5m.model
+│   ├── xgb_FORMUSDT_15m.model
+│   ├── xgb_FORMUSDT_1h.model
+│   ├── xgb_FORMUSDT_1m.model
+│   ├── xgb_FORMUSDT_30m.model
+│   ├── xgb_FORMUSDT_3m.model
+│   ├── xgb_FORMUSDT_5m.model
+│   ├── xgb_FORTHUSDT_15m.model
+│   ├── xgb_FORTHUSDT_1d.model
+│   ├── xgb_FORTHUSDT_1h.model
+│   ├── xgb_FORTHUSDT_1m.model
+│   ├── xgb_FORTHUSDT_30m.model
+│   ├── xgb_FORTHUSDT_3m.model
+│   ├── xgb_FORTHUSDT_5m.model
+│   ├── xgb_FUNUSDT_15m.model
+│   ├── xgb_FUNUSDT_1d.model
+│   ├── xgb_FUNUSDT_1h.model
+│   ├── xgb_FUNUSDT_1m.model
+│   ├── xgb_FUNUSDT_30m.model
+│   ├── xgb_FUNUSDT_3m.model
+│   ├── xgb_FUNUSDT_5m.model
+│   ├── xgb_GALAUSDT_15m.model
+│   ├── xgb_GALAUSDT_1d.model
+│   ├── xgb_GALAUSDT_1h.model
+│   ├── xgb_GALAUSDT_1m.model
+│   ├── xgb_GALAUSDT_30m.model
+│   ├── xgb_GALAUSDT_3m.model
+│   ├── xgb_GALAUSDT_5m.model
+│   ├── xgb_GASUSDT_15m.model
+│   ├── xgb_GASUSDT_1d.model
+│   ├── xgb_GASUSDT_1h.model
+│   ├── xgb_GASUSDT_1m.model
+│   ├── xgb_GASUSDT_30m.model
+│   ├── xgb_GASUSDT_3m.model
+│   ├── xgb_GASUSDT_5m.model
+│   ├── xgb_GMXUSDT_15m.model
+│   ├── xgb_GMXUSDT_1d.model
+│   ├── xgb_GMXUSDT_1h.model
+│   ├── xgb_GMXUSDT_1m.model
+│   ├── xgb_GMXUSDT_30m.model
+│   ├── xgb_GMXUSDT_3m.model
+│   ├── xgb_GMXUSDT_5m.model
+│   ├── xgb_GUNUSDT_15m.model
+│   ├── xgb_GUNUSDT_1h.model
+│   ├── xgb_GUNUSDT_1m.model
+│   ├── xgb_GUNUSDT_30m.model
+│   ├── xgb_GUNUSDT_3m.model
+│   ├── xgb_GUNUSDT_5m.model
+│   ├── xgb_HBARUSDT_15m.model
+│   ├── xgb_HBARUSDT_1d.model
+│   ├── xgb_HBARUSDT_1h.model
+│   ├── xgb_HBARUSDT_1m.model
+│   ├── xgb_HBARUSDT_30m.model
+│   ├── xgb_HBARUSDT_3m.model
+│   ├── xgb_HBARUSDT_5m.model
+│   ├── xgb_ICPUSDT_15m.model
+│   ├── xgb_ICPUSDT_1d.model
+│   ├── xgb_ICPUSDT_1h.model
+│   ├── xgb_ICPUSDT_1m.model
+│   ├── xgb_ICPUSDT_30m.model
+│   ├── xgb_ICPUSDT_3m.model
+│   ├── xgb_ICPUSDT_5m.model
+│   ├── xgb_INJUSDT_15m.model
+│   ├── xgb_INJUSDT_1d.model
+│   ├── xgb_INJUSDT_1h.model
+│   ├── xgb_INJUSDT_1m.model
+│   ├── xgb_INJUSDT_30m.model
+│   ├── xgb_INJUSDT_3m.model
+│   ├── xgb_INJUSDT_5m.model
+│   ├── xgb_JASMYUSDT_15m.model
+│   ├── xgb_JASMYUSDT_1d.model
+│   ├── xgb_JASMYUSDT_1h.model
+│   ├── xgb_JASMYUSDT_1m.model
+│   ├── xgb_JASMYUSDT_30m.model
+│   ├── xgb_JASMYUSDT_3m.model
+│   ├── xgb_JASMYUSDT_5m.model
+│   ├── xgb_JUPUSDT_15m.model
+│   ├── xgb_JUPUSDT_1d.model
+│   ├── xgb_JUPUSDT_1h.model
+│   ├── xgb_JUPUSDT_1m.model
+│   ├── xgb_JUPUSDT_30m.model
+│   ├── xgb_JUPUSDT_3m.model
+│   ├── xgb_JUPUSDT_5m.model
+│   ├── xgb_KAITOUSDT_15m.model
+│   ├── xgb_KAITOUSDT_1h.model
+│   ├── xgb_KAITOUSDT_1m.model
+│   ├── xgb_KAITOUSDT_30m.model
+│   ├── xgb_KAITOUSDT_3m.model
+│   ├── xgb_KAITOUSDT_5m.model
+│   ├── xgb_LAYERUSDT_15m.model
+│   ├── xgb_LAYERUSDT_1d.model
+│   ├── xgb_LAYERUSDT_1h.model
+│   ├── xgb_LAYERUSDT_1m.model
+│   ├── xgb_LAYERUSDT_30m.model
+│   ├── xgb_LAYERUSDT_3m.model
+│   ├── xgb_LAYERUSDT_5m.model
+│   ├── xgb_LDOUSDT_15m.model
+│   ├── xgb_LDOUSDT_1d.model
+│   ├── xgb_LDOUSDT_1h.model
+│   ├── xgb_LDOUSDT_1m.model
+│   ├── xgb_LDOUSDT_30m.model
+│   ├── xgb_LDOUSDT_3m.model
+│   ├── xgb_LDOUSDT_5m.model
+│   ├── xgb_LINAUSDT_15m.model
+│   ├── xgb_LINAUSDT_1d.model
+│   ├── xgb_LINAUSDT_1h.model
+│   ├── xgb_LINAUSDT_1m.model
+│   ├── xgb_LINAUSDT_30m.model
+│   ├── xgb_LINAUSDT_3m.model
+│   ├── xgb_LINAUSDT_5m.model
+│   ├── xgb_LINKUSDT_15m.model
+│   ├── xgb_LINKUSDT_1d.model
+│   ├── xgb_LINKUSDT_1h.model
+│   ├── xgb_LINKUSDT_1m.model
+│   ├── xgb_LINKUSDT_30m.model
+│   ├── xgb_LINKUSDT_3m.model
+│   ├── xgb_LINKUSDT_5m.model
+│   ├── xgb_LPTUSDT_15m.model
+│   ├── xgb_LPTUSDT_1d.model
+│   ├── xgb_LPTUSDT_1h.model
+│   ├── xgb_LPTUSDT_1m.model
+│   ├── xgb_LPTUSDT_30m.model
+│   ├── xgb_LPTUSDT_3m.model
+│   ├── xgb_LPTUSDT_5m.model
+│   ├── xgb_LTCUSDT_15m.model
+│   ├── xgb_LTCUSDT_1d.model
+│   ├── xgb_LTCUSDT_1h.model
+│   ├── xgb_LTCUSDT_1m.model
+│   ├── xgb_LTCUSDT_30m.model
+│   ├── xgb_LTCUSDT_3m.model
+│   ├── xgb_LTCUSDT_5m.model
+│   ├── xgb_MASKUSDT_15m.model
+│   ├── xgb_MASKUSDT_1d.model
+│   ├── xgb_MASKUSDT_1h.model
+│   ├── xgb_MASKUSDT_1m.model
+│   ├── xgb_MASKUSDT_30m.model
+│   ├── xgb_MASKUSDT_3m.model
+│   ├── xgb_MASKUSDT_5m.model
+│   ├── xgb_MKRUSDT_15m.model
+│   ├── xgb_MKRUSDT_1d.model
+│   ├── xgb_MKRUSDT_1h.model
+│   ├── xgb_MKRUSDT_1m.model
+│   ├── xgb_MKRUSDT_30m.model
+│   ├── xgb_MKRUSDT_3m.model
+│   ├── xgb_MKRUSDT_5m.model
+│   ├── xgb_MUBARAKUSDT_15m.model
+│   ├── xgb_MUBARAKUSDT_1h.model
+│   ├── xgb_MUBARAKUSDT_1m.model
+│   ├── xgb_MUBARAKUSDT_30m.model
+│   ├── xgb_MUBARAKUSDT_3m.model
+│   ├── xgb_MUBARAKUSDT_5m.model
+│   ├── xgb_NEARUSDT_15m.model
+│   ├── xgb_NEARUSDT_1d.model
+│   ├── xgb_NEARUSDT_1h.model
+│   ├── xgb_NEARUSDT_1m.model
+│   ├── xgb_NEARUSDT_30m.model
+│   ├── xgb_NEARUSDT_3m.model
+│   ├── xgb_NEARUSDT_5m.model
+│   ├── xgb_NEIROUSDT_15m.model
+│   ├── xgb_NEIROUSDT_1d.model
+│   ├── xgb_NEIROUSDT_1h.model
+│   ├── xgb_NEIROUSDT_1m.model
+│   ├── xgb_NEIROUSDT_30m.model
+│   ├── xgb_NEIROUSDT_3m.model
+│   ├── xgb_NEIROUSDT_5m.model
+│   ├── xgb_NEOUSDT_15m.model
+│   ├── xgb_NEOUSDT_1d.model
+│   ├── xgb_NEOUSDT_1h.model
+│   ├── xgb_NEOUSDT_1m.model
+│   ├── xgb_NEOUSDT_30m.model
+│   ├── xgb_NEOUSDT_3m.model
+│   ├── xgb_NEOUSDT_5m.model
+│   ├── xgb_NILUSDT_15m.model
+│   ├── xgb_NILUSDT_1h.model
+│   ├── xgb_NILUSDT_1m.model
+│   ├── xgb_NILUSDT_30m.model
+│   ├── xgb_NILUSDT_3m.model
+│   ├── xgb_NILUSDT_5m.model
+│   ├── xgb_OMUSDT_15m.model
+│   ├── xgb_OMUSDT_1d.model
+│   ├── xgb_OMUSDT_1h.model
+│   ├── xgb_OMUSDT_1m.model
+│   ├── xgb_OMUSDT_30m.model
+│   ├── xgb_OMUSDT_3m.model
+│   ├── xgb_OMUSDT_5m.model
+│   ├── xgb_OPUSDT_15m.model
+│   ├── xgb_OPUSDT_1d.model
+│   ├── xgb_OPUSDT_1h.model
+│   ├── xgb_OPUSDT_1m.model
+│   ├── xgb_OPUSDT_30m.model
+│   ├── xgb_OPUSDT_3m.model
+│   ├── xgb_OPUSDT_5m.model
+│   ├── xgb_ORDIUSDT_15m.model
+│   ├── xgb_ORDIUSDT_1d.model
+│   ├── xgb_ORDIUSDT_1h.model
+│   ├── xgb_ORDIUSDT_1m.model
+│   ├── xgb_ORDIUSDT_30m.model
+│   ├── xgb_ORDIUSDT_3m.model
+│   ├── xgb_ORDIUSDT_5m.model
+│   ├── xgb_PARTIUSDT_15m.model
+│   ├── xgb_PARTIUSDT_1h.model
+│   ├── xgb_PARTIUSDT_1m.model
+│   ├── xgb_PARTIUSDT_30m.model
+│   ├── xgb_PARTIUSDT_3m.model
+│   ├── xgb_PARTIUSDT_5m.model
+│   ├── xgb_PAXGUSDT_15m.model
+│   ├── xgb_PAXGUSDT_1d.model
+│   ├── xgb_PAXGUSDT_1h.model
+│   ├── xgb_PAXGUSDT_1m.model
+│   ├── xgb_PAXGUSDT_30m.model
+│   ├── xgb_PAXGUSDT_3m.model
+│   ├── xgb_PAXGUSDT_5m.model
+│   ├── xgb_PENDLEUSDT_15m.model
+│   ├── xgb_PENDLEUSDT_1d.model
+│   ├── xgb_PENDLEUSDT_1h.model
+│   ├── xgb_PENDLEUSDT_1m.model
+│   ├── xgb_PENDLEUSDT_30m.model
+│   ├── xgb_PENDLEUSDT_3m.model
+│   ├── xgb_PENDLEUSDT_5m.model
+│   ├── xgb_PEPEUSDT_15m.model
+│   ├── xgb_PEPEUSDT_1d.model
+│   ├── xgb_PEPEUSDT_1h.model
+│   ├── xgb_PEPEUSDT_1m.model
+│   ├── xgb_PEPEUSDT_30m.model
+│   ├── xgb_PEPEUSDT_3m.model
+│   ├── xgb_PEPEUSDT_5m.model
+│   ├── xgb_PNUTUSDT_15m.model
+│   ├── xgb_PNUTUSDT_1d.model
+│   ├── xgb_PNUTUSDT_1h.model
+│   ├── xgb_PNUTUSDT_1m.model
+│   ├── xgb_PNUTUSDT_30m.model
+│   ├── xgb_PNUTUSDT_3m.model
+│   ├── xgb_PNUTUSDT_5m.model
+│   ├── xgb_POLUSDT_15m.model
+│   ├── xgb_POLUSDT_1d.model
+│   ├── xgb_POLUSDT_1h.model
+│   ├── xgb_POLUSDT_1m.model
+│   ├── xgb_POLUSDT_30m.model
+│   ├── xgb_POLUSDT_3m.model
+│   ├── xgb_POLUSDT_5m.model
+│   ├── xgb_RAREUSDT_15m.model
+│   ├── xgb_RAREUSDT_1d.model
+│   ├── xgb_RAREUSDT_1h.model
+│   ├── xgb_RAREUSDT_1m.model
+│   ├── xgb_RAREUSDT_30m.model
+│   ├── xgb_RAREUSDT_3m.model
+│   ├── xgb_RAREUSDT_5m.model
+│   ├── xgb_RAYUSDT_15m.model
+│   ├── xgb_RAYUSDT_1d.model
+│   ├── xgb_RAYUSDT_1h.model
+│   ├── xgb_RAYUSDT_1m.model
+│   ├── xgb_RAYUSDT_30m.model
+│   ├── xgb_RAYUSDT_3m.model
+│   ├── xgb_RAYUSDT_5m.model
+│   ├── xgb_RENDERUSDT_15m.model
+│   ├── xgb_RENDERUSDT_1d.model
+│   ├── xgb_RENDERUSDT_1h.model
+│   ├── xgb_RENDERUSDT_1m.model
+│   ├── xgb_RENDERUSDT_30m.model
+│   ├── xgb_RENDERUSDT_3m.model
+│   ├── xgb_RENDERUSDT_5m.model
+│   ├── xgb_RUNEUSDT_15m.model
+│   ├── xgb_RUNEUSDT_1d.model
+│   ├── xgb_RUNEUSDT_1h.model
+│   ├── xgb_RUNEUSDT_1m.model
+│   ├── xgb_RUNEUSDT_30m.model
+│   ├── xgb_RUNEUSDT_3m.model
+│   ├── xgb_RUNEUSDT_5m.model
+│   ├── xgb_SEIUSDT_15m.model
+│   ├── xgb_SEIUSDT_1d.model
+│   ├── xgb_SEIUSDT_1h.model
+│   ├── xgb_SEIUSDT_1m.model
+│   ├── xgb_SEIUSDT_30m.model
+│   ├── xgb_SEIUSDT_3m.model
+│   ├── xgb_SEIUSDT_5m.model
+│   ├── xgb_SHIBUSDT_15m.model
+│   ├── xgb_SHIBUSDT_1d.model
+│   ├── xgb_SHIBUSDT_1h.model
+│   ├── xgb_SHIBUSDT_1m.model
+│   ├── xgb_SHIBUSDT_30m.model
+│   ├── xgb_SHIBUSDT_3m.model
+│   ├── xgb_SHIBUSDT_5m.model
+│   ├── xgb_SOLUSDT_15m.model
+│   ├── xgb_SOLUSDT_1d.model
+│   ├── xgb_SOLUSDT_1h.model
+│   ├── xgb_SOLUSDT_1m.model
+│   ├── xgb_SOLUSDT_30m.model
+│   ├── xgb_SOLUSDT_3m.model
+│   ├── xgb_SOLUSDT_5m.model
+│   ├── xgb_STPTUSDT_15m.model
+│   ├── xgb_STPTUSDT_1d.model
+│   ├── xgb_STPTUSDT_1h.model
+│   ├── xgb_STPTUSDT_1m.model
+│   ├── xgb_STPTUSDT_30m.model
+│   ├── xgb_STPTUSDT_3m.model
+│   ├── xgb_STPTUSDT_5m.model
+│   ├── xgb_SUIUSDT_15m.model
+│   ├── xgb_SUIUSDT_1d.model
+│   ├── xgb_SUIUSDT_1h.model
+│   ├── xgb_SUIUSDT_1m.model
+│   ├── xgb_SUIUSDT_30m.model
+│   ├── xgb_SUIUSDT_3m.model
+│   ├── xgb_SUIUSDT_5m.model
+│   ├── xgb_SUSDT_15m.model
+│   ├── xgb_SUSDT_1d.model
+│   ├── xgb_SUSDT_1h.model
+│   ├── xgb_SUSDT_1m.model
+│   ├── xgb_SUSDT_30m.model
+│   ├── xgb_SUSDT_3m.model
+│   ├── xgb_SUSDT_5m.model
+│   ├── xgb_TAOUSDT_15m.model
+│   ├── xgb_TAOUSDT_1d.model
+│   ├── xgb_TAOUSDT_1h.model
+│   ├── xgb_TAOUSDT_1m.model
+│   ├── xgb_TAOUSDT_30m.model
+│   ├── xgb_TAOUSDT_3m.model
+│   ├── xgb_TAOUSDT_5m.model
+│   ├── xgb_TIAUSDT_15m.model
+│   ├── xgb_TIAUSDT_1d.model
+│   ├── xgb_TIAUSDT_1h.model
+│   ├── xgb_TIAUSDT_1m.model
+│   ├── xgb_TIAUSDT_30m.model
+│   ├── xgb_TIAUSDT_3m.model
+│   ├── xgb_TIAUSDT_5m.model
+│   ├── xgb_TONUSDT_15m.model
+│   ├── xgb_TONUSDT_1d.model
+│   ├── xgb_TONUSDT_1h.model
+│   ├── xgb_TONUSDT_1m.model
+│   ├── xgb_TONUSDT_30m.model
+│   ├── xgb_TONUSDT_3m.model
+│   ├── xgb_TONUSDT_5m.model
+│   ├── xgb_TROYUSDT_15m.model
+│   ├── xgb_TROYUSDT_1d.model
+│   ├── xgb_TROYUSDT_1h.model
+│   ├── xgb_TROYUSDT_1m.model
+│   ├── xgb_TROYUSDT_30m.model
+│   ├── xgb_TROYUSDT_3m.model
+│   ├── xgb_TROYUSDT_5m.model
+│   ├── xgb_TRUMPUSDT_15m.model
+│   ├── xgb_TRUMPUSDT_1d.model
+│   ├── xgb_TRUMPUSDT_1h.model
+│   ├── xgb_TRUMPUSDT_1m.model
+│   ├── xgb_TRUMPUSDT_30m.model
+│   ├── xgb_TRUMPUSDT_3m.model
+│   ├── xgb_TRUMPUSDT_5m.model
+│   ├── xgb_TRXUSDT_15m.model
+│   ├── xgb_TRXUSDT_1d.model
+│   ├── xgb_TRXUSDT_1h.model
+│   ├── xgb_TRXUSDT_1m.model
+│   ├── xgb_TRXUSDT_30m.model
+│   ├── xgb_TRXUSDT_3m.model
+│   ├── xgb_TRXUSDT_5m.model
+│   ├── xgb_TSTUSDT_15m.model
+│   ├── xgb_TSTUSDT_1d.model
+│   ├── xgb_TSTUSDT_1h.model
+│   ├── xgb_TSTUSDT_1m.model
+│   ├── xgb_TSTUSDT_30m.model
+│   ├── xgb_TSTUSDT_3m.model
+│   ├── xgb_TSTUSDT_5m.model
+│   ├── xgb_TUTUSDT_15m.model
+│   ├── xgb_TUTUSDT_1h.model
+│   ├── xgb_TUTUSDT_1m.model
+│   ├── xgb_TUTUSDT_30m.model
+│   ├── xgb_TUTUSDT_3m.model
+│   ├── xgb_TUTUSDT_5m.model
+│   ├── xgb_UNIUSDT_15m.model
+│   ├── xgb_UNIUSDT_1d.model
+│   ├── xgb_UNIUSDT_1h.model
+│   ├── xgb_UNIUSDT_1m.model
+│   ├── xgb_UNIUSDT_30m.model
+│   ├── xgb_UNIUSDT_3m.model
+│   ├── xgb_UNIUSDT_5m.model
+│   ├── xgb_USDCUSDT_15m.model
+│   ├── xgb_USDCUSDT_1d.model
+│   ├── xgb_USDCUSDT_1h.model
+│   ├── xgb_USDCUSDT_1m.model
+│   ├── xgb_USDCUSDT_30m.model
+│   ├── xgb_USDCUSDT_3m.model
+│   ├── xgb_USDCUSDT_5m.model
+│   ├── xgb_USUALUSDT_15m.model
+│   ├── xgb_USUALUSDT_1d.model
+│   ├── xgb_USUALUSDT_1h.model
+│   ├── xgb_USUALUSDT_1m.model
+│   ├── xgb_USUALUSDT_30m.model
+│   ├── xgb_USUALUSDT_3m.model
+│   ├── xgb_USUALUSDT_5m.model
+│   ├── xgb_VANRYUSDT_15m.model
+│   ├── xgb_VANRYUSDT_1d.model
+│   ├── xgb_VANRYUSDT_1h.model
+│   ├── xgb_VANRYUSDT_1m.model
+│   ├── xgb_VANRYUSDT_30m.model
+│   ├── xgb_VANRYUSDT_3m.model
+│   ├── xgb_VANRYUSDT_5m.model
+│   ├── xgb_VETUSDT_15m.model
+│   ├── xgb_VETUSDT_1d.model
+│   ├── xgb_VETUSDT_1h.model
+│   ├── xgb_VETUSDT_1m.model
+│   ├── xgb_VETUSDT_30m.model
+│   ├── xgb_VETUSDT_3m.model
+│   ├── xgb_VETUSDT_5m.model
+│   ├── xgb_VIDTUSDT_15m.model
+│   ├── xgb_VIDTUSDT_1d.model
+│   ├── xgb_VIDTUSDT_1h.model
+│   ├── xgb_VIDTUSDT_1m.model
+│   ├── xgb_VIDTUSDT_30m.model
+│   ├── xgb_VIDTUSDT_3m.model
+│   ├── xgb_VIDTUSDT_5m.model
+│   ├── xgb_WBTCUSDT_15m.model
+│   ├── xgb_WBTCUSDT_1d.model
+│   ├── xgb_WBTCUSDT_1h.model
+│   ├── xgb_WBTCUSDT_1m.model
+│   ├── xgb_WBTCUSDT_30m.model
+│   ├── xgb_WBTCUSDT_3m.model
+│   ├── xgb_WBTCUSDT_5m.model
+│   ├── xgb_WIFUSDT_15m.model
+│   ├── xgb_WIFUSDT_1d.model
+│   ├── xgb_WIFUSDT_1h.model
+│   ├── xgb_WIFUSDT_1m.model
+│   ├── xgb_WIFUSDT_30m.model
+│   ├── xgb_WIFUSDT_3m.model
+│   ├── xgb_WIFUSDT_5m.model
+│   ├── xgb_WLDUSDT_15m.model
+│   ├── xgb_WLDUSDT_1d.model
+│   ├── xgb_WLDUSDT_1h.model
+│   ├── xgb_WLDUSDT_1m.model
+│   ├── xgb_WLDUSDT_30m.model
+│   ├── xgb_WLDUSDT_3m.model
+│   ├── xgb_WLDUSDT_5m.model
+│   ├── xgb_XLMUSDT_15m.model
+│   ├── xgb_XLMUSDT_1d.model
+│   ├── xgb_XLMUSDT_1h.model
+│   ├── xgb_XLMUSDT_1m.model
+│   ├── xgb_XLMUSDT_30m.model
+│   ├── xgb_XLMUSDT_3m.model
+│   ├── xgb_XLMUSDT_5m.model
+│   ├── xgb_XRPUSDT_15m.model
+│   ├── xgb_XRPUSDT_1d.model
+│   ├── xgb_XRPUSDT_1h.model
+│   ├── xgb_XRPUSDT_1m.model
+│   ├── xgb_XRPUSDT_30m.model
+│   ├── xgb_XRPUSDT_3m.model
+│   ├── xgb_XRPUSDT_5m.model
+│   ├── xgb_ZECUSDT_15m.model
+│   ├── xgb_ZECUSDT_1d.model
+│   ├── xgb_ZECUSDT_1h.model
+│   ├── xgb_ZECUSDT_1m.model
+│   ├── xgb_ZECUSDT_30m.model
+│   ├── xgb_ZECUSDT_3m.model
+│   ├── xgb_ZECUSDT_5m.model
+│   ├── xgb_ZROUSDT_15m.model
+│   ├── xgb_ZROUSDT_1d.model
+│   ├── xgb_ZROUSDT_1h.model
+│   ├── xgb_ZROUSDT_1m.model
+│   ├── xgb_ZROUSDT_30m.model
+│   ├── xgb_ZROUSDT_3m.model
+│   └── xgb_ZROUSDT_5m.model
+├── node_modules
+├── package-lock.json
+├── predict_live.py
+├── predict_top100.py
+├── render.yaml
+├── requirements.txt
+├── run_full_bot.py
+├── run_scheduler.py
+├── sentiment_scores.json
+├── setup.sh
+├── startbot.sh
+├── structure.txt
+├── templates
+│   ├── historique.html
+│   ├── index.html
+│   ├── live.html
+│   └── trade.html
+├── test_bb.py
+├── test_check.py
+├── test_fetcher.py
+├── train_all_models.py
+├── train_bot.py
+├── twitter_tracker.py
+└── venv
+    ├── bin
+    ├── bin 2
+    ├── include
+    ├── lib
+    ├── lib 2
+    ├── pyvenv 2.cfg
+    └── pyvenv.cfg
+
+22 directories, 1633 files

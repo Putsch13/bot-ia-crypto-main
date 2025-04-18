@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from joblib import dump, load
 
+
 def prepare_dataset(csv_path, future_shift=1):
     df = pd.read_csv(csv_path, index_col='timestamp', parse_dates=True)
 
@@ -12,13 +13,23 @@ def prepare_dataset(csv_path, future_shift=1):
     df['target'] = (df['future_close'] > df['close']).astype(int)
     df.dropna(inplace=True)
 
-    features = ['open', 'high', 'low', 'close', 'volume', 'rsi', 
-                'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9',
-                'ema20', 'ema50', 'delta_pct']
-    
-    X = df[features]
+    features = [
+        'open', 'high', 'low', 'close', 'volume', 'rsi', 
+        'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9',
+        'ema20', 'ema50', 'delta_pct',
+        'bollinger_high', 'bollinger_low', 'bollinger_width',
+        'sma_10', 'sma_50', 'ema_20',
+        'stoch_rsi', 'stoch_rsi_k', 'stoch_rsi_d',
+        'adx', 'volume_ema',
+        'upper_shadow', 'lower_shadow', 'variation', 'sentiment'
+    ]
+
+    df = df[[col for col in features + ['target'] if col in df.columns]]
+
+    X = df.drop(columns=['target'])
     y = df['target']
     return X, y, df
+
 
 def train_model(csv_path, model_output_path):
     X, y, _ = prepare_dataset(csv_path)
@@ -32,6 +43,7 @@ def train_model(csv_path, model_output_path):
     dump(model, model_output_path)
 
     return model_output_path, acc
+
 
 def predict_from_csv(csv_path, model_path):
     X, _, df = prepare_dataset(csv_path)

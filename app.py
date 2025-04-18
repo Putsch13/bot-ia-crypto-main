@@ -1,19 +1,23 @@
 import os
-import threading
-import time
 import csv
 import json
+import time
+import threading
 import logging
+import joblib
+import pandas as pd
+import ccxt
 from datetime import datetime
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-import ccxt
-import pandas as pd
 
-# === Modules internes ===
+# === Modules internes
 from audit_cryptos import run_full_audit
 from backend_ia_bot import latest_ia_report, start_bot_from_api
-from ml_brain import analyse_technique, charger_modele
+from ml_brain import (
+    analyse_technique, charger_modele,
+    get_top_100_symbols, get_binance_ohlcv, enrichir_features, FEATURE_COLUMNS
+)
 from config import (
     BINANCE_API_KEY, BINANCE_SECRET_KEY, USE_SANDBOX,
     DATA_PATH, MODELS_PATH, LOG_FILE, TRADE_HISTORY_CSV,
@@ -22,6 +26,58 @@ from config import (
 from ai_engine import predict_from_csv, train_model
 from bot_config import load_config, save_config
 from bot_runner import run_bot
+
+# === Flask Setup ===
+app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+@app.route("/top-predictions", methods=["GET"])
+def top_predictions():
+    try:
+        model = joblib.load("models/model.pkl")
+        scaler = joblib.load("models/scaler.pkl")
+        label_encoder = joblib.load("models/label_encoder.pkl")
+
+        symbols = get_top_100_symbols()
+        results = []
+
+        for symbol in symbols:
+            try:
+                df = get_binance_ohlcv(symbol, limit=100)
+                if df is None or df.empty:
+                    continue
+
+                df_enriched = enrichir_features(df)
+                if df_enriched is None or df_enriched.empty:
+                    continue
+
+                current = df_enriched.iloc[-1]
+                if current[FEATURE_COLUMNS[:-1]].isnull().any():
+                    continue
+
+                try:
+                    symbol_encoded = label_encoder.transform([symbol])[0]
+                except ValueError:
+                    print(f"[SKIP] {symbol} ignoré : label inconnu pour l'IA")
+                    continue
+
+                row = {col: current[col] for col in FEATURE_COLUMNS[:-1]}
+                row["symbol_encoded"] = symbol_encoded
+
+                df_row = pd.DataFrame([row])
+                df_scaled = scaler.transform(df_row)
+                proba = float(model.predict_proba(df_scaled)[0][1])
+
+                results.append({"symbol": symbol, "proba": round(proba, 4)})
+
+            except Exception as e:
+                continue
+
+        results_sorted = sorted(results, key=lambda x: x["proba"], reverse=True)[:10]
+        return jsonify(results_sorted)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # === Flask Setup ===
 app = Flask(__name__)
@@ -108,7 +164,21 @@ def api_start_bot():
 
 @app.route("/rapport_ia", methods=["GET"])
 def api_rapport_ia():
-    return jsonify(latest_ia_report or {})
+    try:
+        if not latest_ia_report:
+            return jsonify({"error": "Aucun rapport IA disponible."}), 404
+
+        # 🧼 Nettoyage NaN → null pour que le JSON soit valide en JS
+        clean = {
+            "timestamp": latest_ia_report.get("timestamp", str(datetime.utcnow())),
+            "top": json.loads(pd.DataFrame(latest_ia_report["top"]).to_json(orient="records")),
+            "flop": json.loads(pd.DataFrame(latest_ia_report["flop"]).to_json(orient="records")),
+            "rapport": str(latest_ia_report.get("rapport", "Aucun rapport.")),
+            "duration": int(latest_ia_report.get("duration", 0)),
+        }
+        return jsonify(clean)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/performance", methods=["GET"])
 def get_performance_summary():
@@ -160,6 +230,19 @@ def get_top_flop():
     except Exception as e:
         logger.error(f"Erreur /topflop : {e}")
         return jsonify({"top": [], "flop": []})
+
+@app.route("/logs", methods=["GET"])
+def get_logs():
+    try:
+        with open("logs/trades.csv", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            logs = list(reader)
+            return jsonify(logs)
+    except FileNotFoundError:
+        return jsonify([]), 200  # fichier vide = tableau vide
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 @app.route("/get_positions", methods=["GET"])
 def get_positions():
@@ -214,15 +297,18 @@ def auto_audit_ia():
         logger.info("🧠 Lancement de l’audit IA auto...")
         top, flop, rapport = run_full_audit()
         latest_ia_report = {
+            "timestamp": datetime.utcnow().isoformat(),
             "top": top,
             "flop": flop,
             "rapport": rapport,
             "duration": 10
         }
-        logger.info("✅ Audit IA terminé.")
+        logger.info("✅ Audit IA terminé. Rapport prêt.")
     except Exception as e:
         logger.error("❌ Erreur audit IA auto : %s", e)
+
     threading.Timer(600, auto_audit_ia).start()
+
 
 # === Frontend
 @app.route("/")

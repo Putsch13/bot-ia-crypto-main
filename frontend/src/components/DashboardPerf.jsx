@@ -12,27 +12,26 @@ export default function DashboardPerf() {
       try {
         const res = await axios.get(`${API_URL}/performance`);
         const data = res.data.data;
-  
-        // On extrait le gain du jour via la dernière entrée
-        const lastDay = data.gains_by_day?.at(-1)?.gain || 0;
-  
+
+        const lastDay = data.gains_by_day?.at(-1)?.gain ?? 0;
+
         setPerf({
-          pnl_total: data.total_gain,
+          pnl_total: data.total_gain ?? 0,
           daily_gain: lastDay,
-          nb_trades: data.total_trades,
-          status: "ON" // Optionnel : à rendre dynamique si tu veux plus tard
+          nb_trades: data.total_trades ?? 0,
+          status: "ON", // À rendre dynamique si nécessaire
         });
-  
+
         setLoading(false);
       } catch (err) {
         console.error("Erreur de perf :", err);
         setLoading(false);
       }
     };
-  
+
     fetchPerf();
   }, []);
-  
+
   if (loading || !perf) {
     return <p className="text-zinc-400">Chargement des performances...</p>;
   }

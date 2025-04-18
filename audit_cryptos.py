@@ -4,24 +4,20 @@ import pandas as pd
 from datetime import datetime
 from functools import lru_cache
 import logging
-from ml_brain import charger_dataset_top100, encoder_symbols, charger_et_predire_from_df
-
-df = charger_dataset_top100()
-df, _ = encoder_symbols(df)
-top_cryptos = charger_et_predire_from_df(df)
-
-# === IMPORTS INTERNES ===
-from ml_brain import charger_modele, charger_et_predire
+from ml_brain import (
+    enrichir_features,
+    charger_dataset_top100,
+    encoder_symbols,
+    charger_et_predire_from_df,
+    charger_modele
+)
 from buzz_tracker import analyze_crypto_sentiment_google
-
-
-
 
 # === LOGGER CONFIG ===
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
+ch.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 logger.addHandler(ch)
@@ -36,10 +32,20 @@ WEIGHT_SENTIMENT = 0.3
 WEIGHT_PREDICTION = 0.3
 
 latest_ia_report = None
+FEATURE_COLUMNS = [
+    'rsi', 'stoch_rsi', 'stoch_rsi_k', 'stoch_rsi_d',
+    'macd', 'macd_signal', 'macd_diff',
+    'sma_10', 'sma_50', 'ema_20',
+    'bollinger_high', 'bollinger_low', 'bollinger_width',
+    'adx', 'volume', 'volume_ema',
+    'delta_pct', 'variation',
+    'upper_shadow', 'lower_shadow',
+    'sentiment', 'symbol_encoded'
+]
 
 @lru_cache(maxsize=3)
 def get_top_100_symbols():
-    logger.info("🔄 Récupération des 100 cryptos les plus actives sur Binance...")
+    logger.info("🔀 Récupération des 100 cryptos les plus actives sur Binance...")
     try:
         res = requests.get(BINANCE_TICKER_URL, timeout=10)
         data = res.json()
@@ -65,17 +71,21 @@ def is_symbol_valid_on_binance(symbol):
 
 def get_price(symbol: str, minutes_ago: int):
     try:
-        url = f"{BINANCE_KLINES_URL}?symbol={symbol}&interval=1m&limit={minutes_ago + 1}"
+        interval = "1h" if minutes_ago > 1000 else "1m"
+        limit = (minutes_ago // 60 + 1) if interval == "1h" else minutes_ago + 1
+        url = f"{BINANCE_KLINES_URL}?symbol={symbol}&interval={interval}&limit={limit}"
         res = requests.get(url, timeout=10)
         data = res.json()
-        if isinstance(data, list) and len(data) > minutes_ago:
-            return float(data[-(minutes_ago + 1)][4])
+
+        if isinstance(data, list) and len(data) > 0:
+            index = -(minutes_ago // (60 if interval == "1h" else 1) + 1)
+            return float(data[index][4])
     except Exception as e:
         logger.error(f"⚠️ Erreur get_price({symbol}, {minutes_ago} min): {e}")
     return None
 
 def get_variations(symbol):
-    logger.info(f"🔄 Récupération des variations pour {symbol}...")
+    logger.info(f"🔀 Récupération des variations pour {symbol}...")
     now = get_price(symbol, 0)
     if now is None:
         return None
@@ -87,22 +97,45 @@ def get_variations(symbol):
             variations[label] = round((now - past) / past * 100, 2)
         else:
             variations[label] = None
+            logger.warning(f"{label} est None pour {symbol}")
     return variations
 
 def get_sentiment_scores_dynamic(symbols):
     logger.info("Récupération des scores de sentiment Google...")
     coins = [s.replace("USDT", "") for s in symbols]
     g_scores = analyze_crypto_sentiment_google(coins)
-    
-    result = {}
-    for coin in g_scores.keys():
-        g = g_scores.get(coin, 0.5)
-        result[coin.upper()] = {"google": g, "total": g}
-    return result
+    return {coin.upper(): {"google": g, "total": g} for coin, g in g_scores.items()}
+
+def get_ohlcv_df(symbol: str):
+    try:
+        url = f"{BINANCE_KLINES_URL}?symbol={symbol}&interval=1m&limit=2000"
+        res = requests.get(url, timeout=10)
+        data = res.json()
+
+        if not isinstance(data, list) or len(data) == 0:
+            logger.warning(f"⚠️ Données OHLCV invalides pour {symbol}")
+            return None
+
+        df = pd.DataFrame(data, columns=[
+            "timestamp", "open", "high", "low", "close", "volume",
+            "_1", "_2", "_3", "_4", "_5", "_6"
+        ])
+
+        df = df[["timestamp", "open", "high", "low", "close", "volume"]]
+        df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
+        df[["open", "high", "low", "close", "volume"]] = df[["open", "high", "low", "close", "volume"]].astype(float)
+        df.set_index("timestamp", inplace=True)
+        df = df.sort_index()
+        logger.info(f"➡️ {symbol} → {len(df)} lignes OHLCV récupérées (interval=1m)")
+        return df
+
+    except Exception as e:
+        logger.error(f"⛔ Erreur get_ohlcv_df({symbol}): {e}")
+        return None
 
 def run_full_audit():
     global latest_ia_report
-    logger.info("🧠 Lancement run_full_audit()")
+    logger.info("🧐 Lancement de l'audit complet IA...")
     start_time = time.time()
 
     model = charger_modele()
@@ -111,78 +144,128 @@ def run_full_audit():
         return
 
     symbols = get_top_100_symbols()
-    logger.info(f"🔢 {len(symbols)} cryptos à analyser (via get_top_100_symbols())")
+    logger.info(f"🔢 {len(symbols)} cryptos à analyser.")
+
     sentiments = get_sentiment_scores_dynamic(symbols)
-    rows, explanations = [], []
+    rows, explanations, errors = [], [], []
 
     for symbol in symbols:
         if not is_symbol_valid_on_binance(symbol):
+            logger.warning(f"❌ {symbol} non reconnu sur Binance, skip.")
             continue
 
-        variations = get_variations(symbol)
-        if not variations:
-            continue
-
-        coin = symbol.replace("USDT", "")
-        sentiment = sentiments.get(coin, {"total": 0})["total"]
-        pred_score = 0
-        narration = []
+        logger.info(f"🔍 Analyse IA pour {symbol}...")
 
         try:
-            pred_score = charger_et_predire(symbol, variations, model)
-            narration.append("Prédiction IA: " + ("Hausse" if pred_score == 1 else "Baisse"))
+            df = get_ohlcv_df(symbol)
+            if df is None or df.empty:
+                logger.warning(f"⚠️ Données OHLCV vides pour {symbol}, skip.")
+                continue
+
+            df = enrichir_features(df)
+            if df is None or df.empty:
+                logger.warning(f"⚠️ Données enrichies vides pour {symbol}, skip.")
+                continue
+
+            df["symbol"] = symbol
+
+            df, _ = encoder_symbols(df)
+            if "symbol_encoded" not in df.columns:
+                raise ValueError("❌ symbol_encoded manquant après encodage")
+
+            coin = symbol.replace("USDT", "")
+            sentiment = sentiments.get(coin, {}).get("total", 0.5)
+            df["sentiment"] = sentiment
+
+            df["completeness"] = df[FEATURE_COLUMNS].notna().mean(axis=1)
+            missing_cols = [col for col in FEATURE_COLUMNS if col not in df.columns]
+            if missing_cols:
+                raise ValueError(f"❌ Colonnes manquantes : {missing_cols}")
+
+            pred_score = charger_et_predire_from_df(df)
+
+            # Gestion robuste du format de prédiction
+            if isinstance(pred_score, pd.DataFrame) and "prediction" in pred_score.columns:
+                pred = pred_score["prediction"].iloc[-1]
+            elif isinstance(pred_score, (int, float)):
+                pred = pred_score
+            else:
+                logger.warning(f"[{symbol}] Format inattendu pour pred_score: {type(pred_score)}")
+                pred = 0
+
+            # Vérification finale anti-NaN
+            try:
+                pred = float(pred)
+                if pd.isna(pred):
+                    pred = 0
+            except Exception:
+                pred = 0
+
+            latest = df.iloc[-1]
+            narration = [
+                f"Variation 10min: {latest['variation_10min']:.2f}%",
+                f"RSI: {latest['rsi']:.2f}",
+                f"MACD: {latest['macd']:.2f}",
+                f"Sentiment Google: {sentiment * 100:.1f}%",
+                f"IA: {'Hausse' if pred == 1 else 'Baisse'}"
+            ]
+
+            # 🔐 Anti-NaN fallback pour les variations
+            v10 = latest["variation_10min"]
+            v1h = latest["variation_1h"]
+            v24h = latest["variation_24h"]
+
+            # Utiliser 0.0 comme fallback si valeur NaN
+            v10 = v10 if pd.notna(v10) else 0.0
+            v1h = v1h if pd.notna(v1h) else 0.0
+            v24h = v24h if pd.notna(v24h) else 0.0
+            sent = sentiment if pd.notna(sentiment) else 0.5
+            
+
+            # Score de variation pondéré
+            score_variation = v10 * 0.2 + v1h * 0.4 + v24h * 0.4
+
+            # Log debug pour comprendre les valeurs utilisées
+            logger.debug(f"[{symbol}] var10={v10} var1h={v1h} var24h={v24h} sentiment={sent} pred={pred} completeness={latest['completeness']}")
+
+            score_ia = round((
+                WEIGHT_VARIATION * score_variation +
+                WEIGHT_SENTIMENT * sent * 100 +
+                WEIGHT_PREDICTION * pred * 100
+            ) * latest["completeness"], 2)
+
+            logger.info(f"✅ {symbol} audité avec score IA {score_ia}")
+
+            rows.append({
+                "symbol": symbol,
+                "sentiment": sentiment,
+                "score_ia": score_ia,
+                "variation_10min": latest["variation_10min"],
+                "variation_1h": latest["variation_1h"],
+                "variation_24h": latest["variation_24h"]
+            })
+
+            explanations.append({
+                "crypto": symbol,
+                "explanation": " | ".join(narration)
+            })
+
         except Exception as e:
-            logger.error(f"❌ Erreur de prédiction pour {symbol}: {e}")
-            narration.append("Prédiction IA: Indisponible")
-
-        if variations["variation_10min"] is not None:
-            narration.append(f"Variation sur 10 min: {variations['variation_10min']}%")
-        if variations["variation_1h"] is not None:
-            narration.append(f"Variation sur 1h: {variations['variation_1h']}%")
-        if variations["variation_24h"] is not None:
-            narration.append(f"Variation sur 24h: {variations['variation_24h']}%")
-        
-        narration.append(f"Sentiment global (Google): {sentiment*100:.1f}%")
-
-        explanation_text = (
-            f"La crypto {symbol} présente une variation moyenne de {variations['variation_10min']}% sur 10 minutes, "
-            f"{variations['variation_1h']}% sur 1 heure, et {variations['variation_24h']}% sur 24 heures. "
-            f"Le sentiment détecté via Google est de {sentiment*100:.1f}%. "
-            f"L'IA prédit une {'hausse' if pred_score == 1 else 'baisse'}."
-        )
-        narration.append(explanation_text)
-
-        score_variation = (
-            (variations["variation_10min"] or 0) * 0.2 +
-            (variations["variation_1h"] or 0) * 0.4 +
-            (variations["variation_24h"] or 0) * 0.4
-        )
-        score_ia = round(
-            WEIGHT_VARIATION * score_variation +
-            WEIGHT_SENTIMENT * sentiment * 100 +
-            WEIGHT_PREDICTION * pred_score * 100,
-            2
-        )
-
-        rows.append({
-            "symbol": symbol,
-            **variations,
-            "sentiment": sentiment,
-            "score_ia": score_ia
-        })
-
-        explanations.append({
-            "crypto": symbol,
-            "explanation": " | ".join(narration)
-        })
+            logger.error(f"❌ Échec analyse pour {symbol} : {e}")
+            errors.append(f"{symbol} → {e}")
+            continue
 
         time.sleep(0.2)
 
-    logger.info(f"✅ Audit terminé. {len(rows)} cryptos ont été auditées avec succès.")
+    if not rows:
+        logger.warning("⚠️ Aucun résultat à auditer, DataFrame vide.")
+        return [], [], "❌ Aucun crypto n'a pu être audité avec succès."
 
+    logger.info(f"✅ Audit terminé. {len(rows)} cryptos analysées.")
     df = pd.DataFrame(rows).sort_values("score_ia", ascending=False).reset_index(drop=True)
     df["rank"] = df.index + 1
     df["datetime"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
     filename = f"audit_100cryptos_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
     df.to_csv(filename, index=False)
 
@@ -199,6 +282,11 @@ def run_full_audit():
     for c in flop5:
         exp = next((e['explanation'] for e in explanations if e['crypto'] == c['symbol']), "Pas d'explication.")
         rapport += f"→ {c['symbol']} (Score IA: {c['score_ia']})\n   {exp}\n\n"
+
+    if errors:
+        rapport += "----- Erreurs rencontrées -----\n"
+        for err in errors:
+            rapport += f"{err}\n"
 
     duration = int(time.time() - start_time)
     latest_ia_report = {
