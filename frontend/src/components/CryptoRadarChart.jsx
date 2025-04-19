@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import InfoTooltip from "./InfoTooltip";
 
-export default function CryptoRadarChart({ symbol, intervalle }) {
+export default function CryptoRadarChart({ symbol }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,14 +19,6 @@ export default function CryptoRadarChart({ symbol, intervalle }) {
   useEffect(() => {
     const fetchRadarData = async () => {
       try {
-        // Vérifie si l'intervalle est inférieur à 2 minutes
-        if (intervalle < 2) {
-          alert("⚠️ L’intervalle minimum autorisé est de 2 minutes.");
-          setError("Intervalle trop court.");
-          setLoading(false);
-          return;
-        }
-
         const res = await axios.get(`http://127.0.0.1:5002/radar_data?symbol=${symbol}`);
         console.log("✅ Données radar reçues :", res.data);
 
@@ -48,24 +40,17 @@ export default function CryptoRadarChart({ symbol, intervalle }) {
     };
 
     fetchRadarData();
-  }, [symbol, intervalle]);
+  }, [symbol]);
 
   if (loading) return <p className="text-zinc-400">Chargement du radar...</p>;
   if (error || !data) return <p className="text-red-400">{error || "Erreur inconnue"}</p>;
 
   return (
     <div className="bg-zinc-900 p-4 rounded-2xl shadow-xl">
-      <h2 className="text-lg font-bold text-center text-white mb-4">
+      <h2 className="text-lg font-bold text-center text-white mb-4 flex items-center justify-center gap-2">
         🔍 Analyse détaillée IA : {symbol}
+        <InfoTooltip text="Analyse des indicateurs techniques avancés pour anticiper les signaux d’achat ou de vente." />
       </h2>
-
-      <div className="mb-2 flex items-center gap-2">
-        <label className="text-sm text-white flex items-center gap-1">
-          Intervalle (min)
-          <InfoTooltip text="Délai entre deux audits IA. Minimum recommandé : 2 minutes pour éviter les surcharges." />
-        </label>
-        <span className="text-sm text-zinc-400">{intervalle} min</span>
-      </div>
 
       <ResponsiveContainer width="100%" height={400}>
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>

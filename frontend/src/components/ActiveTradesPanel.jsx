@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import InfoTooltip from "./InfoTooltip";
 
 const ActiveTradesPanel = () => {
   const [portfolio, setPortfolio] = useState({ fictif: {}, reel: {} });
@@ -53,7 +54,6 @@ const ActiveTradesPanel = () => {
       const result = await res.json();
       console.log(result);
 
-      // Refresh portefeuille
       const refreshed = await fetch("http://localhost:5002/get_portfolio");
       setPortfolio(await refreshed.json());
     } catch (err) {
@@ -72,11 +72,26 @@ const ActiveTradesPanel = () => {
       <table className="w-full text-sm text-white mt-2">
         <thead>
           <tr className="text-zinc-400 border-b border-zinc-700">
-            <th>Symbol</th>
-            <th>Prix d’achat</th>
-            <th>Montant $</th>
-            <th>Profit</th>
-            <th>Timestamp</th>
+            <th>
+              Symbol
+              <InfoTooltip text="Paire de trading utilisée (ex: BTCUSDT)." />
+            </th>
+            <th>
+              Prix d’achat
+              <InfoTooltip text="Prix auquel la position a été ouverte." />
+            </th>
+            <th>
+              Montant $
+              <InfoTooltip text="Montant investi en dollars sur ce trade." />
+            </th>
+            <th>
+              Profit
+              <InfoTooltip text="Gain ou perte actuel basé sur le prix live Binance." />
+            </th>
+            <th>
+              Timestamp
+              <InfoTooltip text="Heure et date d’ouverture du trade." />
+            </th>
             <th>🛑</th>
           </tr>
         </thead>
@@ -94,7 +109,9 @@ const ActiveTradesPanel = () => {
                 <td>{symbol}</td>
                 <td>{(buyPrice ?? 0).toFixed(4)}</td>
                 <td>{usdtInvested}</td>
-                <td className={isProfit ? "text-green-400" : "text-red-400"}>{profit} $</td>
+                <td className={isProfit ? "text-green-400" : "text-red-400"}>
+                  {profit} $
+                </td>
                 <td>{new Date(info.timestamp * 1000).toLocaleString()}</td>
                 <td>
                   <button
@@ -114,14 +131,21 @@ const ActiveTradesPanel = () => {
 
   return (
     <div className="p-4 bg-zinc-900 rounded-xl shadow-lg mt-6">
-      <h2 className="text-lg font-bold text-white mb-4">⚡ Trades Actifs</h2>
+      <h2 className="text-lg font-bold text-white mb-4">
+        ⚡ Trades Actifs
+        <InfoTooltip text="Liste des positions actuellement ouvertes par l'IA en mode fictif ou réel." />
+      </h2>
 
-      {/* FICTIF */}
-      <h3 className="text-yellow-400 font-semibold mb-2">Mode Fictif</h3>
+      <h3 className="text-yellow-400 font-semibold mb-2">
+        Mode Fictif
+        <InfoTooltip text="Le mode fictif simule les trades sans utiliser d'argent réel. Pratique pour les tests." />
+      </h3>
       {renderTrades("fictif")}
 
-      {/* RÉEL */}
-      <h3 className="text-emerald-400 font-semibold mt-6 mb-2">Mode Réel</h3>
+      <h3 className="text-emerald-400 font-semibold mt-6 mb-2">
+        Mode Réel
+        <InfoTooltip text="Le mode réel exécute des ordres sur Binance avec de l'argent réel." />
+      </h3>
       {renderTrades("reel")}
     </div>
   );

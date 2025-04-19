@@ -12,6 +12,24 @@ from ml_brain import (
     charger_modele
 )
 from buzz_tracker import analyze_crypto_sentiment_google
+import requests
+from requests.exceptions import RequestException
+
+def safe_check_symbol_on_binance(symbol, retries=2, timeout=5):
+    try:
+        url = "https://api.binance.com/api/v3/exchangeInfo"
+        for _ in range(retries):
+            try:
+                res = requests.get(url, timeout=timeout)
+                res.raise_for_status()
+                data = res.json()
+                available_symbols = {s["symbol"] for s in data["symbols"]}
+                return symbol in available_symbols
+            except RequestException as e:
+                continue  # Réessaye
+    except Exception as final_e:
+        logger.error(f"[BINANCE] ❌ Erreur finale pour {symbol} : {final_e}")
+    return False
 
 # === LOGGER CONFIG ===
 logger = logging.getLogger(__name__)
@@ -150,9 +168,10 @@ def run_full_audit():
     rows, explanations, errors = [], [], []
 
     for symbol in symbols:
-        if not is_symbol_valid_on_binance(symbol):
+        if not safe_check_symbol_on_binance(symbol):
             logger.warning(f"❌ {symbol} non reconnu sur Binance, skip.")
             continue
+        time.sleep(0.25)  # ⏱️ Laisse souffler Binance
 
         logger.info(f"🔍 Analyse IA pour {symbol}...")
 
@@ -260,6 +279,12 @@ def run_full_audit():
     if not rows:
         logger.warning("⚠️ Aucun résultat à auditer, DataFrame vide.")
         return [], [], "❌ Aucun crypto n'a pu être audité avec succès."
+
+    if errors:
+        logger.warning("🧨 Résumé des erreurs d'audit :")
+        for err in errors:
+            logger.warning(f"  ⛔ {err}")
+    
 
     logger.info(f"✅ Audit terminé. {len(rows)} cryptos analysées.")
     df = pd.DataFrame(rows).sort_values("score_ia", ascending=False).reset_index(drop=True)

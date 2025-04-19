@@ -10,6 +10,8 @@ import ccxt
 from datetime import datetime
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
+from audit_cryptos import get_ohlcv_df, enrichir_features
+
 
 # === Modules internes
 from audit_cryptos import run_full_audit
@@ -18,6 +20,7 @@ from ml_brain import (
     analyse_technique, charger_modele,
     get_top_100_symbols, get_binance_ohlcv, enrichir_features, FEATURE_COLUMNS
 )
+
 from config import (
     BINANCE_API_KEY, BINANCE_SECRET_KEY, USE_SANDBOX,
     DATA_PATH, MODELS_PATH, LOG_FILE, TRADE_HISTORY_CSV,
@@ -39,6 +42,8 @@ def top_predictions():
         label_encoder = joblib.load("models/label_encoder.pkl")
 
         symbols = get_top_100_symbols()
+        logger.info(f"🔢 {len(symbols)} cryptos à analyser.")  # <- déjà présent, bien
+
         results = []
 
         for symbol in symbols:
@@ -74,6 +79,7 @@ def top_predictions():
                 continue
 
         results_sorted = sorted(results, key=lambda x: x["proba"], reverse=True)[:10]
+        logger.info(f"✅ Rapport IA → {len(rows)} cryptos auditées avec succès.")
         return jsonify(results_sorted)
 
     except Exception as e:
@@ -164,21 +170,58 @@ def api_start_bot():
 
 @app.route("/rapport_ia", methods=["GET"])
 def api_rapport_ia():
+    import math
+
+    def clean_dict(d):
+        return {
+            k: (0.0 if isinstance(v, float) and math.isnan(v) else v)
+            for k, v in d.items()
+        }
+
     try:
         if not latest_ia_report:
             return jsonify({"error": "Aucun rapport IA disponible."}), 404
 
-        # 🧼 Nettoyage NaN → null pour que le JSON soit valide en JS
         clean = {
             "timestamp": latest_ia_report.get("timestamp", str(datetime.utcnow())),
-            "top": json.loads(pd.DataFrame(latest_ia_report["top"]).to_json(orient="records")),
-            "flop": json.loads(pd.DataFrame(latest_ia_report["flop"]).to_json(orient="records")),
+            "top": [clean_dict(dict(x)) for x in latest_ia_report.get("top", [])],
+            "flop": [clean_dict(dict(x)) for x in latest_ia_report.get("flop", [])],
             "rapport": str(latest_ia_report.get("rapport", "Aucun rapport.")),
             "duration": int(latest_ia_report.get("duration", 0)),
         }
         return jsonify(clean)
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route("/crypto_insight", methods=["GET"])
+def get_crypto_insight():
+    symbol = request.args.get("symbol")
+    if not symbol:
+        return jsonify({"error": "Symbol manquant"}), 400
+
+    try:
+        df = get_binance_ohlcv(symbol, limit=1000)
+        df = enrichir_features(df)
+        df["symbol"] = symbol
+        df, _ = encoder_symbols(df)
+        latest = df.iloc[-1]
+
+        insight = {
+            "rsi": float(latest["rsi"]),
+            "macd": float(latest["macd"]),
+            "adx": float(latest["adx"]),
+            "variation_1h": float(latest["variation_1h"]),
+            "volume_ema": float(latest["volume_ema"]),
+            "sentiment": float(latest.get("sentiment", 0.5)),
+        }
+
+        return jsonify(insight)
+
+    except Exception as e:
+        logger.error(f"[❌] Erreur /crypto_insight : {e}")
+        return jsonify({"error": str(e)}), 500
+
 
 @app.route("/performance", methods=["GET"])
 def get_performance_summary():
@@ -230,6 +273,12 @@ def get_top_flop():
     except Exception as e:
         logger.error(f"Erreur /topflop : {e}")
         return jsonify({"top": [], "flop": []})
+
+    if errors:
+        logger.warning("🧨 Résumé des erreurs d'audit :")
+        for err in errors:
+            logger.warning(f"  ⛔ {err}")
+
 
 @app.route("/logs", methods=["GET"])
 def get_logs():
@@ -308,6 +357,38 @@ def auto_audit_ia():
         logger.error("❌ Erreur audit IA auto : %s", e)
 
     threading.Timer(600, auto_audit_ia).start()
+
+@app.route("/radar_data", methods=["GET"])
+def get_radar_data():
+    symbol = request.args.get("symbol", "BTCUSDT")
+    try:
+        df = get_ohlcv_df(symbol)
+        if df is None or df.empty:
+            return jsonify({"error": "Pas de données OHLCV."}), 404
+
+        df = enrichir_features(df)
+        if df is None or df.empty:
+            return jsonify({"error": "Échec enrichissement."}), 500
+
+        latest = df.iloc[-1]
+
+        features = {
+            "RSI": float(latest.get("rsi", 0)),
+            "MACD": float(latest.get("macd", 0)),
+            "Stoch RSI": float(latest.get("stoch_rsi", 0)),
+            "ADX": float(latest.get("adx", 0)),
+            "Volume EMA": float(latest.get("volume_ema", 0)),
+            "Delta %": float(latest.get("delta_pct", 0)),
+        }
+
+        return jsonify({
+            "symbol": symbol,
+            "features": features
+        })
+
+    except Exception as e:
+        logger.error(f"[Radar] Erreur pour {symbol} → {e}")
+        return jsonify({"error": str(e)}), 500
 
 
 # === Frontend

@@ -596,3 +596,83 @@ Thank you very much!</p>
 13:00:17 - 💹 Nouveau capital : 1001.23 USDT
 13:02:19 - 🧪 Achat fictif de QTUM/USDT à 2.07
 13:02:19 - 💹 Nouveau capital : 1001.34 USDT
+14:13:24 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:13:24 - 💹 Nouveau capital : 100.10 USDT
+14:15:42 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:15:42 - 💹 Nouveau capital : 100.21 USDT
+14:17:47 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:17:47 - 💹 Nouveau capital : 100.31 USDT
+14:19:58 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:19:58 - 💹 Nouveau capital : 100.42 USDT
+14:22:02 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:22:02 - 💹 Nouveau capital : 100.52 USDT
+14:24:20 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:24:20 - 💹 Nouveau capital : 100.62 USDT
+14:26:21 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:26:21 - 💹 Nouveau capital : 100.73 USDT
+14:28:35 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:28:35 - 💹 Nouveau capital : 100.83 USDT
+14:30:39 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:30:39 - 💹 Nouveau capital : 100.94 USDT
+14:32:38 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:32:38 - 💹 Nouveau capital : 101.04 USDT
+14:34:56 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:34:56 - 💹 Nouveau capital : 101.14 USDT
+14:37:11 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:37:11 - 💹 Nouveau capital : 101.25 USDT
+14:39:41 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:39:41 - 💹 Nouveau capital : 101.35 USDT
+14:41:52 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:41:52 - 💹 Nouveau capital : 101.46 USDT
+14:44:21 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:44:21 - 💹 Nouveau capital : 101.56 USDT
+14:46:37 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:46:37 - 💹 Nouveau capital : 101.66 USDT
+14:48:54 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:48:54 - 💹 Nouveau capital : 101.77 USDT
+14:51:13 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:51:13 - 💹 Nouveau capital : 101.87 USDT
+14:53:34 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:53:34 - 💹 Nouveau capital : 101.98 USDT
+14:55:56 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:55:56 - 💹 Nouveau capital : 102.08 USDT
+14:58:15 - 🧪 Achat fictif de QTUM/USDT à 2.08
+14:58:15 - 💹 Nouveau capital : 102.18 USDT
+15:00:28 - 🧪 Achat fictif de QTUM/USDT à 2.08
+15:00:28 - 💹 Nouveau capital : 102.29 USDT
+15:02:38 - 🧪 Achat fictif de QTUM/USDT à 2.08
+15:02:38 - 💹 Nouveau capital : 102.39 USDT
+15:05:02 - 🧪 Achat fictif de QTUM/USDT à 2.08
+15:05:02 - 💹 Nouveau capital : 102.50 USDT
+15:07:11 - 🧪 Achat fictif de QTUM/USDT à 2.08
+15:07:11 - 💹 Nouveau capital : 102.60 USDT
+15:09:46 - 🧪 Achat fictif de QTUM/USDT à 2.08
+15:09:46 - 💹 Nouveau capital : 102.70 USDT
+15:11:52 - 🧪 Achat fictif de QTUM/USDT à 2.08
+15:11:52 - 💹 Nouveau capital : 102.81 USDT
+15:14:18 - 🧪 Achat fictif de QTUM/USDT à 2.09
+15:14:18 - 💹 Nouveau capital : 102.91 USDT
+15:16:30 - 🧪 Achat fictif de QTUM/USDT à 2.09
+15:16:30 - 💹 Nouveau capital : 103.02 USDT
+15:19:01 - 🧪 Achat fictif de QTUM/USDT à 2.10
+15:19:01 - 💹 Nouveau capital : 103.12 USDT
+15:21:25 - 🧪 Achat fictif de QTUM/USDT à 2.11
+15:21:25 - 💹 Nouveau capital : 103.23 USDT
+15:23:41 - 🧪 Achat fictif de QTUM/USDT à 2.10
+15:23:41 - 💹 Nouveau capital : 103.33 USDT
+15:26:03 - 🧪 Achat fictif de QTUM/USDT à 2.12
+15:26:03 - 💹 Nouveau capital : 103.44 USDT
+15:28:25 - 🧪 Achat fictif de QTUM/USDT à 2.11
+15:28:25 - 💹 Nouveau capital : 103.54 USDT
+15:30:52 - 🧪 Achat fictif de QTUM/USDT à 2.11
+15:30:52 - 💹 Nouveau capital : 103.65 USDT
+15:33:13 - 🧪 Achat fictif de QTUM/USDT à 2.12
+15:33:13 - 💹 Nouveau capital : 103.76 USDT
+15:35:38 - 🧪 Achat fictif de QTUM/USDT à 2.12
+15:35:38 - 💹 Nouveau capital : 103.86 USDT
+15:38:00 - 🧪 Achat fictif de QTUM/USDT à 2.12
+15:38:00 - 💹 Nouveau capital : 103.97 USDT
+15:40:29 - 🧪 Achat fictif de QTUM/USDT à 2.13
+15:40:29 - 💹 Nouveau capital : 104.07 USDT
+15:42:54 - 🧪 Achat fictif de LTC/USDT à 75.97
+15:42:54 - 💹 Nouveau capital : 107.87 USDT
