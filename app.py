@@ -1,3 +1,4 @@
+
 import os
 import csv
 import json
@@ -6,84 +7,159 @@ import threading
 import logging
 import joblib
 import pandas as pd
+import numpy as np
 import ccxt
 from datetime import datetime
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, send_file
 from flask_cors import CORS
-from audit_cryptos import get_ohlcv_df, enrichir_features
-
 
 # === Modules internes
-from audit_cryptos import run_full_audit
+from audit_cryptos import get_ohlcv_df, enrichir_features, run_full_audit
 from backend_ia_bot import latest_ia_report, start_bot_from_api
 from ml_brain import (
-    analyse_technique, charger_modele,
-    get_top_100_symbols, get_binance_ohlcv, enrichir_features, FEATURE_COLUMNS
+    charger_modele,
+    get_top_100_symbols, get_binance_ohlcv,
+    enrichir_features, FEATURE_COLUMNS, charger_et_predire_from_df
 )
-
 from config import (
     BINANCE_API_KEY, BINANCE_SECRET_KEY, USE_SANDBOX,
     DATA_PATH, MODELS_PATH, LOG_FILE, TRADE_HISTORY_CSV,
     SENTIMENT_FILE, IA_CONFIDENCE_THRESHOLD
 )
 from ai_engine import predict_from_csv, train_model
-from bot_config import load_config, save_config
+from bot_config import load_config, save_config, load_portfolio, charger_portefeuille, sauvegarder_portefeuille
 from bot_runner import run_bot
+from data_fetcher import fetch_real_data, get_prix_binance, fetch_enriched_features
+from ml_brain import predict_price_movement
 
-# === Flask Setup ===
+# === App Flask ===
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-@app.route("/top-predictions", methods=["GET"])
-def top_predictions():
+# === Logger ===
+logging.basicConfig(level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.FileHandler("app.log"), logging.StreamHandler()])
+logger = logging.getLogger(__name__)
+
+# === Binance Client ===
+exchange = ccxt.binance({'apiKey': BINANCE_API_KEY, 'secret': BINANCE_SECRET_KEY})
+exchange.set_sandbox_mode(USE_SANDBOX)
+
+# === Chargement du modèle IA ===
+model = joblib.load("models/model.pkl")
+scaler = joblib.load("models/scaler.pkl")
+label_encoder = joblib.load("models/label_encoder.pkl")
+with open("models/feature_columns.txt") as f:
+    FEATURE_COLUMNS = f.read().splitlines()
+# 🛠️ Début de l'app Flask
+app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+portefeuille = charger_portefeuille("prod")
+capital_total = 1000  # ou ton capital réel
+
+symbols = ["BTCUSDT", "ETHUSDT", "SOLUSDT", ...]  # ou ta liste dynamique
+
+@app.route("/run_ai_bot", methods=["POST"])
+def lancer_bot_ia():
     try:
-        model = joblib.load("models/model.pkl")
-        scaler = joblib.load("models/scaler.pkl")
-        label_encoder = joblib.load("models/label_encoder.pkl")
+        portefeuille = charger_portefeuille("prod")
+        capital_total = 1000  # ou un paramètre dynamique
+        top_symbols = get_top_100_symbols()
 
-        symbols = get_top_100_symbols()
-        logger.info(f"🔢 {len(symbols)} cryptos à analyser.")  # <- déjà présent, bien
-
-        results = []
-
-        for symbol in symbols:
-            try:
-                df = get_binance_ohlcv(symbol, limit=100)
-                if df is None or df.empty:
-                    continue
-
-                df_enriched = enrichir_features(df)
-                if df_enriched is None or df_enriched.empty:
-                    continue
-
-                current = df_enriched.iloc[-1]
-                if current[FEATURE_COLUMNS[:-1]].isnull().any():
-                    continue
-
-                try:
-                    symbol_encoded = label_encoder.transform([symbol])[0]
-                except ValueError:
-                    print(f"[SKIP] {symbol} ignoré : label inconnu pour l'IA")
-                    continue
-
-                row = {col: current[col] for col in FEATURE_COLUMNS[:-1]}
-                row["symbol_encoded"] = symbol_encoded
-
-                df_row = pd.DataFrame([row])
-                df_scaled = scaler.transform(df_row)
-                proba = float(model.predict_proba(df_scaled)[0][1])
-
-                results.append({"symbol": symbol, "proba": round(proba, 4)})
-
-            except Exception as e:
-                continue
-
-        results_sorted = sorted(results, key=lambda x: x["proba"], reverse=True)[:10]
-        logger.info(f"✅ Rapport IA → {len(rows)} cryptos auditées avec succès.")
-        return jsonify(results_sorted)
-
+        verifier_et_exec_trading(top_symbols, portefeuille, capital_total)
+        return jsonify({"message": "🤖 IA trading lancé avec succès"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+TRADE_HISTORY_CSV = "logs/trades.csv"
+PREDICTIONS_LOG_CSV = "logs/ia_predictions_log.csv"
+
+# 🔁 NOUVEAU FORMAT UNIFIÉ
+PREDICTION_FIELDS = [
+    "Date", "Symbol", "Score", "Probabilité", "Sentiment", "Variation_1h",
+    "Prediction", "Real", "Confidence", "Result"
+]
+
+# === Chargement des modèles ML ===
+model = joblib.load("models/model.pkl")
+scaler = joblib.load("models/scaler.pkl")
+label_encoder = joblib.load("models/label_encoder.pkl")
+with open("models/feature_columns.txt") as f:
+    FEATURE_COLUMNS = f.read().splitlines()
+
+# === PROFIL UTILISATEUR ===
+# Définir des seuils par profil IA
+PROFILS_IA = {
+    "prudent": 0.7,
+    "moyen": 0.6,
+    "agressif": 0.5
+}
+
+
+
+def log_prediction(symbol, score, proba, sentiment, var_1h, prediction=None, real=None, confidence=None, result=None):
+    os.makedirs("logs", exist_ok=True)
+    file_exists = os.path.isfile(PREDICTIONS_LOG_CSV)
+
+    with open(PREDICTIONS_LOG_CSV, "a", newline="") as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=PREDICTION_FIELDS)
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow({
+            "Date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "Symbol": symbol,
+            "Score": round(score, 2),
+            "Probabilité": round(proba, 4),
+            "Sentiment": round(sentiment, 2),
+            "Variation_1h": round(var_1h, 2),
+            "Prediction": prediction,
+            "Real": real,
+            "Confidence": round(confidence, 4) if confidence is not None else "",
+            "Result": result or ""
+        })
+
+@app.route("/api/predictions", methods=["GET"])
+def get_predictions():
+    try:
+        if not os.path.exists(PREDICTIONS_LOG_CSV):
+            print("📂 Fichier de log manquant : logs/ia_predictions_log.csv")
+            return jsonify([])
+
+        with open(PREDICTIONS_LOG_CSV, "r") as f:
+            reader = csv.DictReader(f)
+            data = list(reader)
+        return jsonify(data)
+
+    except Exception as e:
+        print("🔥 Erreur interne API /api/predictions:", e)
+        return jsonify([]), 500
+
+# ✅ AJOUT : GET FEATURES ENRICHIES
+@app.route("/api/features/<symbol>", methods=["GET"])
+def get_enriched_features(symbol):
+    try:
+        df = fetch_enriched_features(symbol.upper())
+        if df is None or df.empty:
+            return jsonify({"error": "Aucune donnée"}), 404
+        return jsonify(df.iloc[-1].to_dict())
+    except Exception as e:
+        print(f"Erreur features enrichies pour {symbol}:", e)
+        return jsonify({"error": "Erreur interne"}), 500    
+
+# ✅ AJOUT : GET PRIX DIRECT
+@app.route("/api/price/<symbol>", methods=["GET"])
+def get_price(symbol):
+    try:
+        price = get_prix_binance(symbol.upper())
+        if price is None:
+            return jsonify({"error": "Prix introuvable"}), 404
+        return jsonify({"symbol": symbol.upper(), "price": price})
+    except Exception as e:
+        print(f"Erreur récupération prix pour {symbol}:", e)
+        return jsonify({"error": "Erreur interne"}), 500
+                 
 
 # === Flask Setup ===
 app = Flask(__name__)
@@ -95,22 +171,60 @@ logging.basicConfig(level=logging.INFO,
     handlers=[logging.FileHandler("app.log"), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
-# === Binance / modèle ===
+# === Binance Client ===
 exchange = ccxt.binance({'apiKey': BINANCE_API_KEY, 'secret': BINANCE_SECRET_KEY})
 exchange.set_sandbox_mode(USE_SANDBOX)
+
+# === Chargement du modèle IA
 model = charger_modele()
 
-# === Routes API ===
+# === API : Prédictions IA logs CSV
+@app.route("/api/predictions", methods=["GET"])
+def get_predictions():
+    try:
+        if not os.path.exists(PREDICTIONS_LOG_CSV):
+            print("📂 Fichier de log manquant : logs/ia_predictions_log.csv")
+            return jsonify([])
+
+        with open(PREDICTIONS_LOG_CSV, "r") as f:
+            reader = csv.DictReader(f)
+            data = list(reader)
+        return jsonify(data)
+
+    except Exception as e:
+        print("🔥 Erreur interne API /api/predictions:", e)
+        return jsonify([]), 500
+
+
+@app.route('/api/score_ia_du_jour', methods=['GET'])
+def score_ia_du_jour():
+    try:
+        today = datetime.utcnow().strftime('%Y-%m-%d')
+        with open('logs/ia_predictions_log.csv', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            today_preds = [row for row in reader if row['Date'].startswith(today)]
+
+        if not today_preds:
+            return jsonify({'score': None, 'message': 'Aucune prédiction aujourd’hui.'})
+
+        total = len(today_preds)
+        success = sum(1 for p in today_preds if p['result'] == 'SUCCESS')
+        score = round((success / total) * 100)
+
+        return jsonify({'score': score, 'success': success, 'total': total})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# === API : Divers
 @app.route("/status", methods=["GET"])
 def get_status():
-    try:
-        return jsonify({
-            "message": "🧠 Backend opérationnel",
-            "audit": latest_ia_report if latest_ia_report else None
-        })
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    return jsonify({"message": "🧠 Backend opérationnel", "audit": latest_ia_report or None})
 
+@app.route("/ping")
+def ping():
+    return "pong"
+
+# === API : Configuration / Portefeuille
 @app.route("/get_config", methods=["GET"])
 def get_config():
     try:
@@ -154,10 +268,7 @@ def stop_trade():
     except FileNotFoundError:
         return jsonify({"error": "Aucun portefeuille trouvé"}), 400
 
-@app.route("/ping")
-def ping():
-    return "pong"
-
+# === API : IA & Audit
 @app.route("/start_bot", methods=["POST"])
 def api_start_bot():
     try:
@@ -194,152 +305,42 @@ def api_rapport_ia():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route("/crypto_insight", methods=["GET"])
-def get_crypto_insight():
-    symbol = request.args.get("symbol")
-    if not symbol:
-        return jsonify({"error": "Symbol manquant"}), 400
-
+@app.route("/top-predictions", methods=["GET"])
+def top_predictions():
     try:
-        df = get_binance_ohlcv(symbol, limit=1000)
-        df = enrichir_features(df)
-        df["symbol"] = symbol
-        df, _ = encoder_symbols(df)
-        latest = df.iloc[-1]
+        symbols = get_top_100_symbols()
+        results = []
 
-        insight = {
-            "rsi": float(latest["rsi"]),
-            "macd": float(latest["macd"]),
-            "adx": float(latest["adx"]),
-            "variation_1h": float(latest["variation_1h"]),
-            "volume_ema": float(latest["volume_ema"]),
-            "sentiment": float(latest.get("sentiment", 0.5)),
-        }
-
-        return jsonify(insight)
-
-    except Exception as e:
-        logger.error(f"[❌] Erreur /crypto_insight : {e}")
-        return jsonify({"error": str(e)}), 500
-
-
-@app.route("/performance", methods=["GET"])
-def get_performance_summary():
-    try:
-        with open(TRADE_HISTORY_CSV, "r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            trades = list(reader)
-        if not trades:
-            return jsonify({"message": "Aucun trade.", "data": {}})
-        total = len(trades)
-        gains = [float(t["Gain (%)"].replace("%", "").replace(",", ".")) for t in trades]
-        df = pd.DataFrame([(t["Date"].split(" ")[0], g) for t, g in zip(trades, gains)], columns=["date", "gain"])
-        evolution = df.groupby("date")["gain"].sum().reset_index().to_dict(orient="records")
-        return jsonify({
-            "message": "OK",
-            "data": {
-                "total_trades": total,
-                "total_gain": round(sum(gains), 2),
-                "winrate": round(len([g for g in gains if g > 0]) / total * 100, 1),
-                "gains_by_day": evolution
-            }
-        })
-    except Exception as e:
-        logger.error("Erreur /performance : %s", e)
-        return jsonify({"message": f"Erreur : {e}", "data": {}}), 500
-
-@app.route("/topflop", methods=["GET"])
-def get_top_flop():
-    try:
-        with open("logs/trades.csv", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            latest_trades = {}
-            for t in reversed(list(reader)):
-                sym = t["Symbol"]
-                if sym not in latest_trades:
-                    latest_trades[sym] = t
-            top = []
-            flop = []
-            for sym, trade in latest_trades.items():
-                try:
-                    variation = float(trade["Gain (%)"].replace("%", "").replace(",", "."))
-                    entry = {"symbol": sym, "variation": variation}
-                    (top if variation >= 0 else flop).append(entry)
-                except:
+        for symbol in symbols:
+            try:
+                df = get_binance_ohlcv(symbol, limit=1500)
+                if df is None or df.empty:
                     continue
-            top = sorted(top, key=lambda x: x["variation"], reverse=True)[:5]
-            flop = sorted(flop, key=lambda x: x["variation"])[:5]
-            return jsonify({"top": top, "flop": flop})
-    except Exception as e:
-        logger.error(f"Erreur /topflop : {e}")
-        return jsonify({"top": [], "flop": []})
 
-    if errors:
-        logger.warning("🧨 Résumé des erreurs d'audit :")
-        for err in errors:
-            logger.warning(f"  ⛔ {err}")
+                df_enriched = enrichir_features(df)
+                if df_enriched is None or df_enriched.empty:
+                    continue
 
+                df_enriched["symbol"] = symbol
+                df_enriched["symbol_encoded"] = label_encoder.transform([symbol])[0]
 
-@app.route("/logs", methods=["GET"])
-def get_logs():
-    try:
-        with open("logs/trades.csv", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            logs = list(reader)
-            return jsonify(logs)
-    except FileNotFoundError:
-        return jsonify([]), 200  # fichier vide = tableau vide
+                pred_score = charger_et_predire_from_df(df_enriched)
+                if pred_score.empty:
+                    continue
+                proba = float(pred_score["confidence"].iloc[-1])
+
+                results.append({"symbol": symbol, "proba": round(proba, 4)})
+            except Exception as ex:
+                logger.warning(f"Erreur sur {symbol}: {ex}")
+                continue
+
+        results_sorted = sorted(results, key=lambda x: x["proba"], reverse=True)[:10]
+        return jsonify(results_sorted)
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
-@app.route("/get_positions", methods=["GET"])
-def get_positions():
-    try:
-        with open("positions.json", "r") as f:
-            return jsonify(json.load(f))
-    except FileNotFoundError:
-        return jsonify([])
-
-@app.route("/sell_position", methods=["POST"])
-def sell_position():
-    symbol = request.json.get("symbol")
-    try:
-        with open("positions.json", "r") as f:
-            positions = json.load(f)
-        positions = [p for p in positions if p["symbol"] != symbol]
-        with open("positions.json", "w") as f:
-            json.dump(positions, f)
-        return jsonify({"status": "success"})
-    except Exception as e:
-        return jsonify({"status": "error", "message": str(e)})
-
-@app.route("/predict", methods=["GET"])
-def predict():
-    symbol = request.args.get("symbol")
-    tf = request.args.get("tf")
-    if not symbol or not tf:
-        return jsonify({"error": "Paramètre 'symbol' ou 'tf' manquant."}), 400
-    try:
-        result = predict_from_csv(f"{DATA_PATH}/{symbol}_{tf}.csv", f"{MODELS_PATH}/xgb_{symbol}_{tf}.model")
-        return jsonify(result)
-    except Exception as e:
-        logger.error("Erreur prédiction IA : %s", e)
-        return jsonify({"error": str(e)}), 500
-
-@app.route("/train", methods=["GET"])
-def train():
-    symbol = request.args.get("symbol")
-    tf = request.args.get("tf")
-    if not symbol or not tf:
-        return jsonify({"error": "Paramètres requis : ?symbol=XXX&tf=XXX"}), 400
-    try:
-        _, acc = train_model(f"{DATA_PATH}/{symbol}_{tf}.csv", f"{MODELS_PATH}/xgb_{symbol}_{tf}.model")
-        return jsonify({"symbol": symbol, "tf": tf, "status": "✅ Entraînement terminé", "accuracy": round(acc, 4)})
-    except Exception as e:
-        return jsonify({"symbol": symbol, "tf": tf, "status": "❌ Erreur", "error": str(e)}), 500
-
-# === Audit IA auto
+# === Auto audit IA en boucle
 def auto_audit_ia():
     global latest_ia_report
     try:
@@ -352,46 +353,13 @@ def auto_audit_ia():
             "rapport": rapport,
             "duration": 10
         }
-        logger.info("✅ Audit IA terminé. Rapport prêt.")
+        logger.info("✅ Audit IA terminé.")
     except Exception as e:
         logger.error("❌ Erreur audit IA auto : %s", e)
 
     threading.Timer(600, auto_audit_ia).start()
 
-@app.route("/radar_data", methods=["GET"])
-def get_radar_data():
-    symbol = request.args.get("symbol", "BTCUSDT")
-    try:
-        df = get_ohlcv_df(symbol)
-        if df is None or df.empty:
-            return jsonify({"error": "Pas de données OHLCV."}), 404
-
-        df = enrichir_features(df)
-        if df is None or df.empty:
-            return jsonify({"error": "Échec enrichissement."}), 500
-
-        latest = df.iloc[-1]
-
-        features = {
-            "RSI": float(latest.get("rsi", 0)),
-            "MACD": float(latest.get("macd", 0)),
-            "Stoch RSI": float(latest.get("stoch_rsi", 0)),
-            "ADX": float(latest.get("adx", 0)),
-            "Volume EMA": float(latest.get("volume_ema", 0)),
-            "Delta %": float(latest.get("delta_pct", 0)),
-        }
-
-        return jsonify({
-            "symbol": symbol,
-            "features": features
-        })
-
-    except Exception as e:
-        logger.error(f"[Radar] Erreur pour {symbol} → {e}")
-        return jsonify({"error": str(e)}), 500
-
-
-# === Frontend
+# === FRONTEND Static
 @app.route("/")
 def serve_index():
     return send_from_directory("frontend_dist", "index.html")
@@ -400,7 +368,162 @@ def serve_index():
 def serve_static(path):
     return send_from_directory("frontend_dist", path)
 
-# === RUN Flask ===
+@app.route("/score_ia_du_jour")
+def get_score_ia():
+    try:
+        df = pd.read_csv("dataset_trades.csv")
+        model = joblib.load("models/model.pkl")
+        scaler = joblib.load("models/scaler.pkl")
+        from ml_brain import FEATURE_COLUMNS
+
+        X = df[FEATURE_COLUMNS]
+        y = df["target"]
+        X_scaled = scaler.transform(X)
+        y_proba = model.predict_proba(X_scaled)[:, 1]
+        mean_proba = np.mean(y_proba)
+
+        return {"score": round(mean_proba * 100, 1)}
+    except Exception as e:
+        return {"score": None, "error": str(e)}
+
+@app.route("/performance")
+def performance():
+    try:
+        if not os.path.exists("logs/ia_predictions_log.csv"):
+            return {"data": {"total_gain": 0, "daily_gain": 0, "total_trades": 0}}
+
+        df = pd.read_csv("logs/ia_predictions_log.csv")
+        df["gain"] = df["prix_vente"] - df["prix_achat"]
+        total_gain = df["gain"].sum()
+        total_trades = len(df)
+
+        if "date" in df.columns:
+            df["date"] = pd.to_datetime(df["date"])
+            daily = df.groupby(df["date"].dt.date)["gain"].sum().reset_index()
+            gains_by_day = [{"date": str(row["date"]), "gain": row["gain"]} for _, row in daily.iterrows()]
+            last_day_gain = gains_by_day[-1]["gain"] if gains_by_day else 0
+        else:
+            gains_by_day = []
+            last_day_gain = 0
+
+        return {
+            "data": {
+                "total_gain": round(total_gain, 2),
+                "daily_gain": round(last_day_gain, 2),
+                "total_trades": total_trades,
+                "gains_by_day": gains_by_day
+            }
+        }
+    except Exception as e:
+        return {"data": {}, "error": str(e)}
+
+@app.route("/radar_data")
+def radar_data():
+    try:
+        symbol = request.args.get("symbol", "BTCUSDT")
+        from ml_brain import get_binance_ohlcv, enrichir_features
+        df = get_binance_ohlcv(symbol.replace("/", ""), interval="1m", limit=1500)
+        df = enrichir_features(df)
+        last_row = df.iloc[-1].to_dict()
+
+        radar_fields = [
+            "rsi", "stoch_rsi", "macd", "macd_diff", "adx", "bollinger_width",
+            "volume", "volume_ema", "delta_pct", "variation", "upper_shadow", "lower_shadow"
+        ]
+        result = {field: float(last_row.get(field, 0)) for field in radar_fields}
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/logs/ia_predictions_log.csv")
+def serve_log():
+    try:
+        return send_file("logs/ia_predictions_log.csv", mimetype="text/csv")
+    except:
+        return "Fichier non trouvé", 404
+
+@app.route("/logs")
+def list_logs():
+    try:
+        files = os.listdir("logs")
+        return jsonify(files)
+    except:
+        return jsonify([])
+
+@app.route("/api/stats_ia")
+def api_stats_ia():
+    try:
+        df = pd.read_csv("dataset_trades.csv")
+        model = joblib.load("models/model.pkl")
+        scaler = joblib.load("models/scaler.pkl")
+        from ml_brain import FEATURE_COLUMNS
+        from sklearn.metrics import log_loss
+
+        X = df[FEATURE_COLUMNS]
+        y = df["target"]
+        X_scaled = scaler.transform(X)
+        y_proba = model.predict_proba(X_scaled)[:, 1]
+        y_pred = model.predict(X_scaled)
+
+        return {
+            "mean_proba": round(float(np.mean(y_proba)), 4),
+            "std_proba": round(float(np.std(y_proba)), 4),
+            "log_loss": round(float(log_loss(y, y_proba)), 4),
+            "percent_up": round(float(np.mean(y_pred == 1)) * 100, 2)
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+@app.route("/run_prediction_now", methods=["POST"])
+def run_prediction_now():
+    from predict_live import run_predict_live
+
+    try:
+        mode = request.json.get("mode", "fictif")
+        result = run_predict_live(mode=mode)
+        if not result:
+            return jsonify({"status": "fail", "message": "Aucune crypto avec un bon score IA."}), 200
+
+        return jsonify({"status": "success", "result": result}), 200
+
+    except Exception as e:
+        logger.error(f"❌ Erreur /run_prediction_now : {e}")
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@app.route("/stats_ia")
+def get_stats_ia():
+    from ml_brain import audit_model_confidence
+    import pandas as pd
+    import joblib
+    import numpy as np
+    from sklearn.metrics import log_loss
+
+    try:
+        df = pd.read_csv("dataset_trades.csv")
+        model = joblib.load("models/model.pkl")
+        scaler = joblib.load("models/scaler.pkl")
+
+        with open("models/feature_columns.txt", "r") as f:
+            feature_cols = [line.strip() for line in f.readlines()]
+
+        X = df[feature_cols]
+        y = df["target"]
+        X_scaled = scaler.transform(X)
+
+        y_proba = model.predict_proba(X_scaled)[:, 1]
+        y_pred = model.predict(X_scaled)
+
+        return {
+            "mean_proba": round(np.mean(y_proba), 4),
+            "std_proba": round(np.std(y_proba), 4),
+            "log_loss": round(log_loss(y, y_proba), 4),
+            "percent_up": round(np.mean(y_pred == 1) * 100, 2),
+        }
+
+    except Exception as e:
+        return {"error": str(e)}, 500
+
+# === FLASK RUN
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5002))
     logger.info(f"🧠 Lancement Flask sur le port {port}")

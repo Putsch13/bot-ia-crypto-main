@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import IaExplainer from "./IaExplainer";
-import CryptoRadarChart from "../components/CryptoRadarChart"; // ou "./..."
+import CryptoRadarChart from "./CryptoRadarChart";
+import LogChart from "./LogChart";
+import SuccessRateChart from "./SuccessRateChart";
+import IAPredictionsLog from "./IAPredictionsLog";
+import StatsIA from "./StatsIA";
 
 const API_URL = "http://127.0.0.1:5002";
 
@@ -11,7 +15,8 @@ export default function DashboardPerf() {
   const [showIAInfo, setShowIAInfo] = useState(false);
   const [selectedSymbol, setSelectedSymbol] = useState("BTCUSDT");
   const [availableCryptos, setAvailableCryptos] = useState([]);
-  
+  const [dailyScore, setDailyScore] = useState(null); // 🔥 Score IA du jour
+
   useEffect(() => {
     const fetchSymbols = async () => {
       try {
@@ -25,9 +30,7 @@ export default function DashboardPerf() {
         console.error("Erreur chargement des symboles IA :", err);
       }
     };
-    
-    fetchSymbols();
-    
+
     const fetchPerf = async () => {
       try {
         const res = await axios.get(`${API_URL}/performance`);
@@ -48,12 +51,26 @@ export default function DashboardPerf() {
       }
     };
 
+    const fetchDailyScore = async () => {
+      try {
+        const res = await fetch(`${API_URL}/score_ia_du_jour`);
+        const data = await res.json();
+        if (data?.score !== null) setDailyScore(data.score);
+      } catch (err) {
+        console.error("Erreur de score IA du jour :", err);
+      }
+    };
+
+    // 🔁 Appels au démarrage
+    fetchSymbols();
     fetchPerf();
+    fetchDailyScore();
   }, []);
 
   return (
     <>
-      <div className="bg-zinc-900 p-6 rounded-2xl shadow-lg grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      {/* Statistiques IA générales */}
+      <div className="bg-zinc-900 p-6 rounded-2xl shadow-lg grid grid-cols-2 md:grid-cols-5 gap-6 text-center mb-6">
         <div>
           <p className="text-sm text-zinc-400">📊 PnL total</p>
           <p className={`text-2xl font-bold ${perf?.pnl_total >= 0 ? "text-green-400" : "text-red-400"}`}>
@@ -76,9 +93,15 @@ export default function DashboardPerf() {
             {perf?.status}
           </p>
         </div>
+        <div>
+          <p className="text-sm text-zinc-400">📈 Score IA du jour</p>
+          <p className="text-2xl font-bold text-amber-400">
+            {dailyScore !== null ? `${dailyScore} %` : "—"}
+          </p>
+        </div>
       </div>
 
-      {/* 🔘 Bouton + bloc IA */}
+      {/* Bouton explicatif IA */}
       <div className="text-center mt-6">
         <button
           className="px-4 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition"
@@ -88,12 +111,14 @@ export default function DashboardPerf() {
         </button>
       </div>
 
+      {/* Explication IA (si affichée) */}
       {showIAInfo && (
         <div className="mt-6">
           <IaExplainer />
         </div>
       )}
 
+      {/* Sélecteur de crypto */}
       {availableCryptos.length > 0 && (
         <div className="text-center my-6">
           <label className="text-white text-sm mr-2">Voir les indicateurs pour :</label>
@@ -109,8 +134,21 @@ export default function DashboardPerf() {
         </div>
       )}
 
+      {/* Radar IA */}
       <div className="mt-6 p-4 bg-zinc-900 rounded-2xl shadow-lg">
-      <CryptoRadarChart symbol={selectedSymbol} />
+        <CryptoRadarChart symbol={selectedSymbol} />
+      </div>
+
+      {/* 📊 Graphique des prédictions IA */}
+      <div className="mt-6 p-4 bg-zinc-900 rounded-2xl shadow-lg">
+        <h2 className="text-xl font-semibold mb-4">📊 Statistiques de Prédiction IA</h2>
+        <LogChart />
+        <SuccessRateChart />
+      </div>
+
+      {/* 🔍 Log détaillé des prédictions */}
+      <div className="mt-6 p-4 bg-zinc-900 rounded-2xl shadow-lg">
+        <IAPredictionsLog />
       </div>
     </>
   );

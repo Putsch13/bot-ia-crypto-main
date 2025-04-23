@@ -3,9 +3,10 @@
 import os, json, threading, time, csv
 from datetime import datetime
 import pandas as pd
-from flask import request
+from flask import request, Flask
 import ccxt
-
+app = Flask(__name__)
+from ml_utils import predict_price_movement
 # === MODULES INTERNES ===
 from audit_cryptos import run_full_audit
 from ml_brain import charger_modele
@@ -116,8 +117,11 @@ def calculer_score_crypto(ticker, symbol):
 
     if model:
         try:
-            pred = prediction_model(model, variation_1h, variation_24h, volume, sentiment_score, ticker.get('rsi', 50), 1)
-            score += 20 if pred == 1 else -10
+            label, proba = predict_price_movement(symbol.replace("/", ""))
+            if label == "UP":
+                score += 20
+            else:
+                score -= 10
         except Exception as e:
             print(f"[ERROR] Prédiction IA pour {symbol} : {e}")
 
@@ -143,6 +147,17 @@ def enregistrer_trade(mode, crypto, prix_achat, prix_vente, gain_percent, result
         ])
 
 # === BOT LOOP ===
+PROBA_IA_SEUIL = {
+    "safe": 0.7,
+    "standard": 0.45,
+    "risky": 0.25
+}
+
+@app.route("/radar_data")
+def get_radar_data():
+    symbol = request.args.get("symbol")
+    # ... logic pour récupérer les features de ce symbol et renvoyer un JSON
+
 
 def robot_loop(montant, variation, objectif, mode_exec, mode_type,
                seuil_entree=80, seuil_sortie=30, stop_loss_percent=10, reserve=0, profil='standard'):
@@ -171,10 +186,20 @@ def robot_loop(montant, variation, objectif, mode_exec, mode_type,
             if abs(ticker.get('percentage', 0)) < variation:
                 continue
             score = calculer_score_crypto(ticker, symbol)
-            if score >= score_min:
+            prediction, proba = "INCONNU", 0.0
+            try:
+                from ml_utils import predict_price_movement
+                prediction, proba = predict_price_movement(symbol)
+            except Exception as e:
+                log_robot(f"[WARN] Prédiction IA échouée pour {symbol} : {e}")
+
+            if score >= score_min and proba >= PROBA_IA_SEUIL.get(profil, 0.45):
                 ticker['score'] = score
                 ticker['symbol'] = symbol
+                ticker['proba'] = proba
+                ticker['prediction'] = prediction
                 candidates.append(ticker)
+
 
         if not candidates:
             log_robot("🔍 Aucune crypto sélectionnée. Attente 10 min...")

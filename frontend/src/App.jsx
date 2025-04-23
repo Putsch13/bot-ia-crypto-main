@@ -39,13 +39,13 @@ export default function App() {
         </div>
       </div>
 
+      {/* Narration IA */}
       <div className="mb-8">
         <div className="bg-zinc-900 p-6 rounded-2xl shadow-lg">
           <h2 className="text-xl font-semibold mb-4">🎙️ Narration IA</h2>
           <GPTNarrator />
         </div>
       </div>
-
 
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -77,12 +77,11 @@ export default function App() {
           <div className="bg-zinc-900 p-6 rounded-2xl shadow-lg">
             <h2 className="text-xl font-semibold mb-4">🪵 Historique des logs</h2>
             <LogPanel />
-          
+          </div>
+
           <div className="bg-zinc-900 p-6 rounded-2xl shadow-lg">
             <h2 className="text-xl font-semibold mb-4">📈 Positions en cours</h2>
             <ActiveTradesPanel />
-          </div>
-
           </div>
         </div>
       </div>

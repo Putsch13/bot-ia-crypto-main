@@ -18,7 +18,7 @@ print("🔍 Scan IA en cours sur 100 cryptos...")
 
 for symbol in symbols:
     try:
-        df = get_binance_ohlcv(symbol, limit=100)
+        df = get_binance_ohlcv(symbol, limit=1500)
         if df is None or df.empty:
             continue
 

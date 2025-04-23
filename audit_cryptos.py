@@ -6,7 +6,6 @@ from functools import lru_cache
 import logging
 from ml_brain import (
     enrichir_features,
-    charger_dataset_top100,
     encoder_symbols,
     charger_et_predire_from_df,
     charger_modele
@@ -14,6 +13,8 @@ from ml_brain import (
 from buzz_tracker import analyze_crypto_sentiment_google
 import requests
 from requests.exceptions import RequestException
+from enrich_features import enrichir_features
+
 
 def safe_check_symbol_on_binance(symbol, retries=2, timeout=5):
     try:
@@ -50,16 +51,9 @@ WEIGHT_SENTIMENT = 0.3
 WEIGHT_PREDICTION = 0.3
 
 latest_ia_report = None
-FEATURE_COLUMNS = [
-    'rsi', 'stoch_rsi', 'stoch_rsi_k', 'stoch_rsi_d',
-    'macd', 'macd_signal', 'macd_diff',
-    'sma_10', 'sma_50', 'ema_20',
-    'bollinger_high', 'bollinger_low', 'bollinger_width',
-    'adx', 'volume', 'volume_ema',
-    'delta_pct', 'variation',
-    'upper_shadow', 'lower_shadow',
-    'sentiment', 'symbol_encoded'
-]
+with open("models/feature_columns.txt") as f:
+    FEATURE_COLUMNS = f.read().splitlines()
+
 
 @lru_cache(maxsize=3)
 def get_top_100_symbols():
@@ -186,71 +180,74 @@ def run_full_audit():
                 logger.warning(f"⚠️ Données enrichies vides pour {symbol}, skip.")
                 continue
 
+
             df["symbol"] = symbol
 
-            df, _ = encoder_symbols(df)
-            if "symbol_encoded" not in df.columns:
-                raise ValueError("❌ symbol_encoded manquant après encodage")
+            from sklearn.preprocessing import LabelEncoder
+            le = LabelEncoder()
+            le.fit([symbol])
+            df["symbol_encoded"] = le.transform([symbol])[0]
 
+            # Injecter le sentiment
             coin = symbol.replace("USDT", "")
             sentiment = sentiments.get(coin, {}).get("total", 0.5)
             df["sentiment"] = sentiment
 
-            df["completeness"] = df[FEATURE_COLUMNS].notna().mean(axis=1)
-            missing_cols = [col for col in FEATURE_COLUMNS if col not in df.columns]
-            if missing_cols:
-                raise ValueError(f"❌ Colonnes manquantes : {missing_cols}")
+            # Vérification des colonnes (Étape 2)
+            with open("models/feature_columns.txt") as f:
+                expected_features = f.read().splitlines()
+
+            def verifier_features(df, expected_features):
+                missing = [f for f in expected_features if f not in df.columns]
+                extra = [f for f in df.columns if f not in expected_features]
+                logger.debug(f"[{symbol}] ✅ Features présentes : {len(expected_features) - len(missing)} / {len(expected_features)}")
+                if missing:
+                    logger.warning(f"[{symbol}] ❌ Manquantes : {missing}")
+                if extra:
+                    logger.debug(f"[{symbol}] 🔍 Supplémentaires : {extra}")
+
+            verifier_features(df, expected_features)
+
+            # Ajout des colonnes manquantes
+            for col in expected_features:
+                if col not in df.columns:
+                    df[col] = 0.0
+
+            df["completeness"] = df[expected_features].notna().mean(axis=1)
 
             pred_score = charger_et_predire_from_df(df)
 
-            # Gestion robuste du format de prédiction
-            if isinstance(pred_score, pd.DataFrame) and "prediction" in pred_score.columns:
-                pred = pred_score["prediction"].iloc[-1]
-            elif isinstance(pred_score, (int, float)):
-                pred = pred_score
-            else:
-                logger.warning(f"[{symbol}] Format inattendu pour pred_score: {type(pred_score)}")
-                pred = 0
+            pred = pred_score["prediction"].iloc[-1]
+            confidence = pred_score["confidence"].iloc[-1]
 
-            # Vérification finale anti-NaN
-            try:
-                pred = float(pred)
-                if pd.isna(pred):
-                    pred = 0
-            except Exception:
-                pred = 0
+            logger.info(f"[{symbol}] IA: {'Hausse' if pred == 1 else 'Baisse'} - Confidence: {confidence:.4f}")
+
+            df.dropna(subset=expected_features, how="all", inplace=True)
+
+            if df.empty or df.shape[0] < 1:
+                logger.warning(f"⚠️ DataFrame vide ou incomplet après nettoyage pour {symbol}, skip.")
+                continue
 
             latest = df.iloc[-1]
             narration = [
-                f"Variation 10min: {latest['variation_10min']:.2f}%",
-                f"RSI: {latest['rsi']:.2f}",
-                f"MACD: {latest['macd']:.2f}",
+                f"Variation 10min: {latest.get('variation_10min', 0.0):.2f}%",
+                f"RSI: {latest.get('rsi', 0.0):.2f}",
+                f"MACD: {latest.get('macd', 0.0):.2f}",
                 f"Sentiment Google: {sentiment * 100:.1f}%",
-                f"IA: {'Hausse' if pred == 1 else 'Baisse'}"
+                f"IA: {'Hausse' if pred == 1 else 'Baisse'} (Conf: {confidence:.2f})"
             ]
 
-            # 🔐 Anti-NaN fallback pour les variations
-            v10 = latest["variation_10min"]
-            v1h = latest["variation_1h"]
-            v24h = latest["variation_24h"]
+            # Score IA pondéré
+            v10 = latest.get("variation_10min", 0.0) or 0.0
+            v1h = latest.get("variation_1h", 0.0) or 0.0
+            v24h = latest.get("variation_24h", 0.0) or 0.0
 
-            # Utiliser 0.0 comme fallback si valeur NaN
-            v10 = v10 if pd.notna(v10) else 0.0
-            v1h = v1h if pd.notna(v1h) else 0.0
-            v24h = v24h if pd.notna(v24h) else 0.0
-            sent = sentiment if pd.notna(sentiment) else 0.5
-            
-
-            # Score de variation pondéré
             score_variation = v10 * 0.2 + v1h * 0.4 + v24h * 0.4
-
-            # Log debug pour comprendre les valeurs utilisées
-            logger.debug(f"[{symbol}] var10={v10} var1h={v1h} var24h={v24h} sentiment={sent} pred={pred} completeness={latest['completeness']}")
 
             score_ia = round((
                 WEIGHT_VARIATION * score_variation +
-                WEIGHT_SENTIMENT * sent * 100 +
-                WEIGHT_PREDICTION * pred * 100
+                WEIGHT_SENTIMENT * sentiment * 100 +
+                WEIGHT_PREDICTION * confidence * 100
             ) * latest["completeness"], 2)
 
             logger.info(f"✅ {symbol} audité avec score IA {score_ia}")
@@ -259,9 +256,9 @@ def run_full_audit():
                 "symbol": symbol,
                 "sentiment": sentiment,
                 "score_ia": score_ia,
-                "variation_10min": latest["variation_10min"],
-                "variation_1h": latest["variation_1h"],
-                "variation_24h": latest["variation_24h"]
+                "variation_10min": v10,
+                "variation_1h": v1h,
+                "variation_24h": v24h
             })
 
             explanations.append({
@@ -324,6 +321,7 @@ def run_full_audit():
 
     logger.info(f"✅ Rapport IA généré avec succès en {duration}s.")
     return top5, flop5, rapport
+
 
 if __name__ == "__main__":
     top5, flop5, rapport = run_full_audit()
